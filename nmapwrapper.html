@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Nmap Wrapper — CYBERZOMBI3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NmapEnhanced — CyberZombi3 | Aaron Moorcroft</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
@@ -10,35 +12,105 @@
 
 <div class="grid-bg"></div>
 
-<header class="sub-header">
-    <a href="projects.html" class="back-btn">◀ PROJECTS</a>
-    <h1 class="page-title">NMAP WRAPPER</h1>
+<header class="navbar">
+    <a href="index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="blog/index.html">Blog</a>
+    </nav>
 </header>
 
-<h2 class="section-header">> OUTPUT SAMPLE</h2>
-<img src="assets/images/nmapwrapper.png" class="project-image">
-
+<header class="page-header">
+    <a href="projects.html" class="eyebrow-link">&larr; Projects</a>
+    <h1 class="page-title">NmapEnhanced</h1>
+    <p class="page-subtitle">A Python wrapper that turns a single Nmap scan into a ready-made next-steps playbook.</p>
+    <div class="tag-row">
+        <span class="tag">Python</span>
+        <span class="tag">Nmap</span>
+        <span class="tag">SearchSploit</span>
+        <span class="tag">NVD</span>
+    </div>
+</header>
 
 <section class="content-panel">
 
-    <h2 class="section-header">> OVERVIEW</h2>
+    <h2 class="section-header">&gt; Output Sample</h2>
+    <img src="assets/images/nmapwrapper.png" class="project-image" alt="NmapEnhanced.py terminal output showing scan results and an enriched intel table">
+
+    <h2 class="section-header">&gt; Overview</h2>
     <p class="text-block">
-        A custom wrapper around Nmap that automates scan profiles, tags services, and outputs
-        structured data for use in other tools — including the AI Pentest Agent.
+        <code>NmapEnhanced.py</code> wraps a standard Nmap scan and automatically enriches every
+        discovered port with a structured intel table — risk score, known exploits and CVEs,
+        suggested follow-up commands, and relevant NSE scripts to run next. Instead of reading raw
+        scan output and manually looking up what each service means, you get a ready-made action
+        plan the moment the scan finishes.
     </p>
 
-    <h2 class="section-header">> FEATURES</h2>
+    <h2 class="section-header">&gt; Example Run</h2>
+    <pre class="code-block">$ python3 NmapEnhanced.py 127.0.0.1
+Running: nmap -sV -O -oX scan.xml 127.0.0.1
+
+PORT     STATE  SERVICE  VERSION
+22/tcp   open   ssh      OpenSSH 10.3p1 Debian 1 (protocol 2.0)
+80/tcp   open   http     Caddy httpd
+443/tcp  open   ssl/https
+8000/tcp open   http     Uvicorn
+
+Nmap done: 1 IP address (1 host up) scanned in 12.58 seconds</pre>
+
+    <h2 class="section-header">&gt; Enriched Intel Table</h2>
     <p class="text-block">
-        - Auto‑profile selection<br>
-        - Service tagging<br>
-        - JSON output<br>
-        - Integrates with AI agent<br>
-        - Reduces repetitive recon
+        For every open port, the wrapper builds out a row covering risk, exploits/CVEs, and what
+        to run next:
+    </p>
+    <pre class="code-block">Port     Service              Risk   Follow-up                          NSE
+22/tcp   OpenSSH 10.3p1        0.0    ssh -v, hydra -l user -P           nmap --script ssh2-enum-algos
+                                      rockyou.txt                       nmap --script ssh-hostkey
+80/tcp   Caddy httpd           0.0    whatweb, gobuster dir -w           nmap --script http-enum
+                                      common.txt
+443/tcp  https                0.0    whatweb, gobuster dir -w           nmap --script ssl-enum-ciphers
+                                      common.txt</pre>
+    <p class="text-block">
+        Each row also carries an "Intel / Plugins / OSINT" note — e.g. flagging that a service's
+        key exchange algorithms should be reviewed, or that a web port's CMS should be identified
+        — pulled from SearchSploit and NVD lookups where a match exists.
+    </p>
+
+    <h2 class="section-header">&gt; Features</h2>
+    <p class="text-block">
+        - Automatic per-port risk scoring<br>
+        - CVE and exploit lookups via SearchSploit and the NVD API<br>
+        - Suggested follow-up commands (Hydra, Gobuster, WhatWeb, and more)<br>
+        - Relevant NSE script suggestions per service<br>
+        - Structured output that feeds directly into other tools, including the
+        <a href="agent.html">AI Pentest Agent</a>
+    </p>
+
+    <h2 class="section-header">&gt; Why I Built This</h2>
+    <p class="text-block">
+        A raw Nmap scan tells you what's open — it doesn't tell you what to do next. I built this
+        wrapper to close that gap: run one command and get both the scan and the "here's what I'd
+        try next" reasoning that normally takes a few minutes of manual lookups per service.
     </p>
 
 </section>
 
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
+        <!-- TODO: replace with your GitHub profile URL -->
+        <a href="#">GitHub</a>
+        <!-- TODO: replace with your LinkedIn profile URL -->
+        <a href="#">LinkedIn</a>
+    </div>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft — CyberZombi3</span>
+</footer>
+
 <script src="assets/js/main.js"></script>
 </body>
 </html>
-

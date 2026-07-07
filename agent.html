@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AI Pentest Agent — CYBERZOMBI3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Pentest Agent — CyberZombi3 | Aaron Moorcroft</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
@@ -10,46 +12,123 @@
 
 <div class="grid-bg"></div>
 
-<header class="sub-header">
-    <a href="projects.html" class="back-btn">◀ PROJECTS</a>
-    <h1 class="page-title">AI PENTEST AGENT</h1>
+<header class="navbar">
+    <a href="index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="blog/index.html">Blog</a>
+    </nav>
 </header>
 
-<h2 class="section-header">> UI PREVIEW</h2>
-<img src="assets/images/agent-ui.png" class="project-image">
-
+<header class="page-header">
+    <a href="projects.html" class="eyebrow-link">&larr; Projects</a>
+    <h1 class="page-title">AI Pentest Agent</h1>
+    <p class="page-subtitle">An autonomous recon and enumeration engine with an LLM-driven planning loop.</p>
+    <div class="tag-row">
+        <span class="tag">Python</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">Nmap</span>
+        <span class="tag">LLM Planning</span>
+    </div>
+</header>
 
 <section class="content-panel">
 
-    <h2 class="section-header">> OVERVIEW</h2>
+    <h2 class="section-header">&gt; UI Preview</h2>
+    <img src="assets/images/agent-ui.png" class="project-image" alt="AI Pentest Agent dashboard showing target input, detected services, and live agent output">
+
+    <h2 class="section-header">&gt; Overview</h2>
     <p class="text-block">
-        The CYBERZOMBI3 AI Pentest Agent is an autonomous recon and enumeration engine.
-        It plans, executes, and iterates over scanning tasks using classic tools wrapped
-        in a neon‑console UI.
+        The AI Pentest Agent is an autonomous reconnaissance and enumeration engine. Give it a
+        target — an IP, host:port, or URL — and it plans a sequence of scanning actions with an
+        LLM, executes them using real tools, reads back the results, and decides what to run
+        next. It keeps going, round after round, until enumeration is genuinely exhausted, then
+        reports what it found. The whole thing runs behind a browser-based dashboard served over
+        FastAPI and WebSockets.
     </p>
 
-    <h2 class="section-header">> CORE LOOP</h2>
-    <pre class="code-block">
-[AI PLAN] Continue with SSH, database, and SMB enumeration.
-[SKIP] Already ran ssh_enum
-[SKIP] Already ran nmap_db_scripts
-[SKIP] Already ran enum4linux
-SCAN COMPLETE – 8 tool(s) executed
-    </pre>
-
-    <h2 class="section-header">> FEATURES</h2>
+    <h2 class="section-header">&gt; How It Plans</h2>
     <p class="text-block">
-        - Nmap profiles<br>
-        - SSH enumeration<br>
-        - SMB/Enum4linux<br>
-        - Service tagging<br>
-        - Structured output<br>
-        - Autonomous planning
+        Each round, the agent asks the model for the next batch of actions based on what's been
+        discovered so far (open ports, service banners, previous tool output). It tracks
+        everything it has already run against a target so it never repeats a scan pointlessly —
+        the log below shows it recognising and skipping tools it already executed before moving
+        to the next round:
+    </p>
+    <pre class="code-block">[ROUND 6/6]
+[AI RAW] ```json
+{
+  "actions": [
+    {"tool": "ssh_enum", "target": "192.168.64.4"},
+    {"tool": "nmap_db_scripts", "target": "192.168.64.4"},
+    {"tool": "enum4linux", "target": "192.168.64.4"}
+  ],
+  "reason": "Continue with SSH, database, and SMB enumeration."
+}
+```
+
+[AI PLAN] Reason: Continue with SSH, database, and SMB enumeration.
+[SKIP] Already ran ssh_enum:192.168.64.4
+[SKIP] Already ran nmap_db_scripts:192.168.64.4
+[SKIP] Already ran enum4linux:192.168.64.4
+
+================================================================
+  SCAN COMPLETE - 8 tool(s) executed
+================================================================</pre>
+
+    <h2 class="section-header">&gt; Detected Services (example run)</h2>
+    <p class="text-block">
+        Against a lab target, the agent fingerprinted four live services and picked its tool
+        chain accordingly:
+    </p>
+    <pre class="code-block">ssh          OpenSSH 10.3p1 Debian 1 (protocol 2.0)      22/tcp
+http         Caddy httpd                                  80/tcp
+ssl/https                                                  443/tcp
+http         Uvicorn                                      8000/tcp</pre>
+
+    <h2 class="section-header">&gt; Tool Chain</h2>
+    <p class="text-block">
+        Depending on what it finds, the agent reaches for: <code>nmap</code> service/DB scripts,
+        <code>ssh_enum</code>, <code>enum4linux</code>, <code>nikto</code>, <code>nuclei</code>,
+        <code>feroxbuster</code>, and <code>whatweb</code> — the same tools I'd reach for
+        manually, just sequenced and de-duplicated automatically.
+    </p>
+
+    <h2 class="section-header">&gt; Features</h2>
+    <p class="text-block">
+        - Multi-round AI planning loop with automatic de-duplication<br>
+        - Service-aware tool selection (SSH, SMB, HTTP, databases)<br>
+        - Live action history log per round<br>
+        - Browser dashboard (FastAPI + WebSockets) for live target input and streamed output<br>
+        - Structured, reviewable output built for CTF and lab environments
+    </p>
+
+    <h2 class="section-header">&gt; Why I Built This</h2>
+    <p class="text-block">
+        Recon and enumeration are the most repetitive part of any pentest or CTF box — the same
+        handful of tools, run in roughly the same order, every time. This agent automates that
+        first pass so I can spend my own time on the interesting part: working out how to
+        actually get in.
     </p>
 
 </section>
 
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
+        <!-- TODO: replace with your GitHub profile URL -->
+        <a href="#">GitHub</a>
+        <!-- TODO: replace with your LinkedIn profile URL -->
+        <a href="#">LinkedIn</a>
+    </div>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft — CyberZombi3</span>
+</footer>
+
 <script src="assets/js/main.js"></script>
 </body>
 </html>
-

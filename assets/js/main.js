@@ -1,9 +1,17 @@
-document.addEventListener("mousemove", (e) => {
-    const grid = document.querySelector(".grid-bg");
-    if (!grid) return;
+// Highlight the current page in the nav
+document.addEventListener("DOMContentLoaded", () => {
+    const links = document.querySelectorAll(".nav-links a");
+    const current = window.location.pathname.split("/").pop() || "index.html";
 
-    const x = (e.clientX / window.innerWidth) * 20;
-    const y = (e.clientY / window.innerHeight) * 20;
+    links.forEach((link) => {
+        const href = link.getAttribute("href");
+        if (href && href.endsWith(current) && current !== "") {
+            link.classList.add("active");
+        }
+    });
 
-    grid.style.transform = `translate(${x}px, ${y}px)`;
+    const yearEl = document.querySelector("[data-year]");
+    if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+    }
 });

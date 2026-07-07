@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Projects — CYBERZOMBI3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Projects — CyberZombi3 | Aaron Moorcroft</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
@@ -10,40 +12,119 @@
 
 <div class="grid-bg"></div>
 
-<header class="sub-header">
-    <a href="index.html" class="back-btn">◀ HOME</a>
-    <h1 class="page-title">PROJECTS</h1>
+<header class="navbar">
+    <a href="index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="blog/index.html">Blog</a>
+    </nav>
+</header>
+
+<header class="page-header">
+    <h1 class="page-title">Projects</h1>
+    <p class="page-subtitle">Things I've designed, built, and kept iterating on.</p>
 </header>
 
 <section class="content-panel">
 
-    <div class="project-card">
-        <h3>CyberOS</h3>
-        <p>Custom 32‑bit OS with VBE graphics, RTL8139 networking, and a multi‑stage bootloader.</p>
-        <a href="cyberos.html" class="post-link">View details</a>
-    </div>
+    <div class="project-grid">
 
-    <div class="project-card">
-        <h3>AI Pentest Agent</h3>
-        <p>Autonomous recon and enumeration engine with neon console UI.</p>
-        <a href="agent.html" class="post-link">View details</a>
-    </div>
+        <a href="cyberos.html" class="project-card">
+            <h3>CyberOS</h3>
+            <p>A custom 32-bit x86 operating system built from scratch: multi-stage bootloader, protected mode, VBE graphics, RTL8139 networking, and a built-in shell.</p>
+            <div class="tag-row">
+                <span class="tag tag-muted">x86 Assembly</span>
+                <span class="tag tag-muted">C</span>
+                <span class="tag tag-muted">QEMU</span>
+            </div>
+            <span class="card-link">View details &rarr;</span>
+        </a>
 
-    <div class="project-card">
-        <h3>iOS Game</h3>
-        <p>Cyber‑styled puzzle runner built in SwiftUI with procedural levels.</p>
-        <a href="iosgame.html" class="post-link">View details</a>
-    </div>
+        <a href="agent.html" class="project-card">
+            <h3>AI Pentest Agent</h3>
+            <p>An autonomous recon and enumeration engine that plans, executes, and iterates on scanning tasks with an LLM-driven loop, wrapped in its own web dashboard.</p>
+            <div class="tag-row">
+                <span class="tag tag-muted">Python</span>
+                <span class="tag tag-muted">FastAPI</span>
+                <span class="tag tag-muted">Nmap</span>
+            </div>
+            <span class="card-link">View details &rarr;</span>
+        </a>
 
-    <div class="project-card">
-        <h3>Nmap Wrapper</h3>
-        <p>Custom automation layer for Nmap with tagging, profiles, and structured output.</p>
-        <a href="nmapwrapper.html" class="post-link">View details</a>
+        <a href="iosgame.html" class="project-card">
+            <h3>CyberLink</h3>
+            <p>A cyberpunk-styled node-link puzzle game for iOS — breach nodes against the clock, choose an operator, and work through five distinct mission types.</p>
+            <div class="tag-row">
+                <span class="tag tag-muted">Swift</span>
+                <span class="tag tag-muted">SwiftUI</span>
+            </div>
+            <span class="card-link">View details &rarr;</span>
+        </a>
+
+        <a href="nmapwrapper.html" class="project-card">
+            <h3>NmapEnhanced</h3>
+            <p>A Python wrapper around Nmap that turns a single scan into a ready-made playbook: risk scoring, CVE/exploit lookups, and suggested follow-up commands per port.</p>
+            <div class="tag-row">
+                <span class="tag tag-muted">Python</span>
+                <span class="tag tag-muted">Nmap</span>
+                <span class="tag tag-muted">SearchSploit</span>
+            </div>
+            <span class="card-link">View details &rarr;</span>
+        </a>
+
+        <a href="jarvis.html" class="project-card">
+            <h3>JARVIS</h3>
+            <p>A fully local, voice-driven AI assistant for macOS — local LLM, local speech-to-text, a wake word, persistent memory, and a plugin system for controlling the Mac.</p>
+            <div class="tag-row">
+                <span class="tag tag-muted">Python</span>
+                <span class="tag tag-muted">Ollama</span>
+                <span class="tag tag-muted">Whisper</span>
+            </div>
+            <span class="card-link">View details &rarr;</span>
+        </a>
+
+        <a href="soclab.html" class="project-card">
+            <h3>SOC Lab</h3>
+            <p>A self-hosted, dockerized Security Operations Center — SIEM, IDS, honeypot, and threat-intel platforms wired together to practice detection and response end to end.</p>
+            <div class="tag-row">
+                <span class="tag tag-muted">Docker</span>
+                <span class="tag tag-muted">Wazuh</span>
+                <span class="tag tag-muted">Suricata</span>
+            </div>
+            <span class="card-link">View details &rarr;</span>
+        </a>
+
+        <a href="agentcommerce.html" class="project-card">
+            <h3>Agent Commerce</h3>
+            <p>A multi-agent AI pipeline that researches, writes, designs, and reviews digital products end to end, from trend research to a finished, sellable listing.</p>
+            <div class="tag-row">
+                <span class="tag tag-muted">Python</span>
+                <span class="tag tag-muted">FastAPI</span>
+                <span class="tag tag-muted">Claude API</span>
+            </div>
+            <span class="card-link">View details &rarr;</span>
+        </a>
+
     </div>
 
 </section>
 
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
+        <!-- TODO: replace with your GitHub profile URL -->
+        <a href="#">GitHub</a>
+        <!-- TODO: replace with your LinkedIn profile URL -->
+        <a href="#">LinkedIn</a>
+    </div>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft — CyberZombi3</span>
+</footer>
+
 <script src="assets/js/main.js"></script>
 </body>
 </html>
-

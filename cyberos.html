@@ -2,53 +2,128 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CyberOS — CYBERZOMBI3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CyberOS — CyberZombi3 | Aaron Moorcroft</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
 
-        
 <div class="grid-bg"></div>
 
-<header class="sub-header">
-    <a href="projects.html" class="back-btn">◀ PROJECTS</a>
-    <h1 class="page-title">CYBEROS</h1>
+<header class="navbar">
+    <a href="index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="blog/index.html">Blog</a>
+    </nav>
 </header>
 
-<h2 class="section-header">> SCREENSHOT</h2>
-<img src="assets/images/cyberos.png" class="project-image">
+<header class="page-header">
+    <a href="projects.html" class="eyebrow-link">&larr; Projects</a>
+    <h1 class="page-title">CyberOS</h1>
+    <p class="page-subtitle">A custom x86 operating system with its own windowed desktop, written from scratch.</p>
+    <div class="tag-row">
+        <span class="tag">x86 Assembly</span>
+        <span class="tag">C</span>
+        <span class="tag">Protected Mode</span>
+        <span class="tag">VBE Graphics</span>
+        <span class="tag">QEMU</span>
+    </div>
+</header>
 
 <section class="content-panel">
 
-    <h2 class="section-header">> OVERVIEW</h2>
+    <h2 class="section-header">&gt; Screenshot — v5.9.4 Desktop</h2>
+    <img src="assets/images/cyberos.png" class="project-image" alt="CyberOS v5.9.4 desktop showing taskbar, Files app, Settings app, and My Computer window">
+
+    <h2 class="section-header">&gt; Overview</h2>
     <p class="text-block">
-        CyberOS is a custom 32‑bit operating system built from scratch. Multi‑stage bootloader,
-        VBE graphics, RTL8139 networking, and a lightweight shell. Designed as a cyber‑lab OS
-        for experiments, hacking tools, and low‑level development.
+        CyberOS is a 32-bit x86 operating system built entirely from scratch — no existing kernel,
+        no framework, just a hand-written bootloader and kernel talking directly to the hardware.
+        What started as a boot sequence and a text shell has grown into a genuine windowed desktop
+        environment: draggable, resizable windows, a taskbar, a working Files app, and a Settings
+        app with live theming — all running on top of a bootloader and kernel I wrote myself.
     </p>
 
-    <h2 class="section-header">> BUILD SYSTEM</h2>
-    <pre class="code-block">
-CyberOS Build System v2.0
+    <h2 class="section-header">&gt; The Desktop (v5.9.4)</h2>
+    <p class="text-block">
+        The current build boots straight into a full desktop, not just a shell prompt:
+    </p>
+    <p class="text-block">
+        - <strong>Taskbar</strong> — shows the OS version, running app buttons (Terminal, Files,
+        Settings, Computer), and a live clock<br>
+        - <strong>Terminal</strong> — the original command-line shell, now running inside its own
+        window<br>
+        - <strong>Files</strong> — a working file browser with back/forward/up navigation, folder
+        creation, and delete<br>
+        - <strong>Settings</strong> — live desktop personalisation: wallpaper themes (Cyber, Dark,
+        Accent, Grid), an accent colour picker, 24-hour/12-hour clock toggle, and resolution
+        switching (800&times;600 up to 1280&times;1024, applied on reboot)<br>
+        - <strong>My Computer</strong> — a system summary window: CPU mode, display mode, memory,
+        network adapter, and storage, all read from the live system rather than hard-coded<br>
+        - <strong>Recycle Bin</strong> — because a desktop isn't a desktop without one
+    </p>
+
+    <h2 class="section-header">&gt; System Info (from "My Computer")</h2>
+    <pre class="code-block">System &amp; Drives
+Floppy (A:)  1.44 MB  FAT12
+
+CPU      : i386 (32-bit protected mode)
+Display  : VBE 1280x1024x32
+Memory   : flat 4 GB address space
+Network  : RTL8139 Ethernet
+Storage  : 1.44 MB floppy (FAT12)</pre>
+
+    <h2 class="section-header">&gt; Boot Process</h2>
+    <p class="text-block">
+        Booting still happens in three hand-written stages, each doing just enough to hand off to
+        the next, before the kernel brings up the desktop shell on top:
+    </p>
+    <p class="text-block">
+        <strong>Stage 1</strong> — a 512-byte real-mode bootstrap that fits in the boot sector and
+        loads the next stage from disk.<br>
+        <strong>Stage 2</strong> — a loader that sets up memory and the transition into 32-bit
+        protected mode.<br>
+        <strong>Stage 3</strong> — the kernel: drivers, the VBE display, the RTL8139 driver, the
+        window manager, and the desktop apps.
+    </p>
+    <pre class="code-block">CyberOS Build System v2.0
 [1/3] Assembling stage1.asm ...
 [2/3] Assembling stage2_loader.asm ...
 [3/3] Assembling stage3_kernel.asm ...
 [IMG] Building floppy.img ...
-floppy.img ready (1.44MB)
-    </pre>
+floppy.img ready (1.44MB)</pre>
 
-    <h2 class="section-header">> RUNTIME</h2>
-    <pre class="code-block">
-CyberOS v3.2.0
-i386   VBE 800x600x32   RTL8139
-Network: UP
-Type 'help' for commands.
-    </pre>
+    <h2 class="section-header">&gt; Why I Built This</h2>
+    <p class="text-block">
+        I wanted to actually understand what an operating system does under the hood — not just
+        use one. Writing the bootloader by hand, wrestling with the jump into protected mode, and
+        writing a network driver against real hardware registers forces a level of understanding
+        that using Linux never does. What keeps me coming back to it is watching it grow from a
+        blinking cursor in a text shell into something with its own window manager and Settings
+        app — each version proves out another piece of "real OS" functionality.
+    </p>
 
 </section>
+
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
+        <!-- TODO: replace with your GitHub profile URL -->
+        <a href="#">GitHub</a>
+        <!-- TODO: replace with your LinkedIn profile URL -->
+        <a href="#">LinkedIn</a>
+    </div>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft — CyberZombi3</span>
+</footer>
 
 <script src="assets/js/main.js"></script>
 </body>
 </html>
-

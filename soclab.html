@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SOC Lab — CyberZombi3 | Aaron Moorcroft</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+<div class="grid-bg"></div>
+
+<header class="navbar">
+    <a href="index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="blog/index.html">Blog</a>
+    </nav>
+</header>
+
+<header class="page-header">
+    <a href="projects.html" class="eyebrow-link">&larr; Projects</a>
+    <h1 class="page-title">SOC Lab</h1>
+    <p class="page-subtitle">A self-hosted Security Operations Center for hands-on blue team practice.</p>
+    <div class="tag-row">
+        <span class="tag">Docker</span>
+        <span class="tag">Wazuh</span>
+        <span class="tag">Suricata</span>
+        <span class="tag">Threat Intel</span>
+    </div>
+</header>
+
+<section class="content-panel">
+
+    <h2 class="section-header">&gt; Preview</h2>
+    <!-- TODO: add a screenshot of the Wazuh dashboard, Cowrie honeypot logs, or the OpenCTI/MISP UI here -->
+    <div class="image-placeholder">Screenshot placeholder — Wazuh dashboard / threat hunting view</div>
+
+    <h2 class="section-header">&gt; Overview</h2>
+    <p class="text-block">
+        The SOC Lab is a fully dockerized, self-hosted Security Operations Center built to
+        practice detection engineering and incident response end to end — from the defender's
+        side. Every component runs as its own container, wired together so a simulated attack
+        actually gets caught, logged, and correlated the way it would be in a real SOC.
+    </p>
+
+    <h2 class="section-header">&gt; Stack</h2>
+    <p class="text-block">
+        <strong>Wazuh</strong> — the core SIEM: collects and correlates security events, runs
+        file integrity monitoring, and surfaces intrusion detections, including alerts forwarded
+        from the honeypot.<br><br>
+        <strong>Wazuh Dashboard</strong> — a Kibana-based UI for threat hunting and reviewing
+        alerts.<br><br>
+        <strong>Cowrie</strong> — an SSH honeypot that emulates a vulnerable Linux server,
+        capturing attacker credentials, commands, and full session activity.<br><br>
+        <strong>Suricata</strong> — a network intrusion detection system watching Docker network
+        traffic for known attack signatures and anomalies.<br><br>
+        <strong>OpenCTI &amp; MISP</strong> — threat intelligence platforms for storing and
+        visualising IOCs, TTPs, threat actors, and malware families, feeding each other via a
+        connector.<br><br>
+        <strong>RabbitMQ &amp; MinIO</strong> — the internal message queue and S3-compatible
+        object storage that OpenCTI relies on to process and store intel data and reports.
+    </p>
+
+    <h2 class="section-header">&gt; How It Works</h2>
+    <p class="text-block">
+        Everything runs in Docker — each container behaves like its own small VM, with no desktop
+        environment of its own. Attacker activity against Cowrie or suspicious network traffic
+        picked up by Suricata gets forwarded into Wazuh as security alerts, which I then
+        investigate through the dashboard, cross-referencing indicators against the threat intel
+        stored in OpenCTI and MISP.
+    </p>
+    <pre class="code-block">Start the entire SOC:   docker compose up -d
+Stop the entire SOC:    docker compose down
+Check running containers: docker ps
+View container logs:   docker logs &lt;container-name&gt;</pre>
+
+    <h2 class="section-header">&gt; Why I Built This</h2>
+    <p class="text-block">
+        Most of my hands-on security work has been from the offensive side. This lab is the
+        counterweight — seeing what an attack actually looks like from a SOC analyst's chair:
+        what gets logged, what gets missed, and how detections need tuning before they're useful
+        rather than just noisy.
+    </p>
+
+</section>
+
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
+        <!-- TODO: replace with your GitHub profile URL -->
+        <a href="#">GitHub</a>
+        <!-- TODO: replace with your LinkedIn profile URL -->
+        <a href="#">LinkedIn</a>
+    </div>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft — CyberZombi3</span>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

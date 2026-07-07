@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>iOS Game — CYBERZOMBI3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CyberLink — CyberZombi3 | Aaron Moorcroft</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
@@ -10,36 +12,116 @@
 
 <div class="grid-bg"></div>
 
-<header class="sub-header">
-    <a href="projects.html" class="back-btn">◀ PROJECTS</a>
-    <h1 class="page-title">iOS GAME</h1>
+<header class="navbar">
+    <a href="index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="blog/index.html">Blog</a>
+    </nav>
 </header>
 
-<h2 class="section-header">> GAMEPLAY</h2>
-<img src="assets/images/iosgame1.png" class="project-image">
-<img src="assets/images/iosgame2.png" class="project-image">
-
+<header class="page-header">
+    <a href="projects.html" class="eyebrow-link">&larr; Projects</a>
+    <h1 class="page-title">CyberLink</h1>
+    <p class="page-subtitle">A cyberpunk-themed node-link puzzle game for iOS.</p>
+    <div class="tag-row">
+        <span class="tag">Swift</span>
+        <span class="tag">SwiftUI</span>
+        <span class="tag">AVFoundation</span>
+    </div>
+</header>
 
 <section class="content-panel">
 
-    <h2 class="section-header">> OVERVIEW</h2>
+    <h2 class="section-header">&gt; Gameplay</h2>
+    <div class="image-row">
+        <img src="assets/images/CyberLink.png" class="project-image" alt="CyberLink splash screen">
+        <img src="assets/images/CyberLink-Gameplay.png" class="project-image" alt="CyberLink gameplay grid with root and breach nodes linked">
+    </div>
+
+    <h2 class="section-header">&gt; Overview</h2>
     <p class="text-block">
-        A neon‑styled puzzle runner built in SwiftUI. Procedural levels, cyber‑aesthetic UI,
-        and fast‑paced node‑link mechanics inspired by hacking mini‑games.
+        CyberLink is a fast-paced node-link puzzle game built in SwiftUI. Each level drops you
+        onto a grid of nodes with a <strong>ROOT</strong> node and a <strong>BREACH</strong> node
+        somewhere on the board — the goal is to trace a path between them before the timer runs
+        out, routing around blockers and picking up bonus nodes along the way.
     </p>
 
-    <h2 class="section-header">> FEATURES</h2>
+    <h2 class="section-header">&gt; Core Mechanics</h2>
     <p class="text-block">
-        - Procedural generation<br>
-        - Neon UI<br>
-        - Smooth animations<br>
-        - Touch‑based linking<br>
-        - Level progression
+        - <strong>Root &rarr; Breach linking</strong> — draw a path from the root node to the
+        breach node to confirm the hack and compromise it<br>
+        - <strong>Block nodes</strong> — locked nodes that must be routed around<br>
+        - <strong>+Time and +Score nodes</strong> — optional pickups along the way that extend
+        the clock or boost your score<br>
+        - <strong>Threat meter</strong> — climbs as you play, adding pressure on top of the timer<br>
+        - <strong>Hint system</strong> — a limited number of hints per level for when a path isn't
+        obvious<br>
+        - <strong>Best score tracking</strong> — your best run per level is saved and shown
+        alongside your current score
+    </p>
+
+    <h2 class="section-header">&gt; Operators</h2>
+    <p class="text-block">
+        Before a run, you choose an operator, each with a distinct passive that changes how you
+        play:
+    </p>
+    <pre class="code-block">GHOST   - Wrong paths cost no time penalty. Clean hands, no traces.
+ROGUE   - Double score. Timer runs 25% faster. High risk, high reward.
+DAEMON  - Moving blockers at half speed. Control the grid. Own the net.</pre>
+
+    <h2 class="section-header">&gt; Mission Types</h2>
+    <p class="text-block">
+        Levels are organised into five mission types — Breach, Sweep, Ghost, Sprint, and
+        Survive — each changing the objective and pacing rather than just reskinning the same
+        puzzle.
+    </p>
+
+    <h2 class="section-header">&gt; Feel &amp; Polish</h2>
+    <p class="text-block">
+        Particle bursts on successful breaches, grid events that shake things up mid-level, and
+        sound handled through a dedicated <code>SoundEngine</code> — the goal throughout has been
+        to make a simple puzzle mechanic feel satisfying to execute, not just correct.
+    </p>
+
+    <h2 class="section-header">&gt; Related Prototype: CyberMatch</h2>
+    <p class="text-block">
+        Alongside CyberLink, I've been prototyping <strong>CyberMatch</strong> — a match-3 style
+        puzzle built on a 7&times;8 grid with six distinct tile types (data chips, optics, neural,
+        credits, virus, pulse). Each tile carries both a colour <em>and</em> a letter/icon overlay
+        so the game stays readable for colour-blind players, with haptic feedback tuned per
+        action (light/medium/heavy taps, success and error buzzes). It's earlier-stage than
+        CyberLink but built with the same attention to feel.
+    </p>
+    <!-- TODO: add a CyberMatch screenshot here once it's further along -->
+    <div class="image-placeholder">Screenshot placeholder — CyberMatch prototype</div>
+
+    <h2 class="section-header">&gt; Why I Built This</h2>
+    <p class="text-block">
+        I wanted a project that let me focus on game feel — timing, haptics, particle feedback —
+        rather than just mechanics, using a hacking-themed puzzle as the vehicle. It's also been
+        a good excuse to get properly comfortable with SwiftUI's animation and state-management
+        model outside of a typical CRUD-app context.
     </p>
 
 </section>
 
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
+        <!-- TODO: replace with your GitHub profile URL -->
+        <a href="#">GitHub</a>
+        <!-- TODO: replace with your LinkedIn profile URL -->
+        <a href="#">LinkedIn</a>
+    </div>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft — CyberZombi3</span>
+</footer>
+
 <script src="assets/js/main.js"></script>
 </body>
 </html>
-

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agent Commerce — CyberZombi3 | Aaron Moorcroft</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+<div class="grid-bg"></div>
+
+<header class="navbar">
+    <a href="index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="blog/index.html">Blog</a>
+    </nav>
+</header>
+
+<header class="page-header">
+    <a href="projects.html" class="eyebrow-link">&larr; Projects</a>
+    <h1 class="page-title">Agent Commerce</h1>
+    <p class="page-subtitle">A multi-agent AI pipeline that takes a product from idea to finished listing.</p>
+    <div class="tag-row">
+        <span class="tag">Python</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">Ollama</span>
+        <span class="tag">Claude API</span>
+    </div>
+</header>
+
+<section class="content-panel">
+
+    <h2 class="section-header">&gt; Preview</h2>
+    <!-- TODO: add a screenshot of the Agent Commerce dashboard (localhost:8080) here -->
+    <div class="image-placeholder">Screenshot placeholder — Agent Commerce dashboard</div>
+
+    <h2 class="section-header">&gt; Overview</h2>
+    <p class="text-block">
+        Agent Commerce is a multi-agent AI system that researches, writes, designs, and reviews
+        digital products end to end — from trend research all the way to a finished, sellable
+        listing — with a local dashboard to watch every agent's output as it works. It runs
+        locally on Apple Silicon using Ollama by default, with an optional Claude API key for
+        higher-quality writing on the content-generation step.
+    </p>
+
+    <h2 class="section-header">&gt; The Agent Pipeline</h2>
+    <p class="text-block">
+        Each stage is a distinct agent with one job, passing its output to the next:
+    </p>
+    <pre class="code-block">SCOUT      - researches trends: Google Trends (UK+US), Reddit RSS, Etsy autocomplete
+FILTER     - discards low-quality topics (TV recaps, sports, gossip, news junk)
+STRATEGIST - designs the product blueprint: sections, worksheet pages, target market
+WRITER     - drafts each section (Claude API if configured, otherwise local Ollama)
+EDITOR     - reviews each section pass/fail, triggers one rewrite loop if needed
+DESIGNER   - builds the final PDF and an Etsy-style cover image
+QUALITY    - reviews content quality and safety (e.g. blocks medical dosing claims)
+DEPLOY     - prepares the Etsy listing
+SIGNAL     - writes matching social copy for Pinterest, Instagram, and TikTok</pre>
+
+    <h2 class="section-header">&gt; Notable Details</h2>
+    <p class="text-block">
+        - Products are locked to a single market (UK or US) per run, to keep tone and spelling
+        consistent<br>
+        - Generated PDFs include real, fillable worksheet pages — tables, weekly grids,
+        checklists, habit trackers — not just marketing copy<br>
+        - A safety guard blocks the WRITER agent from making medical or supplement dosing claims,
+        with the QUALITY agent flagging violations<br>
+        - Cover art uses warm, Etsy-appropriate palettes chosen per product category, deliberately
+        not the cyberpunk aesthetic of my other projects<br>
+        - Everything is served through a FastAPI dashboard for monitoring runs in real time
+    </p>
+
+    <h2 class="section-header">&gt; Why I Built This</h2>
+    <p class="text-block">
+        I wanted to go beyond a single chatbot and actually build a multi-agent system where each
+        agent has a narrow job and a real handoff to the next — closer to how a small production
+        team would work than how a single prompt would. Digital products were a good testbed
+        because the pipeline has a genuine, verifiable end state: a finished PDF and listing, not
+        just a chat reply.
+    </p>
+
+</section>
+
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
+        <!-- TODO: replace with your GitHub profile URL -->
+        <a href="#">GitHub</a>
+        <!-- TODO: replace with your LinkedIn profile URL -->
+        <a href="#">LinkedIn</a>
+    </div>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft — CyberZombi3</span>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

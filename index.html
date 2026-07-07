@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CYBERZOMBI3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Aaron Moorcroft (CyberZombi3) — security researcher and software engineer building offensive security tooling, AI agents, and systems from scratch.">
+    <title>CyberZombi3 — Aaron Moorcroft</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -11,16 +13,95 @@
 
 <div class="grid-bg"></div>
 
-<header class="header">
-    <h1 class="logo">CYBERZOMBI3</h1>
-    <p class="tagline">notes from the neon void<span class="cursor">█</span></p>
+<header class="navbar">
+    <a href="index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="blog/index.html">Blog</a>
+    </nav>
 </header>
 
-<main class="menu">
-    <a href="about.html" class="btn">ABOUT</a>
-    <a href="blog/index.html" class="btn">BLOG</a>
-    <a href="projects.html" class="btn">PROJECTS</a>
+<main class="hero">
+    <p class="eyebrow">Hi, I'm</p>
+    <h1>Aaron Moorcroft</h1>
+    <p class="role"><span class="handle-inline">CyberZombi3</span> — Security Researcher &amp; Software Engineer</p>
+    <p class="intro">
+        I build things from the ground up: offensive security tooling, an operating system
+        written from scratch, local AI agents, and the occasional iOS game. I like understanding
+        how things work at the lowest useful level, then building tools that make the next
+        person's job easier.
+    </p>
+
+    <div class="hero-actions">
+        <a href="projects.html" class="btn btn-primary">View Projects</a>
+        <a href="about.html" class="btn btn-secondary">About Me</a>
+        <a href="blog/index.html" class="btn btn-secondary">Read the Blog</a>
+    </div>
+
+    <div class="tag-row">
+        <span class="tag">Offensive Security</span>
+        <span class="tag">Systems Programming</span>
+        <span class="tag">Local AI Agents</span>
+        <span class="tag">iOS Development</span>
+        <span class="tag">Blue Team / SOC</span>
+    </div>
 </main>
+
+<section class="content-panel">
+    <h2 class="section-header">&gt; Featured Work</h2>
+
+    <div class="project-grid">
+        <a href="cyberos.html" class="project-card">
+            <h3>CyberOS</h3>
+            <p>A custom 32-bit x86 operating system built from scratch — bootloader, VBE graphics, and networking, all hand-written.</p>
+            <div class="tag-row">
+                <span class="tag tag-muted">x86 Assembly</span>
+                <span class="tag tag-muted">C</span>
+            </div>
+            <span class="card-link">View details &rarr;</span>
+        </a>
+
+        <a href="agent.html" class="project-card">
+            <h3>AI Pentest Agent</h3>
+            <p>An autonomous recon engine that plans and executes enumeration tools against a target using an LLM-driven loop.</p>
+            <div class="tag-row">
+                <span class="tag tag-muted">Python</span>
+                <span class="tag tag-muted">FastAPI</span>
+            </div>
+            <span class="card-link">View details &rarr;</span>
+        </a>
+
+        <a href="jarvis.html" class="project-card">
+            <h3>JARVIS</h3>
+            <p>A fully local, voice-driven AI assistant for macOS — no cloud dependency, with a plugin system for controlling the Mac.</p>
+            <div class="tag-row">
+                <span class="tag tag-muted">Ollama</span>
+                <span class="tag tag-muted">Whisper</span>
+            </div>
+            <span class="card-link">View details &rarr;</span>
+        </a>
+    </div>
+
+    <p style="margin-top: 24px;">
+        <a href="projects.html" class="card-link" style="text-decoration:none; font-weight:600;">See all projects &rarr;</a>
+    </p>
+</section>
+
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
+        <!-- TODO: replace with your GitHub profile URL -->
+        <a href="#">GitHub</a>
+        <!-- TODO: replace with your LinkedIn profile URL -->
+        <a href="#">LinkedIn</a>
+    </div>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft — CyberZombi3</span>
+</footer>
 
 <script src="assets/js/main.js"></script>
 </body>

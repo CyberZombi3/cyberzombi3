@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JARVIS — CyberZombi3 | Aaron Moorcroft</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+<div class="grid-bg"></div>
+
+<header class="navbar">
+    <a href="index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="blog/index.html">Blog</a>
+    </nav>
+</header>
+
+<header class="page-header">
+    <a href="projects.html" class="eyebrow-link">&larr; Projects</a>
+    <h1 class="page-title">JARVIS</h1>
+    <p class="page-subtitle">A fully local, voice-driven AI assistant for macOS.</p>
+    <div class="tag-row">
+        <span class="tag">Python</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">Ollama</span>
+        <span class="tag">Whisper</span>
+    </div>
+</header>
+
+<section class="content-panel">
+
+    <h2 class="section-header">&gt; Preview</h2>
+    <!-- TODO: add a screenshot of the Jarvis UI here (frontend/jarvis.html running in the browser at localhost:8000) -->
+    <div class="image-placeholder">Screenshot placeholder — Jarvis web UI at localhost:8000</div>
+
+    <h2 class="section-header">&gt; Overview</h2>
+    <p class="text-block">
+        JARVIS is a local AI assistant for macOS — talk to it or type to it, and it can chat,
+        answer questions, and control the machine it's running on. Everything runs locally: the
+        language model, the speech-to-text, and the text-to-speech, with no cloud dependency
+        required. It streams responses over a WebSocket to a lightweight single-page UI that
+        opens automatically in the browser.
+    </p>
+
+    <h2 class="section-header">&gt; How It's Built</h2>
+    <p class="text-block">
+        - <strong>LLM</strong> — DeepSeek, served locally through Ollama (swappable for any
+        model Ollama supports, e.g. Llama 3 or Mistral)<br>
+        - <strong>Speech-to-text</strong> — Whisper, running entirely locally<br>
+        - <strong>Text-to-speech</strong> — macOS's built-in <code>say</code> command by default,
+        with an optional upgrade to an ElevenLabs voice if an API key is configured<br>
+        - <strong>Backend</strong> — FastAPI with a WebSocket connection for streaming<br>
+        - <strong>Memory</strong> — a SQLite database that remembers conversation context between
+        sessions<br>
+        - <strong>Wake word</strong> — an optional listener for "Hey Jarvis" to trigger voice
+        input hands-free
+    </p>
+
+    <h2 class="section-header">&gt; Plugins</h2>
+    <p class="text-block">
+        Voice or typed commands are matched against a small plugin system that controls the Mac
+        directly:
+    </p>
+    <pre class="code-block">"What time is it?"          -> reads the time
+"Open Safari"                -> opens any app
+"Volume up / down / mute"    -> controls system volume
+"Dark mode" / "Light mode"   -> toggles macOS appearance
+"Take a screenshot"          -> saves to Desktop
+"Lock the screen"            -> locks the Mac
+"Empty the trash"            -> empties Finder trash
+"Search for black holes"     -> opens a Google search</pre>
+    <p class="text-block">
+        New plugins are just a small Python class with a regex pattern and an <code>execute()</code>
+        method, registered with the plugin manager — adding a new voice command takes a few lines
+        of code.
+    </p>
+
+    <h2 class="section-header">&gt; Features</h2>
+    <p class="text-block">
+        - Typed and voice chat in one interface<br>
+        - Fully local LLM + speech-to-text, no cloud round-trip required<br>
+        - Hands-free wake-word activation<br>
+        - Persistent memory across sessions<br>
+        - Extensible plugin architecture for system control
+    </p>
+
+    <h2 class="section-header">&gt; Why I Built This</h2>
+    <p class="text-block">
+        I wanted a Siri/Alexa-style assistant without handing every conversation to a cloud
+        provider — something that keeps my data on my own machine, that I can extend with my own
+        plugins, and that I actually understand end to end because I built every layer of it.
+    </p>
+
+</section>
+
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
+        <!-- TODO: replace with your GitHub profile URL -->
+        <a href="#">GitHub</a>
+        <!-- TODO: replace with your LinkedIn profile URL -->
+        <a href="#">LinkedIn</a>
+    </div>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft — CyberZombi3</span>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
