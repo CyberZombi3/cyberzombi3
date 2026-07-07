@@ -40,15 +40,18 @@
 <section class="content-panel">
 
     <h2 class="section-header">&gt; Preview</h2>
-    <!-- TODO: add a screenshot of the Agent Commerce dashboard (localhost:8080) here -->
-    <div class="image-placeholder">Screenshot placeholder — Agent Commerce dashboard</div>
+    <img src="assets/images/agent-commerce.png" class="project-image" alt="Agent Commerce dashboard: a pixel-art virtual office with each AI agent shown as a sprite in its own room">
 
     <h2 class="section-header">&gt; Overview</h2>
     <p class="text-block">
         Agent Commerce is a multi-agent AI system that researches, writes, designs, and reviews
         digital products end to end — from trend research all the way to a finished, sellable
-        listing — with a local dashboard to watch every agent's output as it works. It runs
-        locally on Apple Silicon using Ollama by default, with an optional Claude API key for
+        listing. Rather than a plain dashboard, the "Command Centre" visualises the whole pipeline
+        as a pixel-art virtual office: each agent is a little sprite working in its own room
+        (Research Lab, Meeting Room, Content Studio, Print Room, Cyber Cafe), so you can watch
+        Scout, Strategist, Writer, Designer, and the rest actually "at work" in real time, alongside
+        live counters for trends found, products built, and items awaiting review. It runs locally
+        on Apple Silicon using Ollama (Gemma) by default, with an optional Claude API key for
         higher-quality writing on the content-generation step.
     </p>
 
@@ -68,6 +71,9 @@ SIGNAL     - writes matching social copy for Pinterest, Instagram, and TikTok</p
 
     <h2 class="section-header">&gt; Notable Details</h2>
     <p class="text-block">
+        - The Command Centre is split into tabs — Command Centre, Trend Intel, Products, Activity
+        Log, and Settings — so I can jump from watching agents work to reviewing what they
+        actually produced<br>
         - Products are locked to a single market (UK or US) per run, to keep tone and spelling
         consistent<br>
         - Generated PDFs include real, fillable worksheet pages — tables, weekly grids,
@@ -76,7 +82,8 @@ SIGNAL     - writes matching social copy for Pinterest, Instagram, and TikTok</p
         with the QUALITY agent flagging violations<br>
         - Cover art uses warm, Etsy-appropriate palettes chosen per product category, deliberately
         not the cyberpunk aesthetic of my other projects<br>
-        - Everything is served through a FastAPI dashboard for monitoring runs in real time
+        - Everything is served through a FastAPI dashboard, with the active model (e.g.
+        <code>gemma4:26b</code>) and writer backend shown live in the header
     </p>
 
     <h2 class="section-header">&gt; Why I Built This</h2>
@@ -93,10 +100,8 @@ SIGNAL     - writes matching social copy for Pinterest, Instagram, and TikTok</p
 <footer class="site-footer">
     <div class="footer-links">
         <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
-        <!-- TODO: replace with your GitHub profile URL -->
-        <a href="#">GitHub</a>
-        <!-- TODO: replace with your LinkedIn profile URL -->
-        <a href="#">LinkedIn</a>
+        <a href="https://github.com/CyberZombi3" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/%F0%9F%90%91-aaron-moorcroft-88064921/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
     <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft — CyberZombi3</span>
 </footer>
