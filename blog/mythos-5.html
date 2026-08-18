@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mythos 5, and models that will not show you their working — CyberZombi3 | Aaron Moorcroft</title>
+    <meta name="description" content="Anthropic&#x27;s Claude Mythos 5 and Fable 5 — capabilities, the API changes they force, and why the hidden chain of thought matters.">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+
+<div class="grid-bg"></div>
+
+<header class="navbar">
+    <a href="../index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../spoofcheck.html">Email Check</a>
+        <a href="index.html">Blog</a>
+    </nav>
+</header>
+
+<header class="page-header">
+    <a href="index.html" class="eyebrow-link">&larr; Blog</a>
+    <h1 class="page-title">Mythos 5, and models that will not show you their working</h1>
+    <p class="page-subtitle">Always-on reasoning, a million tokens of context, and a chain of thought you are never allowed to read.</p>
+</header>
+
+<section class="content-panel">
+
+    <p class="post-date">2026-08-05</p>
+
+    <p class="text-block">
+        Anthropic's current top tier is Fable 5, with Mythos 5 as its counterpart through Project Glasswing — same capabilities, same pricing, same API surface, different door. I have been reading the migration notes rather than the marketing, because the interesting parts of a model release are usually the things it breaks.
+    </p>
+
+    <h2 class="section-header">&gt; Thinking is not optional any more</h2>
+    <p class="text-block">
+        On these models extended thinking is always on. You do not enable it, and you cannot turn it off — an explicit request to disable it is rejected outright. The old fixed thinking budget is gone entirely; depth is controlled through an effort level instead. A million token context window is both the default and the maximum, with 128k of output.
+    </p>
+
+    <h2 class="section-header">&gt; You do not get to read the reasoning</h2>
+    <p class="text-block">
+        The raw chain of thought is never returned. You can ask for a summary of it, and the default is to return nothing at all — the thinking blocks arrive with their content empty. Ask the model to reproduce its own reasoning in the response text and you can trip a refusal for exactly that.
+    </p>
+
+    <p class="text-block">
+        I understand the argument. The chain of thought is where a model is most exposed, and exposing it hands attackers a map. But it does make evaluation harder in a way that matters for security work specifically. If a model tells me a finding is a false positive, the reasoning is the thing I want to audit, and increasingly the reasoning is the one thing I cannot have.
+    </p>
+
+    <h2 class="section-header">&gt; Refusals as a normal response</h2>
+    <p class="text-block">
+        These models run safety classifiers that can decline a request, and a decline is not an error — it comes back as a perfectly successful response with a refusal stop reason and a category. Code that reads the first content block without checking will break, because on a refusal there may be no content at all.
+    </p>
+
+    <div class="callout">
+        Worth knowing if you work in security: benign work in this field trips those classifiers occasionally. Anthropic publish a fallback mechanism that re-runs a declined request on another model automatically, which is a tacit acknowledgement that false positives happen often enough to need engineering around.
+    </div>
+
+    <p class="text-block">
+        There is also a hard requirement for thirty day data retention — these models are not available under zero retention at all, and an organisation configured that way gets a validation error on every request rather than a useful message. That one will cost somebody an afternoon.
+    </p>
+
+
+</section>
+
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="index.html">Blog</a>
+        <a href="../projects.html">Projects</a>
+        <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
+    </div>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft — CyberZombi3</span>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>What actually fits on a laptop — CyberZombi3 | Aaron Moorcroft</title>
+    <meta name="description" content="Choosing a local LLM for a 48GB MacBook Pro — the bandwidth maths, MoE versus dense, and why benchmark scores beat architecture intuition.">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+
+<div class="grid-bg"></div>
+
+<header class="navbar">
+    <a href="../index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../spoofcheck.html">Email Check</a>
+        <a href="index.html">Blog</a>
+    </nav>
+</header>
+
+<header class="page-header">
+    <a href="index.html" class="eyebrow-link">&larr; Blog</a>
+    <h1 class="page-title">What actually fits on a laptop</h1>
+    <p class="page-subtitle">Memory bandwidth, mixture-of-experts, and why the obvious choice was the wrong one.</p>
+</header>
+
+<section class="content-panel">
+
+    <p class="post-date">2026-08-14</p>
+
+    <p class="text-block">
+        I spent an evening working out which open model to run locally on a 48 GB M4 Pro, got the answer confidently wrong, and then got it right. The wrong turn is the useful part.
+    </p>
+
+    <h2 class="section-header">&gt; The maths that decides it</h2>
+    <p class="text-block">
+        Generation speed on Apple Silicon is bound by memory bandwidth, not compute. Roughly, tokens per second is bandwidth divided by the bytes read per token. An M4 Pro has about 273 GB/s. A dense model reads all of itself for every token; a mixture-of-experts model reads only its active parameters.
+    </p>
+
+    <p class="text-block">
+        That difference is enormous. A 30B dense model at 4-bit is about 15 GB per token, so roughly 18 tokens per second at the theoretical ceiling. A model with 3B active parameters reads about 1.5 GB and could in principle manage ten times that. So the obvious move is a big MoE with a small active count, and that is exactly what I picked.
+    </p>
+
+    <h2 class="section-header">&gt; The mistake</h2>
+    <p class="text-block">
+        I reasoned entirely from architecture and never checked whether the model was any good. When I finally looked at the benchmark index, the coding-specific MoE I had chosen scored 14. A 27B dense model in the same size class scored 52 — nearly four times higher, and within touching distance of models I cannot run at all.
+    </p>
+
+    <p class="text-block">
+        The dense model is genuinely about five times slower. I took it anyway, because for agentic work a wrong answer costs a whole loop and slow-but-right beats fast-but-wrong on wall clock. But I would have shipped the fast one on architectural elegance alone if I had not gone and looked.
+    </p>
+
+    <h2 class="section-header">&gt; Two things worth stealing</h2>
+    <p class="text-block">
+        Size on disk is not the parameter count. The 4-bit build of the 80B model I first wanted is 44.9 GB — on a 48 GB machine that leaves nothing for the OS or the KV cache, which grows with context and matters enormously for long agentic runs. Check the actual repository size rather than multiplying parameters by a half.
+    </p>
+
+    <p class="text-block">
+        And published tokens-per-second figures are measured on datacentre hardware serving an API. They tell you nothing about your laptop. Work it out from your own memory bandwidth instead.
+    </p>
+
+
+</section>
+
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="index.html">Blog</a>
+        <a href="../projects.html">Projects</a>
+        <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
+    </div>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft — CyberZombi3</span>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

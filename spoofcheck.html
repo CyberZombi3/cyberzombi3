@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Email Spoof Check — CyberZombi3 | Aaron Moorcroft</title>
+    <meta name="description" content="Free instant check of a domain's email spoofing protection — SPF, DKIM and DMARC. Reads public DNS records only.">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="stylesheet" href="assets/css/style.css">
+<style>
+    /* page-specific: the interactive checker */
+    .check-form { display: flex; gap: 10px; margin: 4px 0 10px; flex-wrap: wrap; }
+    .check-form input {
+        flex: 1 1 260px; min-width: 0; padding: 13px 15px;
+        font-family: var(--mono); font-size: 14.5px;
+        background: var(--bg-elevated); color: var(--text);
+        border: 1px solid var(--border); border-radius: var(--radius-sm); outline: none;
+    }
+    .check-form input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+    .check-form input::placeholder { color: var(--text-faint); }
+    .check-note { color: var(--text-faint); font-size: 13px; margin: 0 0 8px; }
+
+    .verdict {
+        display: flex; gap: 18px; align-items: flex-start;
+        background: var(--bg-elevated); border: 1px solid var(--border);
+        border-radius: var(--radius); padding: 20px; margin: 20px 0 16px;
+    }
+    .grade {
+        flex: 0 0 auto; width: 58px; height: 58px; border-radius: var(--radius-sm);
+        display: flex; align-items: center; justify-content: center;
+        font-family: var(--mono); font-size: 27px; font-weight: 700; color: #0b0e13;
+    }
+    .g-F, .g-E { background: #ff6b6b; }
+    .g-D, .g-C { background: #ffa94d; }
+    .g-B, .g-A { background: var(--accent); }
+    .verdict h3 { margin: 0 0 6px; font-size: 17px; line-height: 1.35; color: var(--text); }
+    .verdict p { margin: 0; color: var(--text-muted); font-size: 14.5px; line-height: 1.6; }
+
+    .finding { padding: 15px 0; border-top: 1px solid var(--border-soft); }
+    .finding:first-child { border-top: 0; padding-top: 4px; }
+    .finding-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+    .sev {
+        font-family: var(--mono); font-size: 11px; font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.06em;
+        padding: 3px 8px; border-radius: 999px; flex: 0 0 auto;
+    }
+    .sev-critical { background: rgba(255,107,107,0.15); color: #ff8787; border: 1px solid rgba(255,107,107,0.3); }
+    .sev-high     { background: rgba(255,169,77,0.15);  color: #ffa94d; border: 1px solid rgba(255,169,77,0.3); }
+    .sev-medium   { background: rgba(255,212,59,0.13);  color: #ffd43b; border: 1px solid rgba(255,212,59,0.28); }
+    .sev-low, .sev-info { background: rgba(147,161,181,0.12); color: var(--text-muted); border: 1px solid var(--border); }
+    .finding-title { font-weight: 600; color: var(--text); font-size: 15px; }
+    .finding p { margin: 7px 0 0; color: var(--text-muted); font-size: 14px; line-height: 1.6; }
+    .finding .fix { margin-top: 7px; font-size: 14px; color: var(--text); }
+    .finding .fix b { color: var(--accent); font-weight: 600; }
+
+    .rec { margin-bottom: 14px; }
+    .rec:last-child { margin-bottom: 0; }
+    .rec-label {
+        font-family: var(--mono); font-size: 11.5px; text-transform: uppercase;
+        letter-spacing: 0.07em; color: var(--text-faint); margin-bottom: 5px;
+    }
+    .rec pre {
+        margin: 0; font-family: var(--mono); font-size: 12.5px; line-height: 1.6;
+        background: var(--bg); border: 1px solid var(--border-soft);
+        border-radius: var(--radius-sm); padding: 11px 13px;
+        overflow-x: auto; white-space: pre-wrap; word-break: break-all; color: var(--text-muted);
+    }
+    .rec .absent { color: var(--text-faint); font-style: italic; font-size: 14px; }
+
+    .spinner {
+        display: inline-block; width: 13px; height: 13px; vertical-align: -1px;
+        border: 2px solid rgba(11,14,19,0.35); border-top-color: #0b0e13;
+        border-radius: 50%; animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .spinner { animation: none; } }
+    .offline { border-left-color: #ffa94d; }
+</style>
+</head>
+
+<body>
+
+<div class="grid-bg"></div>
+
+<header class="navbar">
+    <a href="index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="spoofcheck.html">Email Check</a>
+        <a href="blog/index.html">Blog</a>
+    </nav>
+</header>
+
+<header class="page-header">
+    <a href="projects.html" class="eyebrow-link">&larr; Projects</a>
+    <h1 class="page-title">Email Spoof Check</h1>
+    <p class="page-subtitle">Can a stranger send email that looks like it came from your domain?</p>
+    <div class="tag-row">
+        <span class="tag">SPF</span>
+        <span class="tag">DKIM</span>
+        <span class="tag">DMARC</span>
+        <span class="tag tag-muted">Node</span>
+        <span class="tag tag-muted">Zero dependencies</span>
+    </div>
+</header>
+
+<section class="content-panel">
+
+    <h2 class="section-header">&gt; Run a check</h2>
+    <p class="text-block">
+        Enter any domain. Everything below is read from public DNS records — the same data a
+        receiving mail server reads to decide whether to trust a message. Nothing is scanned,
+        nothing is probed, and no permission is required.
+    </p>
+
+    <form class="check-form" id="check-form">
+        <input id="domain-input" type="text" placeholder="yourcompany.co.uk"
+               autocomplete="off" spellcheck="false" aria-label="Domain to check">
+        <button type="submit" class="btn btn-primary" id="check-btn">Check domain</button>
+    </form>
+    <p class="check-note">Accepts a domain, a URL or an email address. Results cached for 15 minutes.</p>
+
+    <div id="results"></div>
+
+    <h2 class="section-header">&gt; What the grades mean</h2>
+    <p class="text-block">
+        <strong>F</strong> — no DMARC record at all. Anyone on the internet can send mail as
+        this domain and receivers have no instruction to stop it.<br><br>
+        <strong>E</strong> — DMARC exists but is set to <code>p=none</code>. That is monitoring
+        only; forged mail still arrives in the inbox.<br><br>
+        <strong>D / C</strong> — <code>p=quarantine</code>. Forged mail is filtered to spam
+        rather than refused. D means the policy is applied to only a percentage of mail.<br><br>
+        <strong>B / A</strong> — <code>p=reject</code>. Receivers refuse forged mail outright.
+        A also requires SPF to end in <code>-all</code>.
+    </p>
+
+    <h2 class="section-header">&gt; Example result</h2>
+    <img src="assets/images/spoofcheck-result.jpg" class="project-image"
+         alt="An example check result: grade C, headline reading forged email is sent to spam rather than rejected, a medium severity finding, and the domain's published SPF and DMARC records">
+
+    <h2 class="section-header">&gt; On the DKIM result</h2>
+    <div class="callout">
+        <strong>DKIM cannot be checked reliably from outside, and this tool does not claim
+        otherwise.</strong><br><br>
+        A DKIM key lives at <code>&lt;selector&gt;._domainkey.&lt;domain&gt;</code>, and the
+        selector is chosen by whoever set up the mail — it is not published anywhere in DNS and
+        cannot be enumerated. The check works backwards from your MX records to guess the
+        selectors your mail provider normally uses, then tries a handful of common ones.<br><br>
+        So a result of "no DKIM found" means <em>we did not guess your selector</em>. It is
+        <strong>not</strong> evidence that DKIM is missing or misconfigured. That is why the
+        result is reported as informational and never counts against the grade — telling you
+        that you have no DKIM when you do would be a false accusation, and a tool that does
+        that is worse than no tool. To confirm DKIM properly, check with your mail provider or
+        look at the <code>Authentication-Results</code> header of a message you have actually
+        sent.<br><br>
+        SPF and DMARC carry no such caveat — those records live at fixed, well-known names, so
+        an absent record genuinely means absent.
+    </div>
+
+    <h2 class="section-header">&gt; Why this check exists</h2>
+    <p class="text-block">
+        Email spoofing is the cheapest attack there is. If a domain has no enforcing DMARC
+        policy, anyone can send invoices, payment-detail changes or password resets that appear
+        to come from the finance director — no compromise required, no credentials needed, and
+        nothing on the target's network is touched. It is the foundation of most business email
+        compromise, and it is fixed with three DNS records.
+    </p>
+    <p class="text-block">
+        The wider point is architectural: this is the only genuinely useful security finding
+        that can be produced without touching the target at all. That makes it something a
+        business can run on itself in three seconds, rather than something that needs a scope
+        document and written authorisation.
+    </p>
+
+    <h2 class="section-header">&gt; Implementation</h2>
+    <p class="text-block">
+        A small Node server with no dependencies. It resolves TXT records for SPF and
+        <code>_dmarc</code>, MX records to identify the mail provider, and probes provider-specific
+        DKIM selectors in parallel. It queries 1.1.1.1 and 8.8.8.8 directly rather than the
+        system resolver, because consumer routers cache aggressively and some rewrite NXDOMAIN
+        — both of which would produce a wrong verdict.
+    </p>
+    <p class="text-block">
+        The scoring logic is separated from the network layer and covered by 38 tests running
+        against fixtures. That separation matters more than it sounds: every well-configured
+        domain grades A to C, so live testing never exercises the failure paths. The F and E
+        grades, <code>+all</code>, duplicate records and the SPF ten-lookup limit exist only in
+        the test fixtures.
+    </p>
+    <p class="text-block">
+        The public endpoint is rate limited per IP. Without that cap, a free DNS lookup form is
+        a bulk reconnaissance tool running on someone else's IP reputation.
+    </p>
+
+</section>
+
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="blog/index.html">Blog</a>
+    </div>
+    <p class="footer-note">Reads public DNS only. No scanning, no authorisation required.</p>
+</footer>
+
+<script>
+// Set this to the deployed checker's URL. Until it is, the page falls back to a local
+// server (cd ~/Documents/spoofcheck && node server.js) so it works while developing.
+//   Deploy:  cd serverless && npx wrangler deploy
+const API_BASE = "http://127.0.0.1:4830";
+
+// Whether this page is being viewed locally or by a visitor. A visitor should never be
+// shown a command to run — if the backend isn't up for them, that is our problem, not
+// something they can act on.
+const IS_LOCAL = ["localhost", "127.0.0.1", ""].includes(location.hostname);
+
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const results = document.getElementById("results");
+const btn = document.getElementById("check-btn");
+
+document.getElementById("check-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const domain = document.getElementById("domain-input").value.trim();
+    if (!domain) return;
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>';
+    results.innerHTML = "";
+
+    try {
+        const res = await fetch(`${API_BASE}/api/check?domain=${encodeURIComponent(domain)}`);
+        const data = await res.json();
+        if (data.error) throw new Error(data.error);
+        render(data);
+    } catch (err) {
+        // A failed fetch here is almost always the backend not running, not a bad domain.
+        const offline = err instanceof TypeError;
+        let msg;
+        if (!offline) {
+            msg = esc(err.message);
+        } else if (IS_LOCAL) {
+            msg = "<strong>Checker backend isn't reachable.</strong><br><br>Start it with " +
+                  "<code>cd ~/Documents/spoofcheck &amp;&amp; node server.js</code>, or deploy it and " +
+                  "set <code>API_BASE</code> at the foot of this page.";
+        } else {
+            msg = "<strong>The checker is temporarily unavailable.</strong><br><br>Sorry — it's not " +
+                  "responding right now. Please try again shortly. Everything it reads is public DNS, " +
+                  "so nothing you entered was sent anywhere.";
+        }
+        results.innerHTML = `<div class="callout offline">${msg}</div>`;
+    } finally {
+        btn.disabled = false;
+        btn.textContent = "Check domain";
+    }
+});
+
+function render(d) {
+    const findings = d.findings.map((f) => `
+        <div class="finding">
+            <div class="finding-head">
+                <span class="sev sev-${esc(f.severity)}">${esc(f.severity)}</span>
+                <span class="finding-title">${esc(f.title)}</span>
+            </div>
+            <p>${esc(f.detail)}</p>
+            <div class="fix"><b>Fix:</b> ${esc(f.fix)}</div>
+        </div>`).join("");
+
+    const rec = (label, value) => `
+        <div class="rec">
+            <div class="rec-label">${esc(label)}</div>
+            ${value ? `<pre>${esc(value)}</pre>` : '<div class="absent">Not published</div>'}
+        </div>`;
+
+    results.innerHTML = `
+        <div class="verdict">
+            <div class="grade g-${esc(d.grade)}">${esc(d.grade)}</div>
+            <div>
+                <h3>${esc(d.headline)}</h3>
+                <p>${esc(d.summary)}</p>
+            </div>
+        </div>
+
+        <h2 class="section-header">&gt; Findings — ${esc(d.domain)}</h2>
+        ${findings || '<p class="text-block">No issues found.</p>'}
+
+        <h2 class="section-header">&gt; Records as published</h2>
+        ${rec("SPF", d.records.spf)}
+        ${rec("DMARC", d.records.dmarc)}
+        <div class="rec">
+            <div class="rec-label">DKIM selectors found</div>
+            ${d.records.dkimSelectors.length
+                ? `<pre>${esc(d.records.dkimSelectors.join(", "))}</pre>`
+                : '<div class="absent">None found at the selectors tried — inconclusive, see note below</div>'}
+        </div>
+        ${rec("Mail servers", d.records.mx.join("\n"))}`;
+}
+</script>
+
+</body>
+</html>

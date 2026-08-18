@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Side Dashboard — CyberZombi3 | Aaron Moorcroft</title>
+    <meta name="description" content="A vertical side-monitor dashboard: live ADS-B flight radar, weather, bin days, Derby County, Claude usage and a live ISS feed. Zero-framework Node, one dependency.">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+<div class="grid-bg"></div>
+
+<header class="navbar">
+    <a href="index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="spoofcheck.html">Email Check</a>
+        <a href="blog/index.html">Blog</a>
+    </nav>
+</header>
+
+<header class="page-header">
+    <a href="projects.html" class="eyebrow-link">&larr; Projects</a>
+    <h1 class="page-title">Side Dashboard</h1>
+    <p class="page-subtitle">A vertical, always-on dashboard for a rotated side monitor — seventeen cards, one dependency.</p>
+    <div class="tag-row">
+        <span class="tag">Node</span>
+        <span class="tag">ADS-B</span>
+        <span class="tag">SVG</span>
+        <span class="tag tag-muted">GridStack</span>
+        <span class="tag tag-muted">AppleScript</span>
+    </div>
+</header>
+
+<section class="content-panel">
+
+    <h2 class="section-header">&gt; Preview</h2>
+    <img src="assets/images/dashboard-radar.jpg" class="project-image"
+         alt="The flight radar card: a green radar scope over a dark map of Shropshire and Staffordshire, with aircraft drawn as plane and helicopter silhouettes, beside a list of nearby traffic with callsigns, types and altitudes">
+
+    <h2 class="section-header">&gt; Overview</h2>
+    <p class="text-block">
+        A single-page dashboard that lives permanently on a portrait secondary monitor. It pulls
+        from about fifteen sources — none of which need an API key — and renders them as
+        drag-and-drop cards whose layout persists in the browser. The server is a zero-framework
+        Node HTTP server; the entire project has one runtime dependency, and that is the grid
+        library doing the drag and resize.
+    </p>
+
+    <h2 class="section-header">&gt; What's on it</h2>
+    <p class="text-block">
+        <strong>Flight radar</strong> — live ADS-B traffic within 25nm, drawn as a real scope over
+        CARTO basemap tiles. Aircraft render as plane or helicopter silhouettes depending on type,
+        rotated to their actual track, with fading breadcrumb trails and a drop shadow. Military
+        traffic — mostly RAF Shawbury's training helicopters — is coloured separately, and anything
+        squawking 7500, 7600 or 7700 is pulled to the top and flashes regardless of range.<br><br>
+        <strong>Next up</strong> — merges fixtures, calendar and bin collections into one ticking
+        countdown to whatever is genuinely next.<br><br>
+        <strong>Bin collections</strong> — Telford &amp; Wrekin's bin day finder, drawn as coloured
+        wheelie bins. The council only publishes one date per container, which under-reports the
+        weekly bin; the code projects it across every collection day it belongs to.<br><br>
+        <strong>Weather</strong> — Open-Meteo, with icons drawn from primitives rather than emoji so
+        they render identically everywhere, and day/night variants chosen from actual sunrise and
+        sunset times.<br><br>
+        <strong>Derby County</strong> — four feeds merged and de-duplicated on a normalised title,
+        with slots reserved for transfer stories so they don't get buried under match reports.<br><br>
+        <strong>Claude usage</strong> — plan limits and reset windows.<br><br>
+        Plus air quality, ISS passes and aurora, night-sky conditions, Apple Calendar over
+        AppleScript, Spotify, host metrics, public IP, NASA's picture of the day, and Sen's live 4K
+        feed from the ISS.
+    </p>
+
+    <h2 class="section-header">&gt; Security</h2>
+    <p class="text-block">
+        It began bound to every interface. That meant any host on the network could read a week of
+        real calendar entries, the public IP and ISP, and machine metrics — and could POST to an
+        unauthenticated endpoint that spent Anthropic credits. A review of the codebase turned up
+        eleven findings, seven of which were fixed:
+    </p>
+    <p class="text-block">
+        <strong>Bound to loopback.</strong> One line, and the largest single reduction in exposure.<br><br>
+        <strong>Host and Origin validation.</strong> Binding to loopback stops other machines but not
+        a page the browser is already showing. A <code>text/plain</code> POST skips preflight
+        entirely, and DNS rebinding would have made every read endpoint same-origin. Both now
+        return 403.<br><br>
+        <strong>Three XSS sinks closed.</strong> The sharpest was calendar event titles: that input
+        is not the user's, it is whatever an invite says, so anyone able to get a meeting into the
+        diary could run script in the dashboard's origin — which reaches every local API.<br><br>
+        <strong>Request body cap</strong> on the one endpoint that accepted a body.
+    </p>
+    <div class="callout">
+        The static file handler was already sound — five traversal encodings all returned 404 —
+        and credentials were only ever read from the Keychain at request time, never stored in the
+        repository. The chat panel was later removed entirely, which retired the only
+        unauthenticated endpoint that could spend money.
+    </div>
+
+    <h2 class="section-header">&gt; Notes from building it</h2>
+    <p class="text-block">
+        <strong>Everything degrades rather than blanks.</strong> Every source here is best-effort —
+        community ADS-B receivers, council endpoints, news feeds. The cache serves the last good
+        value when a refresh fails and marks it stale, so a flaky upstream leaves real if slightly
+        old data on screen instead of an error. Fetchers that resolve with an error object rather
+        than throwing never overwrite a good entry, so a transient failure can't pin itself in
+        place for a whole TTL.<br><br>
+        <strong>Two map layers, not one.</strong> The radar fetches terrain and place names as
+        separate tile layers so the towns can be brightened on the dark theme and darkened on the
+        light one, independently of the coastlines underneath. Asking for brighter labels on the
+        combined layer would just wash out the whole map.<br><br>
+        <strong>Browsers win arguments about autoplay.</strong> The ISS feed takes two clicks from
+        cold. Chrome will not start a cross-origin video unless the click lands on the player, and
+        the click that loads the player is spent on the poster. Both <code>autoplay=1</code> and a
+        <code>postMessage</code> play command were refused. Asking for the second click beats
+        shipping a black rectangle that looks broken.<br><br>
+        <strong>Never bump the layout storage key.</strong> Doing that to make a new card appear
+        discards a hand-arranged layout. Unknown cards are appended below the existing ones instead.
+    </p>
+
+</section>
+
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="blog/index.html">Blog</a>
+    </div>
+    <p class="footer-note">Runs as a launchd agent, bound to localhost.</p>
+</footer>
+
+</body>
+</html>

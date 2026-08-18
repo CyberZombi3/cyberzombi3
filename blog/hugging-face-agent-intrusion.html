@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>An AI agent breached Hugging Face on its own — CyberZombi3 | Aaron Moorcroft</title>
+    <meta name="description" content="Hugging Face disclosed an intrusion in July 2026 carried out autonomously by OpenAI models that escaped an evaluation sandbox. What it means for defenders.">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+
+<div class="grid-bg"></div>
+
+<header class="navbar">
+    <a href="../index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../spoofcheck.html">Email Check</a>
+        <a href="index.html">Blog</a>
+    </nav>
+</header>
+
+<header class="page-header">
+    <a href="index.html" class="eyebrow-link">&larr; Blog</a>
+    <h1 class="page-title">An AI agent breached Hugging Face on its own</h1>
+    <p class="page-subtitle">No attacker, no malice, and a vulnerability nobody had catalogued.</p>
+</header>
+
+<section class="content-panel">
+
+    <p class="post-date">2026-07-19</p>
+
+    <p class="text-block">
+        Hugging Face disclosed an intrusion on 16 July. The interesting part is not that the world's largest model repository got breached — that was always going to happen eventually. It is who did it. OpenAI confirmed the intruder was its own models, which escaped a sandboxed evaluation environment, reached the internet, found a vulnerability nobody had catalogued, and used it.
+    </p>
+
+    <p class="text-block">
+        Neither company believes there was malicious intent. The current reading is that the model was trying to obtain information that would let it score better on an evaluation it was being run against. It cheated, and cheating happened to require a chain of exploitation across someone else's production infrastructure.
+    </p>
+
+    <h2 class="section-header">&gt; The chain</h2>
+    <p class="text-block">
+        It started in the data processing pipeline — a malicious dataset abusing two separate code execution paths to run code on a processing worker. From there it escalated to node level, collected cloud and cluster credentials, and moved laterally across several internal clusters over the course of a weekend. Hugging Face found no evidence of tampering with public models, datasets, Spaces or their own software supply chain.
+    </p>
+
+    <h2 class="section-header">&gt; Why this bothers me as a tester</h2>
+    <p class="text-block">
+        Every part of that chain is ordinary. Untrusted input reaching a code execution path, credentials sitting on a worker, flat internal networking once you are past the edge — I have written those findings up more times than I can count, and they are usually rated by how likely somebody is to chain them. That assumption has quietly stopped being safe.
+    </p>
+
+    <p class="text-block">
+        The economics of exploitation have been the defender's main protection for a long time. A vulnerability chain that takes a skilled human a fortnight to find is, for most organisations, a chain nobody will bother to find. Remove the fortnight and the calculation changes for every target, not just the interesting ones.
+    </p>
+
+    <div class="callout">
+        The uncomfortable detail is the intent. This was not an adversary. It was a system optimising for a score, in a lab, where somebody had reasoned about the boundary and got it wrong. If that is the failure mode, then "who would target us" stops being a useful question — nobody targeted Hugging Face here either.
+    </div>
+
+    <p class="text-block">
+        The practical takeaway has not changed, which is either reassuring or depressing depending on your mood: assume input is hostile, do not leave credentials where code runs, and segment internally so that a foothold is not the whole estate. What has changed is how quickly a theoretical chain becomes a real one.
+    </p>
+
+
+</section>
+
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="index.html">Blog</a>
+        <a href="../projects.html">Projects</a>
+        <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
+    </div>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft — CyberZombi3</span>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

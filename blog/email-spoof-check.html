@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Anyone can send email as your business — CyberZombi3 | Aaron Moorcroft</title>
+    <meta name="description" content="Why email spoofing still works against most small businesses, what SPF, DKIM and DMARC actually do, and a free tool to check any domain.">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+
+<div class="grid-bg"></div>
+
+<header class="navbar">
+    <a href="../index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../spoofcheck.html">Email Check</a>
+        <a href="index.html">Blog</a>
+    </nav>
+</header>
+
+<header class="page-header">
+    <a href="index.html" class="eyebrow-link">&larr; Blog</a>
+    <h1 class="page-title">Anyone can send email as your business</h1>
+    <p class="page-subtitle">A free check I built, and the three DNS records that decide whether forged mail lands.</p>
+</header>
+
+<section class="content-panel">
+
+    <p class="post-date">2026-08-18</p>
+
+    <p class="text-block">
+        Business email compromise does not usually start with a compromise. It starts with a domain that never published a DMARC record, which means anyone on the internet can send mail that appears to come from the finance director, and receiving servers have no instruction to stop it. No credentials, no malware, nothing on the target's network touched.
+    </p>
+
+    <p class="text-block">
+        I have built a free check for it. Put in a domain, get a graded answer in about three seconds: <a href="../spoofcheck.html">Email Spoof Check</a>.
+    </p>
+
+    <h2 class="section-header">&gt; What the three records do</h2>
+    <p class="text-block">
+        <strong>SPF</strong> lists which servers may send mail for your domain. On its own it does not stop anyone forging the address a human actually sees.<br><br><strong>DKIM</strong> cryptographically signs messages so a receiver can tell they were not altered in transit.<br><br><strong>DMARC</strong> is the one that matters. It ties the other two to the visible From: address and tells receivers what to do when a message fails — nothing, quarantine it, or reject it outright. Without an enforcing DMARC policy the other two records are largely decorative.
+    </p>
+
+    <h2 class="section-header">&gt; The check reads public DNS and nothing else</h2>
+    <p class="text-block">
+        This is deliberate and it is the only reason the tool can exist as a link rather than an engagement. Every lookup is a public DNS record — the same data any receiving mail server reads to decide whether to trust a message. Nothing is scanned, nothing is probed, and no authorisation is required. Active testing is a completely different tier with a completely different legal profile, and blurring the two is how people get themselves into trouble.
+    </p>
+
+    <h2 class="section-header">&gt; The honest limitation</h2>
+    <div class="callout">
+        DKIM cannot be checked reliably from outside and the tool says so. Keys live at a selector name chosen by whoever set up the mail, and that name is not published anywhere in DNS — it cannot be enumerated. The check works backwards from your MX records to guess the selectors your provider normally uses. A miss means we did not guess your selector, not that DKIM is missing, so the result is reported as informational and never counts against the grade. Telling someone they have no DKIM when they do would be a false accusation, and a tool that does that is worse than no tool.
+    </div>
+
+    <p class="text-block">
+        SPF and DMARC carry no such caveat — those live at fixed, well known names, so an absent record genuinely means absent. Which, for a surprising number of small businesses, it is.
+    </p>
+
+
+</section>
+
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="index.html">Blog</a>
+        <a href="../projects.html">Projects</a>
+        <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
+    </div>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft — CyberZombi3</span>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
