@@ -115,7 +115,10 @@
     <p class="text-block">
         Enter any domain. Everything below is read from public DNS records — the same data a
         receiving mail server reads to decide whether to trust a message. Nothing is scanned,
-        nothing is probed, and no permission is required.
+        nothing is probed, and no permission is required.<br><br>
+        The check runs <strong>entirely in your browser</strong>. There is no server: the page
+        resolves DNS directly over DNS-over-HTTPS, so the domain you type is never sent to me
+        and nothing about your lookup is logged anywhere.
     </p>
 
     <form class="check-form" id="check-form">
@@ -179,11 +182,15 @@
 
     <h2 class="section-header">&gt; Implementation</h2>
     <p class="text-block">
-        A small Node server with no dependencies. It resolves TXT records for SPF and
-        <code>_dmarc</code>, MX records to identify the mail provider, and probes provider-specific
-        DKIM selectors in parallel. It queries 1.1.1.1 and 8.8.8.8 directly rather than the
-        system resolver, because consumer routers cache aggressively and some rewrite NXDOMAIN
-        — both of which would produce a wrong verdict.
+        No backend at all. Both Cloudflare and Google publish DNS-over-HTTPS endpoints that
+        allow cross-origin requests, so the page resolves DNS itself: TXT records for SPF and
+        <code>_dmarc</code>, MX records to identify the mail provider, and provider-specific
+        DKIM selectors probed in parallel. Cloudflare is tried first and Google is the fallback,
+        because some networks block one or the other — and someone on a locked-down corporate
+        connection is exactly who wants this answer.<br><br>
+        Running client-side removes the server, the hosting account and the bill, but the better
+        reason is that each visitor's lookups come from their own connection rather than one
+        shared IP. There is no rate limit to police and no IP reputation to protect.
     </p>
     <p class="text-block">
         The scoring logic is separated from the network layer and covered by 38 tests running
@@ -208,98 +215,7 @@
     <p class="footer-note">Reads public DNS only. No scanning, no authorisation required.</p>
 </footer>
 
-<script>
-// Set this to the deployed checker's URL. Until it is, the page falls back to a local
-// server (cd ~/Documents/spoofcheck && node server.js) so it works while developing.
-//   Deploy:  cd serverless && npx wrangler deploy
-const API_BASE = "http://127.0.0.1:4830";
-
-// Whether this page is being viewed locally or by a visitor. A visitor should never be
-// shown a command to run — if the backend isn't up for them, that is our problem, not
-// something they can act on.
-const IS_LOCAL = ["localhost", "127.0.0.1", ""].includes(location.hostname);
-
-const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-const results = document.getElementById("results");
-const btn = document.getElementById("check-btn");
-
-document.getElementById("check-form").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const domain = document.getElementById("domain-input").value.trim();
-    if (!domain) return;
-
-    btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span>';
-    results.innerHTML = "";
-
-    try {
-        const res = await fetch(`${API_BASE}/api/check?domain=${encodeURIComponent(domain)}`);
-        const data = await res.json();
-        if (data.error) throw new Error(data.error);
-        render(data);
-    } catch (err) {
-        // A failed fetch here is almost always the backend not running, not a bad domain.
-        const offline = err instanceof TypeError;
-        let msg;
-        if (!offline) {
-            msg = esc(err.message);
-        } else if (IS_LOCAL) {
-            msg = "<strong>Checker backend isn't reachable.</strong><br><br>Start it with " +
-                  "<code>cd ~/Documents/spoofcheck &amp;&amp; node server.js</code>, or deploy it and " +
-                  "set <code>API_BASE</code> at the foot of this page.";
-        } else {
-            msg = "<strong>The checker is temporarily unavailable.</strong><br><br>Sorry — it's not " +
-                  "responding right now. Please try again shortly. Everything it reads is public DNS, " +
-                  "so nothing you entered was sent anywhere.";
-        }
-        results.innerHTML = `<div class="callout offline">${msg}</div>`;
-    } finally {
-        btn.disabled = false;
-        btn.textContent = "Check domain";
-    }
-});
-
-function render(d) {
-    const findings = d.findings.map((f) => `
-        <div class="finding">
-            <div class="finding-head">
-                <span class="sev sev-${esc(f.severity)}">${esc(f.severity)}</span>
-                <span class="finding-title">${esc(f.title)}</span>
-            </div>
-            <p>${esc(f.detail)}</p>
-            <div class="fix"><b>Fix:</b> ${esc(f.fix)}</div>
-        </div>`).join("");
-
-    const rec = (label, value) => `
-        <div class="rec">
-            <div class="rec-label">${esc(label)}</div>
-            ${value ? `<pre>${esc(value)}</pre>` : '<div class="absent">Not published</div>'}
-        </div>`;
-
-    results.innerHTML = `
-        <div class="verdict">
-            <div class="grade g-${esc(d.grade)}">${esc(d.grade)}</div>
-            <div>
-                <h3>${esc(d.headline)}</h3>
-                <p>${esc(d.summary)}</p>
-            </div>
-        </div>
-
-        <h2 class="section-header">&gt; Findings — ${esc(d.domain)}</h2>
-        ${findings || '<p class="text-block">No issues found.</p>'}
-
-        <h2 class="section-header">&gt; Records as published</h2>
-        ${rec("SPF", d.records.spf)}
-        ${rec("DMARC", d.records.dmarc)}
-        <div class="rec">
-            <div class="rec-label">DKIM selectors found</div>
-            ${d.records.dkimSelectors.length
-                ? `<pre>${esc(d.records.dkimSelectors.join(", "))}</pre>`
-                : '<div class="absent">None found at the selectors tried — inconclusive, see note below</div>'}
-        </div>
-        ${rec("Mail servers", d.records.mx.join("\n"))}`;
-}
-</script>
+<script type="module" src="assets/js/spoofcheck.js"></script>
 
 </body>
 </html>
