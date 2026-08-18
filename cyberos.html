@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CyberOS — CyberZombi3 | Aaron Moorcroft</title>
+    <meta name="description" content="A 32-bit x86 operating system written from scratch in NASM — three-stage bootloader, windowed desktop, FAT12/FAT32, a TCP/IP stack and a packet sniffer. 17,000 lines of assembly in a 60KB kernel.">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -29,99 +30,141 @@
 <header class="page-header">
     <a href="projects.html" class="eyebrow-link">&larr; Projects</a>
     <h1 class="page-title">CyberOS</h1>
-    <p class="page-subtitle">A custom x86 operating system with its own windowed desktop, written from scratch.</p>
+    <p class="page-subtitle">A 32-bit operating system written from scratch in assembly — bootloader, kernel, windowing system, filesystems and a network stack. No libraries, no toolchain beyond NASM.</p>
     <div class="tag-row">
-        <span class="tag">x86 Assembly</span>
-        <span class="tag">C</span>
+        <span class="tag">NASM</span>
+        <span class="tag">x86</span>
         <span class="tag">Protected Mode</span>
-        <span class="tag">VBE Graphics</span>
-        <span class="tag">QEMU</span>
+        <span class="tag tag-muted">FAT12 / FAT32</span>
+        <span class="tag tag-muted">TCP/IP</span>
+        <span class="tag tag-muted">v5.9.11</span>
     </div>
 </header>
 
 <section class="content-panel">
 
-    <h2 class="section-header">&gt; Screenshot — v5.9.5 Desktop</h2>
-    <img src="assets/images/cyberos-desktop.png" class="project-image" alt="CyberOS v5.9.5 running under QEMU: desktop icons for Terminal, Files, Help, Settings, My Computer and Recycle Bin, with the My Computer window listing drives and system information, and a Files window browsing the PROGRAMS directory">
-    <img src="assets/images/cyberos.png" class="project-image" alt="CyberOS boot output">
+    <h2 class="section-header">&gt; The desktop</h2>
+    <img src="assets/images/cyberos-desktop-5911.png" class="project-image"
+         alt="The CyberOS v5.9.11 desktop: a blue background with pixel-art icons down the left for Terminal, Files, Help, Settings, My Computer and Recycle Bin, and a taskbar showing the version and a live clock">
 
-    <h2 class="section-header">&gt; Overview</h2>
     <p class="text-block">
-        CyberOS is a 32-bit x86 operating system built entirely from scratch — no existing kernel,
-        no framework, just a hand-written bootloader and kernel talking directly to the hardware.
-        What started as a boot sequence and a text shell has grown into a genuine windowed desktop
-        environment: draggable, resizable windows, a taskbar, a working Files app, and a Settings
-        app with live theming — all running on top of a bootloader and kernel I wrote myself.
+        CyberOS boots from a 1.44 MB floppy image into a 1024×768 32-bit graphical desktop.
+        Everything on screen — the window manager, the icons, the font rendering, the mouse
+        cursor — is drawn by hand-written assembly into a linear framebuffer. There is no
+        libc, no compiler, and nothing borrowed from an existing kernel.
     </p>
 
-    <h2 class="section-header">&gt; The Desktop (v5.9.4)</h2>
+    <h2 class="section-header">&gt; By the numbers</h2>
     <p class="text-block">
-        The current build boots straight into a full desktop, not just a shell prompt:
-    </p>
-    <p class="text-block">
-        - <strong>Taskbar</strong> — shows the OS version, running app buttons (Terminal, Files,
-        Settings, Computer), and a live clock<br>
-        - <strong>Terminal</strong> — the original command-line shell, now running inside its own
-        window<br>
-        - <strong>Files</strong> — a working file browser with back/forward/up navigation, folder
-        creation, and delete<br>
-        - <strong>Settings</strong> — live desktop personalisation: wallpaper themes (Cyber, Dark,
-        Accent, Grid), an accent colour picker, 24-hour/12-hour clock toggle, and resolution
-        switching (800&times;600 up to 1280&times;1024, applied on reboot)<br>
-        - <strong>My Computer</strong> — a system summary window: CPU mode, display mode, memory,
-        network adapter, and storage, all read from the live system rather than hard-coded<br>
-        - <strong>Recycle Bin</strong> — because a desktop isn't a desktop without one
+        <strong>16,829 lines</strong> of NASM in the stage 3 kernel, plus 286 in the stage 2
+        loader.<br><br>
+        <strong>60,424 bytes</strong> — the assembled kernel, at 92% of its 128-sector load
+        budget. Size is a live constraint on this project, not an afterthought.<br><br>
+        <strong>512 bytes</strong> for stage 1, which is all a boot sector gets.
     </p>
 
-    <h2 class="section-header">&gt; System Info (from "My Computer")</h2>
-    <pre class="code-block">System &amp; Drives
-Floppy (A:)  1.44 MB  FAT12
-
-CPU      : i386 (32-bit protected mode)
-Display  : VBE 1280x1024x32
-Memory   : flat 4 GB address space
-Network  : RTL8139 Ethernet
-Storage  : 1.44 MB floppy (FAT12)</pre>
-
-    <h2 class="section-header">&gt; Boot Process</h2>
+    <h2 class="section-header">&gt; How it boots</h2>
     <p class="text-block">
-        Booting still happens in three hand-written stages, each doing just enough to hand off to
-        the next, before the kernel brings up the desktop shell on top:
+        Three stages, because the first one has 512 bytes to work with and that is nowhere
+        near enough.<br><br>
+        <strong>Stage 1</strong> lives in the boot sector at LBA 0. Its whole job is to pull
+        stage 2 off the disk and jump to it.<br><br>
+        <strong>Stage 2</strong> sits at LBA 1. It queries VESA BIOS Extensions for a 1024×768
+        32-bit mode and a linear framebuffer, loads the kernel from LBA 9, sets up the GDT,
+        switches the CPU from 16-bit real mode into 32-bit protected mode, and hands over.<br><br>
+        <strong>Stage 3</strong> is the kernel: interrupt handling, memory, PS/2 keyboard and
+        mouse drivers, the framebuffer graphics layer, the window manager, two filesystem
+        drivers, an ATA disk driver, an RTL8139 network driver and a TCP/IP stack.
+    </p>
+
+    <h2 class="section-header">&gt; Windowing</h2>
+    <img src="assets/images/cyberos-windows.png" class="project-image"
+         alt="Three overlapping CyberOS windows — a file manager, a settings panel and My Computer — showing correct z-ordering, title bars with minimise and close buttons, resize grips, and a taskbar listing each open window">
+
+    <p class="text-block">
+        A real window manager rather than a full-screen menu: overlapping windows with correct
+        z-ordering, draggable title bars, minimise and close buttons, resize grips, and a
+        taskbar that tracks what is open. Clicking a window raises it and repaints only what
+        needs repainting.
     </p>
     <p class="text-block">
-        <strong>Stage 1</strong> — a 512-byte real-mode bootstrap that fits in the boot sector and
-        loads the next stage from disk.<br>
-        <strong>Stage 2</strong> — a loader that sets up memory and the transition into 32-bit
-        protected mode.<br>
-        <strong>Stage 3</strong> — the kernel: drivers, the VBE display, the RTL8139 driver, the
-        window manager, and the desktop apps.
+        The settings panel is genuinely wired up — wallpaper themes, an accent colour that
+        propagates through the whole UI, 12 or 24 hour clock, and a resolution switch that
+        takes effect on the next boot because the mode is negotiated with VESA in stage 2.
     </p>
-    <pre class="code-block">CyberOS Build System v2.0
-[1/3] Assembling stage1.asm ...
-[2/3] Assembling stage2_loader.asm ...
-[3/3] Assembling stage3_kernel.asm ...
-[IMG] Building floppy.img ...
-floppy.img ready (1.44MB)</pre>
 
-    <h2 class="section-header">&gt; Why I Built This</h2>
+    <h2 class="section-header">&gt; The shell</h2>
+    <img src="assets/images/cyberos-terminal.png" class="project-image"
+         alt="The CyberOS terminal showing an ASCII-art banner and the output of the help command, listing commands grouped under System, Display, Files, Network, Disk and Power">
+
     <p class="text-block">
-        I wanted to actually understand what an operating system does under the hood — not just
-        use one. Writing the bootloader by hand, wrestling with the jump into protected mode, and
-        writing a network driver against real hardware registers forces a level of understanding
-        that using Linux never does. What keeps me coming back to it is watching it grow from a
-        blinking cursor in a text shell into something with its own window manager and Settings
-        app — each version proves out another piece of "real OS" functionality.
+        The terminal has command history, and the command set is the honest measure of how much
+        of the machine the kernel actually drives:<br><br>
+        <strong>System</strong> — <code>sysinfo</code>, <code>mem</code>, <code>pci</code>,
+        <code>ver</code>, <code>about</code>. <code>pci</code> walks the PCI configuration space
+        and enumerates real devices.<br><br>
+        <strong>Files</strong> — <code>ls</code>, <code>view</code>, <code>save</code>,
+        <code>load</code>, against FAT12 on the floppy and FAT32 on the hard disk.<br><br>
+        <strong>Network</strong> — <code>ifconfig</code>, <code>ping</code>, <code>dhcp</code>
+        and <code>sniff</code>. There is an RTL8139 driver, an ARP and IP implementation, ICMP,
+        a DHCP client that really does obtain a lease, and a packet sniffer.<br><br>
+        <strong>Disk</strong> — <code>hdd</code>, <code>format</code> and <code>install</code>.
+        It can format a FAT32 volume and install itself to the hard disk.<br><br>
+        <strong>Power</strong> — <code>reboot</code>, <code>shutdown</code>.
+    </p>
+
+    <h2 class="section-header">&gt; I audited my own kernel</h2>
+    <p class="text-block">
+        In July 2026 I ran a full security audit against the CyberOS source — the same way I
+        would approach any other codebase, except that this one had no libraries to hide behind
+        and I had written every line of it. It found <strong>3 critical, 6 high, 8 medium and
+        9 low</strong> findings. All are fixed.
+    </p>
+    <p class="text-block">
+        The critical three were memory and filesystem corruption:<br><br>
+        <strong>C1</strong> — a buffer overflow opening any floppy file larger than 1 KB.<br>
+        <strong>C2</strong> — <code>fat_next</code> returned garbage cluster numbers, so deleting
+        a file corrupted the on-disk FAT.<br>
+        <strong>C3</strong> — <code>load</code> and <code>view</code> walked random cluster chains
+        for anything over 512 bytes.
+    </p>
+    <div class="callout">
+        The two that interest me most were in the network path. <strong>H2</strong> — the frame
+        parser walked past the end of a received packet, reachable remotely and without
+        authentication. <strong>H3</strong> — a remote attacker could exhaust the heap and
+        permanently deny service. Writing a network stack from nothing makes it very obvious how
+        much of a real one is bounds checking rather than protocol.<br><br>
+        <strong>H6</strong> was the satisfying one: the floppy driver never verified that an
+        operation had completed. That had almost certainly been the source of years of
+        intermittent disk corruption I had been blaming on QEMU.
+    </div>
+    <p class="text-block">
+        Every fix was assembled, booted headless in QEMU and exercised through the real UI — file
+        manager, terminal, menus, network — with a screenshot at each step. The kernel came out
+        of it <em>smaller</em>: 61,041 bytes down to 60,424, because roughly 720 lines of dead
+        code went out while about 500 lines of bounds checks came in. The pre-audit source and
+        floppy image are kept for rollback.
+    </p>
+
+    <h2 class="section-header">&gt; Why</h2>
+    <p class="text-block">
+        Because everything above the hardware is normally somebody else's abstraction, and the
+        only way to find out what those abstractions are actually doing is to go without them.
+        Writing a filesystem makes you understand why file corruption happens. Writing a network
+        stack makes you understand why parsers are where the bugs live. I break into systems for
+        a living, and building one from the boot sector up has taught me more about how they
+        fail than any amount of reading.
     </p>
 
 </section>
 
 <footer class="site-footer">
     <div class="footer-links">
-        <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
-        <a href="https://github.com/CyberZombi3" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://www.linkedin.com/in/%F0%9F%90%91-aaron-moorcroft-88064921/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="blog/index.html">Blog</a>
     </div>
-    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft — CyberZombi3</span>
+    <p class="footer-note">Written in NASM. Runs on real hardware and under QEMU.</p>
 </footer>
 
 <script src="assets/js/main.js"></script>
