@@ -104,8 +104,8 @@
         <span class="tag">SPF</span>
         <span class="tag">DKIM</span>
         <span class="tag">DMARC</span>
-        <span class="tag tag-muted">Node</span>
-        <span class="tag tag-muted">Zero dependencies</span>
+        <span class="tag tag-muted">DNS-over-HTTPS</span>
+        <span class="tag tag-muted">No backend</span>
     </div>
 </header>
 
@@ -126,7 +126,7 @@
                autocomplete="off" spellcheck="false" aria-label="Domain to check">
         <button type="submit" class="btn btn-primary" id="check-btn">Check domain</button>
     </form>
-    <p class="check-note">Accepts a domain, a URL or an email address. Results cached for 15 minutes.</p>
+    <p class="check-note">Accepts a domain, a URL or an email address. Roughly a dozen DNS lookups, run in parallel.</p>
 
     <div id="results"></div>
 
