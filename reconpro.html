@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ReconPro — CyberZombi3 | Aaron Moorcroft</title>
+    <meta name="description" content="An AI-driven penetration testing platform: a frontier agent drives nmap, nuclei, sqlmap, metasploit and the rest of the local toolset against authorised targets, verifies its findings with command output as evidence, and writes the report.">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+<div class="grid-bg"></div>
+
+<header class="navbar">
+    <a href="index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="spoofcheck.html">Email Check</a>
+        <a href="blog/index.html">Blog</a>
+    </nav>
+</header>
+
+<header class="page-header">
+    <a href="projects.html" class="eyebrow-link">&larr; Projects</a>
+    <h1 class="page-title">ReconPro</h1>
+    <p class="page-subtitle">An AI penetration testing platform. The agent plans and executes the test itself — recon through to exploitation and reporting — driving the real local toolset, and every finding it records is verified with command output rather than inferred from a banner.</p>
+    <div class="tag-row">
+        <span class="tag">Python</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">Claude Agent SDK</span>
+        <span class="tag tag-muted">129 tools</span>
+        <span class="tag tag-muted">Authorised targets only</span>
+    </div>
+</header>
+
+<section class="content-panel">
+
+    <div class="callout">
+        <strong>Authorised use only.</strong> The agent executes real attacks. It is pointed
+        exclusively at my own lab systems or targets inside a signed engagement scope, and the
+        scope rules are enforced in code rather than left to the agent's discretion.
+    </div>
+
+    <h2 class="section-header">&gt; Scan history and diffing</h2>
+    <img src="assets/images/reconpro.jpg" class="project-image"
+         alt="The ReconPro interface showing the scan history tab: six runs against a lab host, each row tagged agent or fixed with its critical, high and medium counts, above tabs for findings, services, config review, reasoning, terminal and the credential vault">
+
+    <p class="text-block">
+        Every run against a host is kept, so a re-scan is a comparison rather than a fresh
+        opinion. The rows above are successive passes at the same lab VM as things were fixed
+        between them.
+    </p>
+
+    <h2 class="section-header">&gt; Verified, not scanned</h2>
+    <p class="text-block">
+        This is the whole premise. A scanner tells you a host is <em>probably</em> vulnerable
+        because a version string matched; that is where most automated tooling stops, and it is
+        why scanner output needs a human to triage it before anyone will act on it.
+    </p>
+    <p class="text-block">
+        ReconPro's agent has to <em>demonstrate</em> the finding. It runs the check, reads the
+        output, and only records a finding when it has evidence — the command and its output are
+        attached to the finding itself. Where it can go further it does: it exploits, captures
+        credentials, and stores them for reuse against the rest of the estate on later scans.
+    </p>
+
+    <h2 class="section-header">&gt; How it runs</h2>
+    <p class="text-block">
+        A FastAPI server on loopback serves a single-page operator UI. The agent drives whatever
+        is on <code>PATH</code> — nmap, nuclei, sqlmap, metasploit, enum4linux, hydra,
+        bloodhound-python and around 129 tools in total — and the whole run streams live into
+        the browser so you can watch it think and intervene.
+    </p>
+    <p class="text-block">
+        <strong>Engagement types</strong> — infrastructure, web app, API, AD review, containers,
+        Kubernetes, thick client, server build reviews, firewall ruleset reviews and cloud
+        config reviews. Each one hands the agent a different set of scope rules defining what it
+        may and may not touch.<br><br>
+        <strong>Methodology-driven</strong> — upload a methodology sheet and the agent treats it
+        as required coverage, reporting a status against every single item: pass, finding
+        raised, not applicable, or not testable with a stated reason. That last category is the
+        one that matters, because it is the honest answer a scanner never gives you.<br><br>
+        <strong>Engagement briefs</strong> — free text that shapes the whole test. "Deep-dive
+        every hosted app, host compromise is secondary" changes what it prioritises.<br><br>
+        <strong>Live operator chat</strong> — talk to the agent mid-scan. "That payload failed,
+        try an x86 template." The same session resumes afterwards for follow-up questions.<br><br>
+        <strong>Estate scans</strong> — give it a subnet and it discovers live hosts, tests each
+        in turn, and writes a combined report.<br><br>
+        <strong>Offline config review</strong> — drag in firewall rulesets, device configs,
+        <code>sshd_config</code> or cloud exports for a no-network hardening review that returns
+        corrected config, not just a list of complaints.<br><br>
+        <strong>Scan-over-scan diffing</strong> — a re-scan is compared against the previous run
+        and split into new, unchanged, and no-longer-observed. The third one is a prompt to go
+        and verify a fix rather than assume it.<br><br>
+        <strong>Reporting</strong> — a Markdown report per scan, with one-click export to styled
+        HTML with a cover page and severity chart, JSON and CSV. Findings carry MITRE ATT&amp;CK
+        technique IDs.
+    </p>
+
+
+    <h2 class="section-header">&gt; What a report looks like</h2>
+    <img src="assets/images/reconpro-report.jpg" class="project-image"
+         alt="A generated ReconPro scan report in Markdown: open ports, then eighteen new verified findings including EternalBlue and several DVWA injection issues, then a separate section listing twenty-nine findings not re-observed this scan and flagged for verification before being treated as fixed">
+
+    <p class="text-block">
+        This is a real report against a deliberately vulnerable lab VM, and the structure is the
+        argument. Eighteen <em>verified</em> findings at the top — each one demonstrated. Then a
+        separate section for what was not re-observed, explicitly labelled
+        <em>verify before treating as fixed</em> rather than silently dropped. Then, kept firmly
+        apart from both, the version-inferred CVEs marked <code>unverified</code> — ninety-two
+        of them collapsed into a single line, because that is roughly what they are worth
+        without a check behind them.
+    </p>
+
+    <h2 class="section-header">&gt; Surviving a restart</h2>
+    <p class="text-block">
+        Running jobs are snapshotted to disk every fifteen seconds. If the server dies mid-run —
+        and long agent runs give it plenty of opportunity — the jobs reappear in the selector
+        afterwards, including the ones interrupted halfway, marked as such and still
+        inspectable. Completed agent sessions stay resumable for follow-up chat. Losing four
+        hours of a scan to a process restart is the kind of thing you only build against once.
+    </p>
+
+    <h2 class="section-header">&gt; What's deliberately switched off</h2>
+    <p class="text-block">
+        Two features are built and disabled in the UI: concurrent jobs (the backend handles
+        three in parallel, capped at one until the job selector has been properly
+        browser-tested) and the engagement-type dropdown (greyed out until the methodology packs
+        behind it are wired in — the CLI flag still works). Both are one-line re-enables. I'd
+        rather ship a thing that does less and doesn't lie about it.
+    </p>
+
+    <h2 class="section-header">&gt; The honest bit</h2>
+    <p class="text-block">
+        This does not replace a tester, and the interesting reason isn't capability — it's that
+        an agent is extremely good at exhaustively working a checklist and quite bad at the
+        instinct that says <em>this parameter feels wrong, let me spend an hour on it</em>. What
+        it genuinely removes is the four hours of enumeration and evidence-gathering at the
+        start of every engagement, which is the part I have never once enjoyed and the part
+        where fatigue actually causes misses.
+    </p>
+
+</section>
+
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="blog/index.html">Blog</a>
+    </div>
+    <p class="footer-note">Authorised targets only. Runs on loopback by default.</p>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CDMF — CyberZombi3 | Aaron Moorcroft</title>
+    <meta name="description" content="A six-plane continuous detect-and-mitigate framework: intel triggers a probe, a confirmed finding becomes a canonical mitigation, four assurance gates test it, and a human decides before anything reaches a control.">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+<div class="grid-bg"></div>
+
+<header class="navbar">
+    <a href="index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="spoofcheck.html">Email Check</a>
+        <a href="blog/index.html">Blog</a>
+    </nav>
+</header>
+
+<header class="page-header">
+    <a href="projects.html" class="eyebrow-link">&larr; Projects</a>
+    <h1 class="page-title">CDMF</h1>
+    <p class="page-subtitle">Continuous Detect-and-Mitigate Framework — a six-plane loop that takes a newly published exploit and carries it through to a verified, deployed mitigation, with AI agents doing the judgement and deterministic code doing the proving.</p>
+    <div class="tag-row">
+        <span class="tag">Python</span>
+        <span class="tag">Claude Agent SDK</span>
+        <span class="tag tag-muted">ModSecurity</span>
+        <span class="tag tag-muted">Suricata</span>
+        <span class="tag tag-muted">Prototype</span>
+    </div>
+</header>
+
+<section class="content-panel">
+
+    <h2 class="section-header">&gt; The loop, running</h2>
+    <img src="assets/images/cdmf.jpg" class="project-image"
+         alt="The CDMF portal mid-run: six plane cards across the top with Intelligence complete and Detection in progress, a live elapsed timer, and an agent event stream below listing feed polling, inventory matching and probe confirmation">
+
+    <p class="text-block">
+        The question this was built to answer is a boring one that nobody has a good answer to:
+        a proof-of-concept for a vulnerability you're exposed to gets published at 09:00 — how
+        long until you have a tested, deployed, verified mitigation in front of it, and can you
+        prove the mitigation actually works? Most organisations measure that in weeks and
+        cannot prove the second half at all.
+    </p>
+    <p class="text-block">
+        CDMF is a working scaffold for closing that loop automatically, with exactly one human
+        checkpoint in it. It is a prototype — a test project that was never put into production —
+        but the full path runs end to end against a containerised twin.
+    </p>
+
+    <h2 class="section-header">&gt; Six planes</h2>
+    <p class="text-block">
+        <strong>1 — Intelligence.</strong> Polls live feeds (CISA KEV among them), matches new
+        entries against an asset inventory, and decides whether this one is actually
+        <em>yours</em>. Most aren't. That triage is the first agent decision.<br><br>
+        <strong>2 — Detection.</strong> Orchestrates probes against the affected asset to
+        <em>confirm</em> exploitability rather than infer it from a version banner, then diffs
+        the result against the previous cycle.<br><br>
+        <strong>3 — Rendering.</strong> Produces one canonical mitigation object, then renders it
+        per vendor — a ModSecurity rule and a Suricata signature from the same source of truth —
+        and reports where coverage has gaps.<br><br>
+        <strong>4 — Assurance.</strong> Four gates the rule must pass: it blocks the real attack;
+        it survives an adversarially generated evasion set; it does not fire on legitimate
+        traffic; and it is hygienic (ReDoS-safe regex, no rule-ID collisions).<br><br>
+        <strong>5 — Handoff.</strong> The human gate. A work item and a rules-as-code pull
+        request. Nothing proceeds without a person clicking.<br><br>
+        <strong>6 — Verification.</strong> Re-verifies in production, emits telemetry, and
+        retires the rule when the underlying vulnerability is patched out.
+    </p>
+
+    <div class="callout">
+        The design rule the whole thing hangs on: <strong>agents for judgement, deterministic
+        code for verification.</strong> A Claude agent decides whether a CVE matters to this
+        estate, drafts the match logic, and generates evasion payloads to attack its own rule.
+        It is never allowed to be the thing that says the rule passed. The four gates, the
+        pattern allowlist and the human gate are ordinary code with no LLM in the path.
+        <br><br>
+        When a gate rejects an agent-drafted rule, the failing payloads are fed back for a
+        redraft — three attempts, then it falls back to a known-good deterministic pattern and
+        flags itself. Every agent also degrades to the scripted path on error, and the whole
+        agent layer switches off with one environment variable.
+    </div>
+
+    <h2 class="section-header">&gt; Treating the framework as a target</h2>
+    <p class="text-block">
+        A system that ingests attacker-controlled data and emits security rules is an obvious
+        thing to attack, so it was built assuming someone would:
+    </p>
+    <p class="text-block">
+        All scan output is untrusted input — stored as evidence, never interpreted as
+        instructions. Generated match patterns are validated against a strict allowlist before
+        they can be rendered. The hygiene gate lints for catastrophic backtracking, because a
+        WAF rule with a ReDoS in it <em>is</em> the denial of service. And nothing reaches a
+        production control without the plane-5 human decision — the agent can propose, it cannot
+        deploy.
+    </p>
+
+    <h2 class="section-header">&gt; The twin</h2>
+    <p class="text-block">
+        Running it for real needs somewhere safe to be wrong. A Docker Compose stack stands up a
+        deliberately vulnerable web application behind ModSecurity with Suricata on the wire —
+        control replicas of the production path. Probes hit the twin, rules are deployed to the
+        twin, and the evasion set is fired at the twin. The hero metric the demo ends on is mean
+        time to <em>verified</em> mitigation, which is the only version of that number worth
+        quoting.
+    </p>
+
+    <h2 class="section-header">&gt; Why I built it</h2>
+    <p class="text-block">
+        Because "we'll write a WAF rule" is where vulnerability management quietly stops being
+        rigorous. The rule gets written, someone eyeballs it, it goes live, and nobody ever
+        tests whether it can be trivially evaded — which, in my experience of getting past them,
+        it usually can. Automating the loop was interesting; automating the <em>adversarial
+        testing of your own mitigation</em> was the part actually worth building.
+    </p>
+
+</section>
+
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="blog/index.html">Blog</a>
+    </div>
+    <p class="footer-note">Prototype. Lab and authorised targets only.</p>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
