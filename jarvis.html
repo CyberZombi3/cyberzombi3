@@ -40,6 +40,10 @@
 
 <section class="content-panel">
 
+    <h2 class="section-header">&gt; Interface</h2>
+    <img src="assets/images/jarvis-hud.jpg" class="project-image"
+         alt="The JARVIS interface: a dark HUD with an animated particle sphere at its centre, a live clock, system resource meters for CPU, memory and audio input, a voice activity waveform, network and session panels, an intelligence stack listing the model, speech-to-text, text-to-speech and memory backends, and a command bar along the bottom">
+
     <h2 class="section-header">&gt; Overview</h2>
     <p class="text-block">
         JARVIS is a local AI assistant for macOS — talk to it or type to it, and it can chat,
@@ -51,8 +55,8 @@
 
     <h2 class="section-header">&gt; How It's Built</h2>
     <p class="text-block">
-        - <strong>LLM</strong> — DeepSeek, served locally through Ollama (swappable for any
-        model Ollama supports, e.g. Llama 3 or Mistral)<br>
+        - <strong>LLM</strong> — Qwen3 32B, served locally through Ollama and swappable for
+        anything else Ollama supports<br>
         - <strong>Speech-to-text</strong> — Whisper, running entirely locally<br>
         - <strong>Text-to-speech</strong> — macOS's built-in <code>say</code> command by default,
         with an optional upgrade to an ElevenLabs voice if an API key is configured<br>
@@ -61,6 +65,16 @@
         sessions<br>
         - <strong>Wake word</strong> — an optional listener for "Hey Jarvis" to trigger voice
         input hands-free
+    </p>
+
+    <h2 class="section-header">&gt; The HUD</h2>
+    <p class="text-block">
+        The front end is a single HTML file with no framework behind it. The centre is an
+        animated particle sphere that reacts to state — idle, listening, thinking, speaking —
+        surrounded by live readouts: CPU, memory and audio input levels, a voice activity
+        waveform, uptime and battery, and an intelligence stack panel showing which model,
+        speech-to-text, voice and memory backend are currently loaded. Everything on it is
+        real telemetry rather than decoration, which is the only reason it is worth having.
     </p>
 
     <h2 class="section-header">&gt; Plugins</h2>
