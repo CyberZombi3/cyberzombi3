@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NightJARC2 — CyberZombi3 | Aaron Moorcroft</title>
-    <meta name="description" content="A command-and-control framework built from scratch for lab use — multi-operator with per-action attribution, SOCKS5 pivoting through beacons, and every action logged. Transparent by default, evasion strictly opt-in and always recorded.">
+    <title>NightJARC2 · CyberZombi3 | Aaron Moorcroft</title>
+    <meta name="description" content="A command-and-control framework built from scratch for lab use, with multi-operator per-action attribution, SOCKS5 pivoting through beacons, and every action logged. Transparent by default, evasion strictly opt-in and always recorded.">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -30,7 +30,7 @@
 <header class="page-header">
     <a href="projects.html" class="eyebrow-link">&larr; Projects</a>
     <h1 class="page-title">NightJARC2</h1>
-    <p class="page-subtitle">A command-and-control framework written from scratch for lab work — beacons, listeners, pivoting, payload staging and reporting, with every operator action attributed and logged.</p>
+    <p class="page-subtitle">A command-and-control framework written from scratch for lab work: beacons, listeners, pivoting, payload staging and reporting, with every operator action attributed and logged.</p>
     <div class="tag-row">
         <span class="tag">Python</span>
         <span class="tag">C2</span>
@@ -44,7 +44,7 @@
 
     <div class="callout">
         <strong>Authorised use only.</strong> NightJARC2 runs against my own QEMU lab VMs. It is
-        published here as an engineering write-up, not as a tool release — there is no download,
+        published here as an engineering write-up, not as a tool release. There is no download,
         and the implant source stays off this site. The screenshot below is a simulated beacon
         (<code>test_beacon.py</code>) checking in to a loopback listener.
     </div>
@@ -55,9 +55,8 @@
 
     <p class="text-block">
         The interface is a single page: a session table at the top, a tabbed console below it.
-        Each beacon gets its own tab, the event log gets one, and the two stay side by side —
-        the point being that you can never run a command without the log of it being one click
-        away.
+        Each beacon gets its own tab, the event log gets one, and the two stay side by side, so
+        you can never run a command without the log of it being one click away.
     </p>
 
     <h2 class="section-header">&gt; Transparent by default</h2>
@@ -65,8 +64,8 @@
         This is the design decision the whole framework is organised around, and it is the
         opposite of what a real adversary would build. Plain code, no evasion in the default
         path, and every single action written to an append-only event log and attributed to the
-        operator who ran it. Payload evasion options exist — they have to, or it isn't a
-        realistic test — but they are <strong>opt-in per payload</strong> and recorded in the
+        operator who ran it. Payload evasion options exist, because without them it isn't a
+        realistic test, but they are <strong>opt-in per payload</strong> and recorded in the
         payload metadata, the event log <em>and</em> the exported report.
     </p>
     <p class="text-block">
@@ -78,26 +77,26 @@
 
     <h2 class="section-header">&gt; What it does</h2>
     <p class="text-block">
-        <strong>Multi-operator</strong> — accounts, login, per-action attribution, presence, and
+        <strong>Multi-operator.</strong> Accounts, login, per-action attribution, presence, and
         team chat threaded into the same event log. An opt-in TLS admin listener lets a second
         operator connect remotely; the first account has to be created locally. Lost the
-        password? Delete the operators file on disk and it falls back to single-operator mode —
-        disk access is the recovery path, deliberately.<br><br>
-        <strong>Pivoting</strong> — a per-beacon SOCKS5 proxy opens a local port that tunnels
+        password? Delete the operators file on disk and it falls back to single-operator mode.
+        Disk access is the recovery path, deliberately.<br><br>
+        <strong>Pivoting.</strong> A per-beacon SOCKS5 proxy opens a local port that tunnels
         through the beacon, so <code>proxychains</code> and <code>curl --socks5</code> work
         against the far side. Implants drop to a 100&nbsp;ms cadence while a stream is open and
         return to their normal sleep afterwards.<br><br>
-        <strong>Listeners</strong> — HTTPS listeners with configurable bind, beacon and staging
+        <strong>Listeners.</strong> HTTPS listeners with configurable bind, beacon and staging
         URIs, and a server banner. Nothing listens until you start it: the server comes up cold
         and autostart is a per-listener flag you have to set on purpose.<br><br>
-        <strong>Beacon operations</strong> — shell, directory and process listing, screenshots,
+        <strong>Beacon operations.</strong> Shell, directory and process listing, screenshots,
         portscanning from the beacon, file upload and download, runtime sleep and jitter
         changes, background jobs for long commands, in-process .NET assembly execution, and
         running a command as another user with credentials pulled from the loot store.<br><br>
-        <strong>Loot and cleanup</strong> — captured credentials go to a curated store with
+        <strong>Loot and cleanup.</strong> Captured credentials go to a curated store with
         passwords masked in every log; a cleanup tracker records everything dropped on a host so
         it can be removed; kill-dates stop beacons outliving the engagement window.<br><br>
-        <strong>Reporting</strong> — one click produces a Markdown report from the event log,
+        <strong>Reporting.</strong> One click produces a Markdown report from the event log,
         which is possible precisely <em>because</em> everything was logged and attributed as it
         happened.
     </p>
@@ -105,7 +104,7 @@
     <h2 class="section-header">&gt; Why write one</h2>
     <p class="text-block">
         There are excellent C2 frameworks and I use them. But using one teaches you how the
-        operator UI works, not how the protocol works — and the interesting failures in a C2 are
+        operator UI works, not how the protocol works, and the interesting failures in a C2 are
         all in the parts you don't see: check-in cadence and jitter, how tasks queue when a
         beacon is asleep, what a pivot does to timing, how state survives a server restart.
     </p>

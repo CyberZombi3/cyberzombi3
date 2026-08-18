@@ -4,7 +4,7 @@
 // a 38-case test suite (`node test.mjs`). If you change the scoring, change it there, run
 // the tests, and copy it back:
 //   cp ~/Documents/spoofcheck/lib/verdict.mjs assets/js/verdict.mjs
-// Pure ESM, no Node APIs — which is why the same file runs in the browser, on the local
+// Pure ESM, no Node APIs, which is why the same file runs in the browser, on the local
 // dev server, and in a serverless function.
 
 // ---------- input handling ----------
@@ -23,7 +23,7 @@ export function normaliseDomain(raw) {
 
 // ---------- SPF ----------
 // SPF says which servers may send for the domain. On its own it does NOT stop spoofing of
-// the visible From: address — that's DMARC's job — but a missing or permissive SPF removes
+// the visible From: address (that's DMARC's job) but a missing or permissive SPF removes
 // the foundation DMARC alignment is built on.
 export function parseSpf(records) {
   const found = records.filter((r) => /^v=spf1(\s|$)/i.test(r.trim()));
@@ -107,7 +107,7 @@ export function assess({ spf, dmarc, dkim, mxHosts }) {
   } else if (partial) {
     grade = dmarc.pct === 100 ? "C" : "D";
     headline = "Forged email is sent to spam rather than rejected";
-    summary = "DMARC is set to quarantine. Spoofed mail usually lands in junk instead of being refused outright — better than nothing, short of full protection.";
+    summary = "DMARC is set to quarantine. Spoofed mail usually lands in junk instead of being refused outright. Better than nothing, short of full protection.";
   } else {
     grade = spf.present && spf.all === "-all" ? "A" : "B";
     headline = "Your domain is protected against email spoofing";

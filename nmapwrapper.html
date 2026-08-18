@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NmapEnhanced — CyberZombi3 | Aaron Moorcroft</title>
+    <title>NmapEnhanced · CyberZombi3 | Aaron Moorcroft</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -46,7 +46,7 @@
     <h2 class="section-header">&gt; Overview</h2>
     <p class="text-block">
         <code>NmapEnhanced.py</code> wraps a standard Nmap scan and automatically enriches every
-        discovered port with a structured intel table — risk score, known exploits and CVEs,
+        discovered port with a structured intel table: risk score, known exploits and CVEs,
         suggested follow-up commands, and relevant NSE scripts to run next. Instead of reading raw
         scan output and manually looking up what each service means, you get a ready-made action
         plan the moment the scan finishes.
@@ -77,9 +77,9 @@ Nmap done: 1 IP address (1 host up) scanned in 12.58 seconds</pre>
 443/tcp  https                0.0    whatweb, gobuster dir -w           nmap --script ssl-enum-ciphers
                                       common.txt</pre>
     <p class="text-block">
-        Each row also carries an "Intel / Plugins / OSINT" note — e.g. flagging that a service's
-        key exchange algorithms should be reviewed, or that a web port's CMS should be identified
-        — pulled from SearchSploit and NVD lookups where a match exists.
+        Each row also carries an "Intel / Plugins / OSINT" note, for example flagging that a
+        service's key exchange algorithms should be reviewed, or that a web port's CMS should be
+        identified, pulled from SearchSploit and NVD lookups where a match exists.
     </p>
 
     <h2 class="section-header">&gt; Features</h2>
@@ -94,7 +94,7 @@ Nmap done: 1 IP address (1 host up) scanned in 12.58 seconds</pre>
 
     <h2 class="section-header">&gt; Why I Built This</h2>
     <p class="text-block">
-        A raw Nmap scan tells you what's open — it doesn't tell you what to do next. I built this
+        A raw Nmap scan tells you what's open. It doesn't tell you what to do next. I built this
         wrapper to close that gap: run one command and get both the scan and the "here's what I'd
         try next" reasoning that normally takes a few minutes of manual lookups per service.
     </p>
@@ -107,7 +107,7 @@ Nmap done: 1 IP address (1 host up) scanned in 12.58 seconds</pre>
         <a href="https://github.com/CyberZombi3" target="_blank" rel="noopener">GitHub</a>
         <a href="https://www.linkedin.com/in/%F0%9F%90%91-aaron-moorcroft-88064921/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
-    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft — CyberZombi3</span>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft · CyberZombi3</span>
 </footer>
 
 <script src="assets/js/main.js"></script>

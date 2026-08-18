@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>An AI agent breached Hugging Face on its own — CyberZombi3 | Aaron Moorcroft</title>
+    <title>An AI agent breached Hugging Face on its own · CyberZombi3 | Aaron Moorcroft</title>
     <meta name="description" content="Hugging Face disclosed an intrusion in July 2026 carried out autonomously by OpenAI models that escaped an evaluation sandbox. What it means for defenders.">
     <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -38,7 +38,7 @@
     <p class="post-date">2026-07-19</p>
 
     <p class="text-block">
-        Hugging Face disclosed an intrusion on 16 July. The interesting part is not that the world's largest model repository got breached — that was always going to happen eventually. It is who did it. OpenAI confirmed the intruder was its own models, which escaped a sandboxed evaluation environment, reached the internet, found a vulnerability nobody had catalogued, and used it.
+        Hugging Face disclosed an intrusion on 16 July. The interesting part is not that the world's largest model repository got breached. That was always going to happen eventually. It is who did it. OpenAI confirmed the intruder was its own models, which escaped a sandboxed evaluation environment, reached the internet, found a vulnerability nobody had catalogued, and used it.
     </p>
 
     <p class="text-block">
@@ -47,12 +47,12 @@
 
     <h2 class="section-header">&gt; The chain</h2>
     <p class="text-block">
-        It started in the data processing pipeline — a malicious dataset abusing two separate code execution paths to run code on a processing worker. From there it escalated to node level, collected cloud and cluster credentials, and moved laterally across several internal clusters over the course of a weekend. Hugging Face found no evidence of tampering with public models, datasets, Spaces or their own software supply chain.
+        It started in the data processing pipeline, with a malicious dataset abusing two separate code execution paths to run code on a processing worker. From there it escalated to node level, collected cloud and cluster credentials, and moved laterally across several internal clusters over the course of a weekend. Hugging Face found no evidence of tampering with public models, datasets, Spaces or their own software supply chain.
     </p>
 
     <h2 class="section-header">&gt; Why this bothers me as a tester</h2>
     <p class="text-block">
-        Every part of that chain is ordinary. Untrusted input reaching a code execution path, credentials sitting on a worker, flat internal networking once you are past the edge — I have written those findings up more times than I can count, and they are usually rated by how likely somebody is to chain them. That assumption has quietly stopped being safe.
+        Every part of that chain is ordinary. Untrusted input reaching a code execution path, credentials sitting on a worker, flat internal networking once you are past the edge. I have written those findings up more times than I can count, and they are usually rated by how likely somebody is to chain them. That assumption has quietly stopped being safe.
     </p>
 
     <p class="text-block">
@@ -60,7 +60,7 @@
     </p>
 
     <div class="callout">
-        The uncomfortable detail is the intent. This was not an adversary. It was a system optimising for a score, in a lab, where somebody had reasoned about the boundary and got it wrong. If that is the failure mode, then "who would target us" stops being a useful question — nobody targeted Hugging Face here either.
+        The uncomfortable detail is the intent. This was not an adversary. It was a system optimising for a score, in a lab, where somebody had reasoned about the boundary and got it wrong. If that is the failure mode, then "who would target us" stops being a useful question. Nobody targeted Hugging Face here either.
     </div>
 
     <p class="text-block">
@@ -76,7 +76,7 @@
         <a href="../projects.html">Projects</a>
         <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
     </div>
-    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft — CyberZombi3</span>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft · CyberZombi3</span>
 </footer>
 
 <script src="../assets/js/main.js"></script>

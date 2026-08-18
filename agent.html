@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AI Pentest Agent — CyberZombi3 | Aaron Moorcroft</title>
+    <title>AI Pentest Agent · CyberZombi3 | Aaron Moorcroft</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -46,7 +46,7 @@
     <h2 class="section-header">&gt; Overview</h2>
     <p class="text-block">
         The AI Pentest Agent is an autonomous reconnaissance and enumeration engine. Give it a
-        target — an IP, host:port, or URL — and it plans a sequence of scanning actions with an
+        target (an IP, host:port, or URL) and it plans a sequence of scanning actions with an
         LLM, executes them using real tools, reads back the results, and decides what to run
         next. It keeps going, round after round, until enumeration is genuinely exhausted, then
         reports what it found. The whole thing runs behind a browser-based dashboard served over
@@ -57,8 +57,8 @@
     <p class="text-block">
         Each round, the agent asks the model for the next batch of actions based on what's been
         discovered so far (open ports, service banners, previous tool output). It tracks
-        everything it has already run against a target so it never repeats a scan pointlessly —
-        the log below shows it recognising and skipping tools it already executed before moving
+        everything it has already run against a target so it never repeats a scan pointlessly.
+        The log below shows it recognising and skipping tools it already executed before moving
         to the next round:
     </p>
     <pre class="code-block">[ROUND 6/6]
@@ -96,7 +96,7 @@ http         Uvicorn                                      8000/tcp</pre>
     <p class="text-block">
         Depending on what it finds, the agent reaches for: <code>nmap</code> service/DB scripts,
         <code>ssh_enum</code>, <code>enum4linux</code>, <code>nikto</code>, <code>nuclei</code>,
-        <code>feroxbuster</code>, and <code>whatweb</code> — the same tools I'd reach for
+        <code>feroxbuster</code>, and <code>whatweb</code>. These are the same tools I'd reach for
         manually, just sequenced and de-duplicated automatically.
     </p>
 
@@ -111,7 +111,7 @@ http         Uvicorn                                      8000/tcp</pre>
 
     <h2 class="section-header">&gt; Why I Built This</h2>
     <p class="text-block">
-        Recon and enumeration are the most repetitive part of any pentest or CTF box — the same
+        Recon and enumeration are the most repetitive part of any pentest or CTF box: the same
         handful of tools, run in roughly the same order, every time. This agent automates that
         first pass so I can spend my own time on the interesting part: working out how to
         actually get in.
@@ -125,7 +125,7 @@ http         Uvicorn                                      8000/tcp</pre>
         <a href="https://github.com/CyberZombi3" target="_blank" rel="noopener">GitHub</a>
         <a href="https://www.linkedin.com/in/%F0%9F%90%91-aaron-moorcroft-88064921/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
-    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft — CyberZombi3</span>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft · CyberZombi3</span>
 </footer>
 
 <script src="assets/js/main.js"></script>

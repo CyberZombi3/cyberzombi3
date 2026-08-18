@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CyberOS — CyberZombi3 | Aaron Moorcroft</title>
-    <meta name="description" content="A 32-bit x86 operating system written from scratch in NASM — three-stage bootloader, windowed desktop, FAT12/FAT32, a TCP/IP stack and a packet sniffer. 17,000 lines of assembly in a 60KB kernel.">
+    <title>CyberOS · CyberZombi3 | Aaron Moorcroft</title>
+    <meta name="description" content="A 32-bit x86 operating system written from scratch in NASM, with a three-stage bootloader, windowed desktop, FAT12/FAT32, a TCP/IP stack and a packet sniffer. 17,000 lines of assembly in a 60KB kernel.">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -30,7 +30,7 @@
 <header class="page-header">
     <a href="projects.html" class="eyebrow-link">&larr; Projects</a>
     <h1 class="page-title">CyberOS</h1>
-    <p class="page-subtitle">A 32-bit operating system written from scratch in assembly — bootloader, kernel, windowing system, filesystems and a network stack. No libraries, no toolchain beyond NASM.</p>
+    <p class="page-subtitle">A 32-bit operating system written from scratch in assembly: bootloader, kernel, windowing system, filesystems and a network stack. No libraries, no toolchain beyond NASM.</p>
     <div class="tag-row">
         <span class="tag">NASM</span>
         <span class="tag">x86</span>
@@ -49,8 +49,8 @@
 
     <p class="text-block">
         CyberOS boots from a 1.44 MB floppy image into a 1024×768 32-bit graphical desktop.
-        Everything on screen — the window manager, the icons, the font rendering, the mouse
-        cursor — is drawn by hand-written assembly into a linear framebuffer. There is no
+        Everything on screen, from the window manager and the icons to the font rendering and
+        the mouse cursor, is drawn by hand-written assembly into a linear framebuffer. There is no
         libc, no compiler, and nothing borrowed from an existing kernel.
     </p>
 
@@ -58,7 +58,7 @@
     <p class="text-block">
         <strong>16,829 lines</strong> of NASM in the stage 3 kernel, plus 286 in the stage 2
         loader.<br><br>
-        <strong>60,424 bytes</strong> — the assembled kernel, at 92% of its 128-sector load
+        <strong>60,424 bytes</strong> for the assembled kernel, at 92% of its 128-sector load
         budget. Size is a live constraint on this project, not an afterthought.<br><br>
         <strong>512 bytes</strong> for stage 1, which is all a boot sector gets.
     </p>
@@ -79,7 +79,7 @@
 
     <h2 class="section-header">&gt; Windowing</h2>
     <img src="assets/images/cyberos-windows.png" class="project-image"
-         alt="Three overlapping CyberOS windows — a file manager, a settings panel and My Computer — showing correct z-ordering, title bars with minimise and close buttons, resize grips, and a taskbar listing each open window">
+         alt="Three overlapping CyberOS windows, a file manager, a settings panel and My Computer, showing correct z-ordering, title bars with minimise and close buttons, resize grips, and a taskbar listing each open window">
 
     <p class="text-block">
         A real window manager rather than a full-screen menu: overlapping windows with correct
@@ -88,7 +88,7 @@
         needs repainting.
     </p>
     <p class="text-block">
-        The settings panel is genuinely wired up — wallpaper themes, an accent colour that
+        The settings panel is genuinely wired up: wallpaper themes, an accent colour that
         propagates through the whole UI, 12 or 24 hour clock, and a resolution switch that
         takes effect on the next boot because the mode is negotiated with VESA in stage 2.
     </p>
@@ -100,38 +100,38 @@
     <p class="text-block">
         The terminal has command history, and the command set is the honest measure of how much
         of the machine the kernel actually drives:<br><br>
-        <strong>System</strong> — <code>sysinfo</code>, <code>mem</code>, <code>pci</code>,
+        <strong>System.</strong> <code>sysinfo</code>, <code>mem</code>, <code>pci</code>,
         <code>ver</code>, <code>about</code>. <code>pci</code> walks the PCI configuration space
         and enumerates real devices.<br><br>
-        <strong>Files</strong> — <code>ls</code>, <code>view</code>, <code>save</code>,
+        <strong>Files.</strong> <code>ls</code>, <code>view</code>, <code>save</code>,
         <code>load</code>, against FAT12 on the floppy and FAT32 on the hard disk.<br><br>
-        <strong>Network</strong> — <code>ifconfig</code>, <code>ping</code>, <code>dhcp</code>
+        <strong>Network.</strong> <code>ifconfig</code>, <code>ping</code>, <code>dhcp</code>
         and <code>sniff</code>. There is an RTL8139 driver, an ARP and IP implementation, ICMP,
         a DHCP client that really does obtain a lease, and a packet sniffer.<br><br>
-        <strong>Disk</strong> — <code>hdd</code>, <code>format</code> and <code>install</code>.
+        <strong>Disk.</strong> <code>hdd</code>, <code>format</code> and <code>install</code>.
         It can format a FAT32 volume and install itself to the hard disk.<br><br>
-        <strong>Power</strong> — <code>reboot</code>, <code>shutdown</code>.
+        <strong>Power.</strong> <code>reboot</code>, <code>shutdown</code>.
     </p>
 
     <h2 class="section-header">&gt; I audited my own kernel</h2>
     <p class="text-block">
-        In July 2026 I ran a full security audit against the CyberOS source — the same way I
+        In July 2026 I ran a full security audit against the CyberOS source, the same way I
         would approach any other codebase, except that this one had no libraries to hide behind
         and I had written every line of it. It found <strong>3 critical, 6 high, 8 medium and
         9 low</strong> findings. All are fixed.
     </p>
     <p class="text-block">
         The critical three were memory and filesystem corruption:<br><br>
-        <strong>C1</strong> — a buffer overflow opening any floppy file larger than 1 KB.<br>
-        <strong>C2</strong> — <code>fat_next</code> returned garbage cluster numbers, so deleting
+        <strong>C1.</strong> A buffer overflow opening any floppy file larger than 1 KB.<br>
+        <strong>C2.</strong> <code>fat_next</code> returned garbage cluster numbers, so deleting
         a file corrupted the on-disk FAT.<br>
-        <strong>C3</strong> — <code>load</code> and <code>view</code> walked random cluster chains
+        <strong>C3.</strong> <code>load</code> and <code>view</code> walked random cluster chains
         for anything over 512 bytes.
     </p>
     <div class="callout">
-        The two that interest me most were in the network path. <strong>H2</strong> — the frame
+        The two that interest me most were in the network path. <strong>H2:</strong> the frame
         parser walked past the end of a received packet, reachable remotely and without
-        authentication. <strong>H3</strong> — a remote attacker could exhaust the heap and
+        authentication. <strong>H3:</strong> a remote attacker could exhaust the heap and
         permanently deny service. Writing a network stack from nothing makes it very obvious how
         much of a real one is bounds checking rather than protocol.<br><br>
         <strong>H6</strong> was the satisfying one: the floppy driver never verified that an
@@ -139,8 +139,8 @@
         intermittent disk corruption I had been blaming on QEMU.
     </div>
     <p class="text-block">
-        Every fix was assembled, booted headless in QEMU and exercised through the real UI — file
-        manager, terminal, menus, network — with a screenshot at each step. The kernel came out
+        Every fix was assembled, booted headless in QEMU and exercised through the real UI (file
+        manager, terminal, menus, network) with a screenshot at each step. The kernel came out
         of it <em>smaller</em>: 61,041 bytes down to 60,424, because roughly 720 lines of dead
         code went out while about 500 lines of bounds checks came in. The pre-audit source and
         floppy image are kept for rollback.

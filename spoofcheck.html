@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Email Spoof Check — CyberZombi3 | Aaron Moorcroft</title>
-    <meta name="description" content="Free instant check of a domain's email spoofing protection — SPF, DKIM and DMARC. Reads public DNS records only.">
+    <title>Email Spoof Check · CyberZombi3 | Aaron Moorcroft</title>
+    <meta name="description" content="Free instant check of a domain's email spoofing protection: SPF, DKIM and DMARC. Reads public DNS records only.">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="assets/css/style.css">
 <style>
@@ -113,7 +113,7 @@
 
     <h2 class="section-header">&gt; Run a check</h2>
     <p class="text-block">
-        Enter any domain. Everything below is read from public DNS records — the same data a
+        Enter any domain. Everything below is read from public DNS records, the same data a
         receiving mail server reads to decide whether to trust a message. Nothing is scanned,
         nothing is probed, and no permission is required.<br><br>
         The check runs <strong>entirely in your browser</strong>. There is no server: the page
@@ -132,13 +132,13 @@
 
     <h2 class="section-header">&gt; What the grades mean</h2>
     <p class="text-block">
-        <strong>F</strong> — no DMARC record at all. Anyone on the internet can send mail as
+        <strong>F.</strong> No DMARC record at all. Anyone on the internet can send mail as
         this domain and receivers have no instruction to stop it.<br><br>
-        <strong>E</strong> — DMARC exists but is set to <code>p=none</code>. That is monitoring
+        <strong>E.</strong> DMARC exists but is set to <code>p=none</code>. That is monitoring
         only; forged mail still arrives in the inbox.<br><br>
-        <strong>D / C</strong> — <code>p=quarantine</code>. Forged mail is filtered to spam
+        <strong>D / C.</strong> <code>p=quarantine</code>. Forged mail is filtered to spam
         rather than refused. D means the policy is applied to only a percentage of mail.<br><br>
-        <strong>B / A</strong> — <code>p=reject</code>. Receivers refuse forged mail outright.
+        <strong>B / A.</strong> <code>p=reject</code>. Receivers refuse forged mail outright.
         A also requires SPF to end in <code>-all</code>.
     </p>
 
@@ -151,17 +151,17 @@
         <strong>DKIM cannot be checked reliably from outside, and this tool does not claim
         otherwise.</strong><br><br>
         A DKIM key lives at <code>&lt;selector&gt;._domainkey.&lt;domain&gt;</code>, and the
-        selector is chosen by whoever set up the mail — it is not published anywhere in DNS and
+        selector is chosen by whoever set up the mail. It is not published anywhere in DNS and
         cannot be enumerated. The check works backwards from your MX records to guess the
         selectors your mail provider normally uses, then tries a handful of common ones.<br><br>
         So a result of "no DKIM found" means <em>we did not guess your selector</em>. It is
         <strong>not</strong> evidence that DKIM is missing or misconfigured. That is why the
-        result is reported as informational and never counts against the grade — telling you
+        result is reported as informational and never counts against the grade. Telling you
         that you have no DKIM when you do would be a false accusation, and a tool that does
         that is worse than no tool. To confirm DKIM properly, check with your mail provider or
         look at the <code>Authentication-Results</code> header of a message you have actually
         sent.<br><br>
-        SPF and DMARC carry no such caveat — those records live at fixed, well-known names, so
+        SPF and DMARC carry no such caveat. Those records live at fixed, well-known names, so
         an absent record genuinely means absent.
     </div>
 
@@ -169,7 +169,7 @@
     <p class="text-block">
         Email spoofing is the cheapest attack there is. If a domain has no enforcing DMARC
         policy, anyone can send invoices, payment-detail changes or password resets that appear
-        to come from the finance director — no compromise required, no credentials needed, and
+        to come from the finance director. No compromise required, no credentials needed, and
         nothing on the target's network is touched. It is the foundation of most business email
         compromise, and it is fixed with three DNS records.
     </p>
@@ -186,7 +186,7 @@
         allow cross-origin requests, so the page resolves DNS itself: TXT records for SPF and
         <code>_dmarc</code>, MX records to identify the mail provider, and provider-specific
         DKIM selectors probed in parallel. Cloudflare is tried first and Google is the fallback,
-        because some networks block one or the other — and someone on a locked-down corporate
+        because some networks block one or the other, and someone on a locked-down corporate
         connection is exactly who wants this answer.<br><br>
         Running client-side removes the server, the hosting account and the bill, but the better
         reason is that each visitor's lookups come from their own connection rather than one

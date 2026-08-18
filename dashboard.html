@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Side Dashboard — CyberZombi3 | Aaron Moorcroft</title>
+    <title>Side Dashboard · CyberZombi3 | Aaron Moorcroft</title>
     <meta name="description" content="A vertical side-monitor dashboard: live ADS-B flight radar, weather, bin days, Derby County, Claude usage and a live ISS feed. Zero-framework Node, one dependency.">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -30,7 +30,7 @@
 <header class="page-header">
     <a href="projects.html" class="eyebrow-link">&larr; Projects</a>
     <h1 class="page-title">Side Dashboard</h1>
-    <p class="page-subtitle">A vertical, always-on dashboard for a rotated side monitor — seventeen cards, one dependency.</p>
+    <p class="page-subtitle">A vertical, always-on dashboard for a rotated side monitor. Seventeen cards, one dependency.</p>
     <div class="tag-row">
         <span class="tag">Node</span>
         <span class="tag">ADS-B</span>
@@ -49,7 +49,7 @@
     <h2 class="section-header">&gt; Overview</h2>
     <p class="text-block">
         A single-page dashboard that lives permanently on a portrait secondary monitor. It pulls
-        from about fifteen sources — none of which need an API key — and renders them as
+        from about fifteen sources, none of which need an API key, and renders them as
         drag-and-drop cards whose layout persists in the browser. The server is a zero-framework
         Node HTTP server; the entire project has one runtime dependency, and that is the grid
         library doing the drag and resize.
@@ -57,22 +57,22 @@
 
     <h2 class="section-header">&gt; What's on it</h2>
     <p class="text-block">
-        <strong>Flight radar</strong> — live ADS-B traffic within 25nm, drawn as a real scope over
+        <strong>Flight radar.</strong> Live ADS-B traffic within 25nm, drawn as a real scope over
         CARTO basemap tiles. Aircraft render as plane or helicopter silhouettes depending on type,
         rotated to their actual track, with fading breadcrumb trails and a drop shadow. Military
-        traffic — mostly RAF Shawbury's training helicopters — is coloured separately, and anything
+        traffic, mostly RAF Shawbury's training helicopters, is coloured separately, and anything
         squawking 7500, 7600 or 7700 is pulled to the top and flashes regardless of range.<br><br>
-        <strong>Next up</strong> — merges fixtures, calendar and bin collections into one ticking
+        <strong>Next up.</strong> Merges fixtures, calendar and bin collections into one ticking
         countdown to whatever is genuinely next.<br><br>
-        <strong>Bin collections</strong> — Telford &amp; Wrekin's bin day finder, drawn as coloured
+        <strong>Bin collections.</strong> Telford &amp; Wrekin's bin day finder, drawn as coloured
         wheelie bins. The council only publishes one date per container, which under-reports the
         weekly bin; the code projects it across every collection day it belongs to.<br><br>
-        <strong>Weather</strong> — Open-Meteo, with icons drawn from primitives rather than emoji so
+        <strong>Weather.</strong> Open-Meteo, with icons drawn from primitives rather than emoji so
         they render identically everywhere, and day/night variants chosen from actual sunrise and
         sunset times.<br><br>
-        <strong>Derby County</strong> — four feeds merged and de-duplicated on a normalised title,
+        <strong>Derby County.</strong> Four feeds merged and de-duplicated on a normalised title,
         with slots reserved for transfer stories so they don't get buried under match reports.<br><br>
-        <strong>Claude usage</strong> — plan limits and reset windows.<br><br>
+        <strong>Claude usage.</strong> Plan limits and reset windows.<br><br>
         Plus air quality, ISS passes and aurora, night-sky conditions, Apple Calendar over
         AppleScript, Spotify, host metrics, public IP, NASA's picture of the day, and Sen's live 4K
         feed from the ISS.
@@ -81,7 +81,7 @@
     <h2 class="section-header">&gt; Security</h2>
     <p class="text-block">
         It began bound to every interface. That meant any host on the network could read a week of
-        real calendar entries, the public IP and ISP, and machine metrics — and could POST to an
+        real calendar entries, the public IP and ISP, and machine metrics, and could POST to an
         unauthenticated endpoint that spent Anthropic credits. A review of the codebase turned up
         eleven findings, seven of which were fixed:
     </p>
@@ -93,20 +93,20 @@
         return 403.<br><br>
         <strong>Three XSS sinks closed.</strong> The sharpest was calendar event titles: that input
         is not the user's, it is whatever an invite says, so anyone able to get a meeting into the
-        diary could run script in the dashboard's origin — which reaches every local API.<br><br>
+        diary could run script in the dashboard's origin, which reaches every local API.<br><br>
         <strong>Request body cap</strong> on the one endpoint that accepted a body.
     </p>
     <div class="callout">
-        The static file handler was already sound — five traversal encodings all returned 404 —
-        and credentials were only ever read from the Keychain at request time, never stored in the
+        The static file handler was already sound, with five traversal encodings all returning
+        404, and credentials were only ever read from the Keychain at request time, never stored in the
         repository. The chat panel was later removed entirely, which retired the only
         unauthenticated endpoint that could spend money.
     </div>
 
     <h2 class="section-header">&gt; Notes from building it</h2>
     <p class="text-block">
-        <strong>Everything degrades rather than blanks.</strong> Every source here is best-effort —
-        community ADS-B receivers, council endpoints, news feeds. The cache serves the last good
+        <strong>Everything degrades rather than blanks.</strong> Every source here is
+        best-effort: community ADS-B receivers, council endpoints, news feeds. The cache serves the last good
         value when a refresh fails and marks it stale, so a flaky upstream leaves real if slightly
         old data on screen instead of an error. Fetchers that resolve with an error object rather
         than throwing never overwrite a good entry, so a transient failure can't pin itself in

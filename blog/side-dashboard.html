@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Building a side monitor dashboard — CyberZombi3 | Aaron Moorcroft</title>
-    <meta name="description" content="Building a vertical dashboard for a rotated side monitor — ADS-B flight radar over CARTO tiles, council bin data, and a zero-framework Node server.">
+    <title>Building a side monitor dashboard · CyberZombi3 | Aaron Moorcroft</title>
+    <meta name="description" content="Building a vertical dashboard for a rotated side monitor: ADS-B flight radar over CARTO tiles, council bin data, and a zero-framework Node server.">
     <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
@@ -43,11 +43,11 @@
 
     <h2 class="section-header">&gt; The radar is the good bit</h2>
     <p class="text-block">
-        The card I keep looking at is a live flight tracker. It pulls ADS-B data for everything within 25 nautical miles and draws it as an actual radar scope — range rings, a sweep, breadcrumb trails behind each aircraft — over dark basemap tiles.
+        The card I keep looking at is a live flight tracker. It pulls ADS-B data for everything within 25 nautical miles and draws it as an actual radar scope, with range rings, a sweep and breadcrumb trails behind each aircraft, over dark basemap tiles.
     </p>
 
     <p class="text-block">
-        Two details took longer than the rest of it combined. The first was making aircraft look like aircraft: fixed-wing traffic draws as a plane silhouette, rotary as a helicopter with crossed rotor blades, both nose-up so the existing track rotation points them correctly. The category flag that is supposed to tell you which is which is frequently absent, and it is absent on exactly the traffic I care about — the police and air ambulance units. So detection falls back to the ICAO type code and then the description text.
+        Two details took longer than the rest of it combined. The first was making aircraft look like aircraft: fixed-wing traffic draws as a plane silhouette, rotary as a helicopter with crossed rotor blades, both nose-up so the existing track rotation points them correctly. The category flag that is supposed to tell you which is which is frequently absent, and it is absent on exactly the traffic I care about: the police and air ambulance units. So detection falls back to the ICAO type code and then the description text.
     </p>
 
     <p class="text-block">
@@ -56,16 +56,16 @@
 
     <h2 class="section-header">&gt; The bins were harder than the aeroplanes</h2>
     <p class="text-block">
-        The council's bin day API returns one date per container — the next one. That reads fine until you notice the weekly bin only ever appears against its own next collection, and never on the fortnightly bin's week, even though it obviously goes out then too. The endpoint also describes the cadence in a text field, so anything described as "every week" gets projected across every collection day that shares its weekday.
+        The council's bin day API returns one date per container, the next one. That reads fine until you notice the weekly bin only ever appears against its own next collection, and never on the fortnightly bin's week, even though it obviously goes out then too. The endpoint also describes the cadence in a text field, so anything described as "every week" gets projected across every collection day that shares its weekday.
     </p>
 
     <h2 class="section-header">&gt; Everything degrades rather than blanks</h2>
     <p class="text-block">
-        Every source here is best effort — community ADS-B receivers, council endpoints, news feeds. The cache holds the last good value for each and serves it when a refresh fails, so a flaky upstream leaves real if slightly old data on screen instead of an error. That sounds obvious and I did not build it that way first; I built it after watching three cards blank simultaneously because one receiver dropped out.
+        Every source here is best effort: community ADS-B receivers, council endpoints, news feeds. The cache holds the last good value for each and serves it when a refresh fails, so a flaky upstream leaves real if slightly old data on screen instead of an error. That sounds obvious and I did not build it that way first; I built it after watching three cards blank simultaneously because one receiver dropped out.
     </p>
 
     <p class="text-block">
-        Zero framework on the server, and one runtime dependency in total — the grid library doing drag and resize. There is a fuller write-up on the <a href="../dashboard.html">Side Dashboard project page</a>.
+        Zero framework on the server, and one runtime dependency in total, the grid library doing drag and resize. There is a fuller write-up on the <a href="../dashboard.html">Side Dashboard project page</a>.
     </p>
 
 
@@ -77,7 +77,7 @@
         <a href="../projects.html">Projects</a>
         <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
     </div>
-    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft — CyberZombi3</span>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft · CyberZombi3</span>
 </footer>
 
 <script src="../assets/js/main.js"></script>

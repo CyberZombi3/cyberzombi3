@@ -1,8 +1,8 @@
-// Email spoof check — runs entirely in the visitor's browser.
+// Email spoof check. Runs entirely in the visitor's browser.
 //
 // There is no backend. Both Cloudflare and Google publish DNS-over-HTTPS endpoints that
 // send Access-Control-Allow-Origin: *, so the page can resolve DNS directly. That removes
-// the server, the hosting account, and the bill — but the better reason is that each
+// the server, the hosting account, and the bill, but the better reason is that each
 // visitor's lookups come from their own connection rather than one shared server IP, so
 // there is no rate limit to police and no IP reputation to protect.
 //
@@ -13,7 +13,7 @@ import {
   normaliseDomain, dkimSelectors, isDkimRecord, buildResult,
 } from "./verdict.mjs";
 
-// Cloudflare first, Google as a fallback — some networks block one or the other, and a
+// Cloudflare first, Google as a fallback, because some networks block one or the other, and a
 // visitor on a locked-down corporate connection is exactly who wants this answer.
 const RESOLVERS = [
   (name, type) => `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(name)}&type=${type}`,
@@ -21,7 +21,7 @@ const RESOLVERS = [
 ];
 
 // A DoH JSON answer returns TXT strings quoted, and a long record arrives as several
-// quoted chunks that must be joined — the same way a resolver reassembles them.
+// quoted chunks that must be joined, the same way a resolver reassembles them.
 function unquoteTxt(data) {
   const parts = String(data).match(/"([^"]*)"/g);
   return parts ? parts.map((p) => p.slice(1, -1)).join("") : String(data);
@@ -129,7 +129,7 @@ function render(d) {
       </div>
     </div>
 
-    <h2 class="section-header">&gt; Findings — ${esc(d.domain)}</h2>
+    <h2 class="section-header">&gt; Findings for ${esc(d.domain)}</h2>
     ${findings || '<p class="text-block">No issues found.</p>'}
 
     <h2 class="section-header">&gt; Records as published</h2>
@@ -139,7 +139,7 @@ function render(d) {
       <div class="rec-label">DKIM selectors found</div>
       ${d.records.dkimSelectors.length
         ? `<pre>${esc(d.records.dkimSelectors.join(", "))}</pre>`
-        : '<div class="absent">None found at the selectors tried — inconclusive, see note below</div>'}
+        : '<div class="absent">None found at the selectors tried. Inconclusive, see note below</div>'}
     </div>
     ${rec("Mail servers", d.records.mx.join("\n"))}`;
 }

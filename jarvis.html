@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>JARVIS — CyberZombi3 | Aaron Moorcroft</title>
+    <title>JARVIS · CyberZombi3 | Aaron Moorcroft</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -46,7 +46,7 @@
 
     <h2 class="section-header">&gt; Overview</h2>
     <p class="text-block">
-        JARVIS is a local AI assistant for macOS — talk to it or type to it, and it can chat,
+        JARVIS is a local AI assistant for macOS. Talk to it or type to it, and it can chat,
         answer questions, and control the machine it's running on. Everything runs locally: the
         language model, the speech-to-text, and the text-to-speech, with no cloud dependency
         required. It streams responses over a WebSocket to a lightweight single-page UI that
@@ -55,22 +55,22 @@
 
     <h2 class="section-header">&gt; How It's Built</h2>
     <p class="text-block">
-        - <strong>LLM</strong> — Qwen3 32B, served locally through Ollama and swappable for
+        - <strong>LLM.</strong> Qwen3 32B, served locally through Ollama and swappable for
         anything else Ollama supports<br>
-        - <strong>Speech-to-text</strong> — Whisper, running entirely locally<br>
-        - <strong>Text-to-speech</strong> — macOS's built-in <code>say</code> command by default,
+        - <strong>Speech-to-text.</strong> Whisper, running entirely locally<br>
+        - <strong>Text-to-speech.</strong> macOS's built-in <code>say</code> command by default,
         with an optional upgrade to an ElevenLabs voice if an API key is configured<br>
-        - <strong>Backend</strong> — FastAPI with a WebSocket connection for streaming<br>
-        - <strong>Memory</strong> — a SQLite database that remembers conversation context between
+        - <strong>Backend.</strong> FastAPI with a WebSocket connection for streaming<br>
+        - <strong>Memory.</strong> A SQLite database that remembers conversation context between
         sessions<br>
-        - <strong>Wake word</strong> — an optional listener for "Hey Jarvis" to trigger voice
+        - <strong>Wake word.</strong> An optional listener for "Hey Jarvis" to trigger voice
         input hands-free
     </p>
 
     <h2 class="section-header">&gt; The HUD</h2>
     <p class="text-block">
         The front end is a single HTML file with no framework behind it. The centre is an
-        animated particle sphere that reacts to state — idle, listening, thinking, speaking —
+        animated particle sphere that reacts to state (idle, listening, thinking, speaking)
         surrounded by live readouts: CPU, memory and audio input levels, a voice activity
         waveform, uptime and battery, and an intelligence stack panel showing which model,
         speech-to-text, voice and memory backend are currently loaded. Everything on it is
@@ -92,7 +92,7 @@
 "Search for black holes"     -> opens a Google search</pre>
     <p class="text-block">
         New plugins are just a small Python class with a regex pattern and an <code>execute()</code>
-        method, registered with the plugin manager — adding a new voice command takes a few lines
+        method, registered with the plugin manager, so adding a new voice command takes a few lines
         of code.
     </p>
 
@@ -108,7 +108,7 @@
     <h2 class="section-header">&gt; Why I Built This</h2>
     <p class="text-block">
         I wanted a Siri/Alexa-style assistant without handing every conversation to a cloud
-        provider — something that keeps my data on my own machine, that I can extend with my own
+        provider. I wanted something that keeps my data on my own machine, that I can extend with my own
         plugins, and that I actually understand end to end because I built every layer of it.
     </p>
 
@@ -120,7 +120,7 @@
         <a href="https://github.com/CyberZombi3" target="_blank" rel="noopener">GitHub</a>
         <a href="https://www.linkedin.com/in/%F0%9F%90%91-aaron-moorcroft-88064921/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
-    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft — CyberZombi3</span>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft · CyberZombi3</span>
 </footer>
 
 <script src="assets/js/main.js"></script>
