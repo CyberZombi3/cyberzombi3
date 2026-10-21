@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Projects · CyberZombi3 | Aaron Moorcroft</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    <link rel="stylesheet" href="assets/css/style.css?v=3">
+    <link rel="stylesheet" href="assets/css/style.css?v=4">
 </head>
 
 <body>
@@ -26,16 +26,18 @@
     </nav>
 </header>
 
-<header class="page-header">
+<header class="page-header wide">
     <h1 class="page-title">Projects</h1>
     <p class="page-subtitle">Things I've designed, built, and kept iterating on.</p>
 </header>
 
-<section class="content-panel">
+<section class="content-panel wide">
 
-    <div class="project-grid">
+    <div class="project-grid media-grid">
 
         <a href="thebounty.html" class="project-card">
+            <div class="card-media"><img src="assets/images/the-bounty-map.jpg" alt="The Bounty: Contract Hacker" loading="lazy" style="object-position: center 18%;"></div>
+            <div class="card-body">
             <h3>The Bounty: Contract Hacker</h3>
             <p>A freelance hacking sim for iPhone. Take bounties from rival factions, route through hijacked devices, and wipe your tracks before a threat hunt works back to you. Three story arcs, each ending in a choice.</p>
             <div class="tag-row">
@@ -44,9 +46,13 @@
                 <span class="tag tag-muted">iOS</span>
             </div>
             <span class="card-link">View details &rarr;</span>
+        
+            </div>
         </a>
 
         <a href="dinodash.html" class="project-card">
+            <div class="card-media"><img src="assets/images/dino-dash-level.jpg" alt="Dino Dash" loading="lazy" style="object-position: center 60%;"></div>
+            <div class="card-body">
             <h3>Dino Dash</h3>
             <p>A jungle stunt-racing browser game: dinosaur cars, loops, lava and erupting volcanoes. Twenty levels, nine dinos, and a robot driver that plays every level to set the star times.</p>
             <div class="tag-row">
@@ -55,9 +61,13 @@
                 <span class="tag tag-muted">planck.js</span>
             </div>
             <span class="card-link">View details &rarr;</span>
+        
+            </div>
         </a>
 
         <a href="cyberos.html" class="project-card">
+            <div class="card-media"><img src="assets/images/cyberos-windows.png" alt="CyberOS" loading="lazy" style="object-position: center 30%;"></div>
+            <div class="card-body">
             <h3>CyberOS</h3>
             <p>A 32-bit operating system written from scratch in NASM, with a three-stage bootloader, windowed desktop, FAT12/FAT32, an RTL8139 driver and a TCP/IP stack. 17,000 lines of assembly in a 60KB kernel, and I security-audited my own kernel.</p>
             <div class="tag-row">
@@ -66,9 +76,37 @@
                 <span class="tag tag-muted">Protected Mode</span>
             </div>
             <span class="card-link">View details &rarr;</span>
+        
+            </div>
         </a>
 
         <a href="ember.html" class="project-card">
+            <div class="card-media art">
+            <svg class="ember-art" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                        <defs>
+                            <radialGradient id="eg" cx="50%" cy="55%" r="60%">
+                                <stop offset="0" stop-color="#ff8a3d" stop-opacity=".35"/>
+                                <stop offset=".5" stop-color="#8b7bff" stop-opacity=".12"/>
+                                <stop offset="1" stop-color="#05070b" stop-opacity="0"/>
+                            </radialGradient>
+                            <linearGradient id="ef" x1="0" y1="1" x2="0" y2="0">
+                                <stop offset="0" stop-color="#ff5f57"/>
+                                <stop offset=".55" stop-color="#ff9f43"/>
+                                <stop offset="1" stop-color="#ffd166"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="400" height="260" fill="url(#eg)"/>
+                        <g fill="none" stroke-width="1">
+                            <circle class="ring" cx="200" cy="135" r="92" stroke="rgba(139,123,255,.35)" stroke-dasharray="4 10"/>
+                            <circle class="ring r2" cx="200" cy="135" r="66" stroke="rgba(62,207,178,.4)" stroke-dasharray="40 14 4 14"/>
+                            <circle cx="200" cy="135" r="118" stroke="rgba(255,255,255,.06)"/>
+                        </g>
+                        <path class="flame" d="M200 70c18 26 36 40 36 68a36 36 0 0 1-72 0c0-14 6-24 14-32 0 12 6 20 13 22-4-20 1-38 9-58z" fill="url(#ef)"/>
+                        <path class="flame" d="M201 118c8 11 14 18 14 29a14 14 0 0 1-28 0c0-9 7-15 14-29z" fill="#fff3c4" opacity=".85"/>
+                        <text x="200" y="232" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="rgba(238,242,247,.55)">ember@workstation:~$ sudo ./build.sh</text>
+                    </svg>
+            </div>
+            <div class="card-body">
             <h3>Ember</h3>
             <p>A personal Debian-based Linux build: a Windows-feeling KDE desktop, iCloud mail and calendars, and a real security toolset, with snapshots around every package change. Work in progress.</p>
             <div class="tag-row">
@@ -77,9 +115,13 @@
                 <span class="tag tag-muted">KDE Plasma</span>
             </div>
             <span class="card-link">View details &rarr;</span>
+        
+            </div>
         </a>
 
         <a href="agent.html" class="project-card">
+            <div class="card-media"><img src="assets/images/agent-ui.png" alt="AI Pentest Agent" loading="lazy" style="object-position: 30% 35%;"></div>
+            <div class="card-body">
             <h3>AI Pentest Agent</h3>
             <p>An autonomous recon and enumeration engine that plans, executes, and iterates on scanning tasks with an LLM-driven loop, wrapped in its own web dashboard.</p>
             <div class="tag-row">
@@ -88,9 +130,13 @@
                 <span class="tag tag-muted">Nmap</span>
             </div>
             <span class="card-link">View details &rarr;</span>
+        
+            </div>
         </a>
 
         <a href="iosgame.html" class="project-card">
+            <div class="card-media"><img src="assets/images/CyberLink-Gameplay.png" alt="CyberLink" loading="lazy" style="object-position: center 30%;"></div>
+            <div class="card-body">
             <h3>CyberLink</h3>
             <p>A cyberpunk-styled node-link puzzle game for iOS. Breach nodes against the clock, choose an operator, and work through five distinct mission types.</p>
             <div class="tag-row">
@@ -98,9 +144,13 @@
                 <span class="tag tag-muted">SwiftUI</span>
             </div>
             <span class="card-link">View details &rarr;</span>
+        
+            </div>
         </a>
 
         <a href="nmapwrapper.html" class="project-card">
+            <div class="card-media"><img src="assets/images/nmapwrapper.png" alt="NmapEnhanced" loading="lazy"></div>
+            <div class="card-body">
             <h3>NmapEnhanced</h3>
             <p>A Python wrapper around Nmap that turns a single scan into a ready-made playbook: risk scoring, CVE/exploit lookups, and suggested follow-up commands per port.</p>
             <div class="tag-row">
@@ -109,9 +159,13 @@
                 <span class="tag tag-muted">SearchSploit</span>
             </div>
             <span class="card-link">View details &rarr;</span>
+        
+            </div>
         </a>
 
         <a href="spoofcheck.html" class="project-card">
+            <div class="card-media"><img src="assets/images/spoofcheck-result.jpg" alt="Email Spoof Check" loading="lazy"></div>
+            <div class="card-body">
             <h3>Email Spoof Check</h3>
             <p>A live tool that grades any domain's protection against email spoofing (SPF, DKIM and DMARC) from public DNS alone. No scanning, no authorisation, three seconds.</p>
             <div class="tag-row">
@@ -120,9 +174,13 @@
                 <span class="tag tag-muted">DMARC</span>
             </div>
             <span class="card-link">Run a check &rarr;</span>
+        
+            </div>
         </a>
 
         <a href="dashboard.html" class="project-card">
+            <div class="card-media"><img src="assets/images/dashboard-radar.jpg" alt="Side Dashboard" loading="lazy" style="object-position: center;"></div>
+            <div class="card-body">
             <h3>Side Dashboard</h3>
             <p>An always-on dashboard for a rotated monitor: live ADS-B flight radar, weather, bin days, countdowns and a live ISS feed. Seventeen cards, one dependency.</p>
             <div class="tag-row">
@@ -131,9 +189,13 @@
                 <span class="tag tag-muted">SVG</span>
             </div>
             <span class="card-link">View details &rarr;</span>
+        
+            </div>
         </a>
 
         <a href="jarvis.html" class="project-card">
+            <div class="card-media"><img src="assets/images/jarvis-hud.jpg" alt="JARVIS" loading="lazy" style="object-position: center;"></div>
+            <div class="card-body">
             <h3>JARVIS</h3>
             <p>A fully local, voice-driven AI assistant for macOS: local LLM, local speech-to-text, a wake word, persistent memory, and a plugin system for controlling the Mac.</p>
             <div class="tag-row">
@@ -142,9 +204,40 @@
                 <span class="tag tag-muted">Whisper</span>
             </div>
             <span class="card-link">View details &rarr;</span>
+        
+            </div>
         </a>
 
         <a href="soclab.html" class="project-card">
+            <div class="card-media art">
+            <svg class="card-art" viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <defs>
+                    <radialGradient id="sg" cx="30%" cy="50%" r="60%"><stop offset="0" stop-color="#3ecfb2" stop-opacity=".22"/><stop offset="1" stop-color="#05070b" stop-opacity="0"/></radialGradient>
+                    <linearGradient id="sw" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3ecfb2" stop-opacity="0"/><stop offset="1" stop-color="#3ecfb2" stop-opacity=".55"/></linearGradient>
+                </defs>
+                <rect width="400" height="210" fill="#080b10"/>
+                <rect width="400" height="210" fill="url(#sg)"/>
+                <g transform="translate(110 105)" fill="none" stroke="rgba(62,207,178,.35)">
+                    <circle r="78"/><circle r="52"/><circle r="26"/>
+                    <path d="M-82 0H82M0-82V82" stroke="rgba(62,207,178,.15)"/>
+                    <g class="sweep"><path d="M0 0L78 0A78 78 0 0 0 55 -55Z" fill="url(#sw)" stroke="none"/></g>
+                    <circle cx="34" cy="-22" r="3.5" fill="#ff5f57" stroke="none" class="blip"/>
+                    <circle cx="-40" cy="30" r="3" fill="#febc2e" stroke="none" class="blip b2"/>
+                    <circle cx="18" cy="48" r="2.6" fill="#3ecfb2" stroke="none"/>
+                </g>
+                <g font-family="JetBrains Mono, monospace" font-size="9.5" fill="rgba(238,242,247,.6)">
+                    <text x="222" y="52" fill="#ff5f57">ALERT  suricata  ET SCAN</text>
+                    <text x="222" y="74">wazuh  sshd auth failure x12</text>
+                    <text x="222" y="96" fill="#febc2e">honeypot  new session</text>
+                    <text x="222" y="118">misp  ioc match: 2</text>
+                    <text x="222" y="140" fill="#3ecfb2">rule 5712 -&gt; ticket opened</text>
+                </g>
+                <g fill="rgba(62,207,178,.5)">
+                    <rect x="222" y="160" width="14" height="22" rx="2"/><rect x="240" y="152" width="14" height="30" rx="2"/><rect x="258" y="166" width="14" height="16" rx="2"/><rect x="276" y="146" width="14" height="36" rx="2" fill="rgba(255,95,87,.6)"/><rect x="294" y="158" width="14" height="24" rx="2"/><rect x="312" y="162" width="14" height="20" rx="2"/><rect x="330" y="150" width="14" height="32" rx="2" fill="rgba(254,188,46,.55)"/><rect x="348" y="164" width="14" height="18" rx="2"/>
+                </g>
+            </svg>
+            </div>
+            <div class="card-body">
             <h3>SOC Lab</h3>
             <p>A self-hosted, dockerized Security Operations Center: SIEM, IDS, honeypot, and threat-intel platforms wired together to practice detection and response end to end.</p>
             <div class="tag-row">
@@ -153,9 +246,13 @@
                 <span class="tag tag-muted">Suricata</span>
             </div>
             <span class="card-link">View details &rarr;</span>
+        
+            </div>
         </a>
 
         <a href="reconpro.html" class="project-card">
+            <div class="card-media"><img src="assets/images/reconpro.jpg" alt="ReconPro" loading="lazy"></div>
+            <div class="card-body">
             <h3>ReconPro</h3>
             <p>An AI penetration testing platform. The agent plans and runs the test itself across 129 local tools, verifies every finding with command output as evidence rather than inferring it from a version banner, diffs each scan against the last, and writes the report.</p>
             <div class="tag-row">
@@ -164,9 +261,13 @@
                 <span class="tag tag-muted">FastAPI</span>
             </div>
             <span class="card-link">View details &rarr;</span>
+        
+            </div>
         </a>
 
         <a href="cdmf.html" class="project-card">
+            <div class="card-media"><img src="assets/images/cdmf.jpg" alt="CDMF" loading="lazy"></div>
+            <div class="card-body">
             <h3>CDMF</h3>
             <p>A six-plane continuous detect-and-mitigate loop: intel triggers a probe, a confirmed finding becomes one canonical mitigation rendered per vendor, four assurance gates attack it, including an agent-generated evasion set, and a human decides before anything reaches a control.</p>
             <div class="tag-row">
@@ -175,9 +276,13 @@
                 <span class="tag tag-muted">Suricata</span>
             </div>
             <span class="card-link">View details &rarr;</span>
+        
+            </div>
         </a>
 
         <a href="pentest-harness.html" class="project-card">
+            <div class="card-media"><img src="assets/images/pentest-harness.jpg" alt="Pentest Harnesses" loading="lazy"></div>
+            <div class="card-body">
             <h3>Pentest Harnesses</h3>
             <p>How to build a testing harness on Anthropic&rsquo;s Claude, with a methodology document generated into fourteen executable skills, scope enforced in code before the model gets control, and a human approving every command it wants to run.</p>
             <div class="tag-row">
@@ -186,9 +291,13 @@
                 <span class="tag tag-muted">YAML</span>
             </div>
             <span class="card-link">View details &rarr;</span>
+        
+            </div>
         </a>
 
         <a href="nightjarc2.html" class="project-card">
+            <div class="card-media"><img src="assets/images/nightjarc2.jpg" alt="NightJARC2" loading="lazy"></div>
+            <div class="card-body">
             <h3>NightJARC2</h3>
             <p>A command-and-control framework written from scratch for lab work: beacons, listeners, SOCKS5 pivoting and payload staging. Transparent by design: every action attributed and logged, evasion opt-in per payload and always recorded.</p>
             <div class="tag-row">
@@ -197,9 +306,13 @@
                 <span class="tag tag-muted">Lab use only</span>
             </div>
             <span class="card-link">View details &rarr;</span>
+        
+            </div>
         </a>
 
         <a href="agentcommerce.html" class="project-card">
+            <div class="card-media"><img src="assets/images/agent-commerce.jpg" alt="Agent Commerce" loading="lazy"></div>
+            <div class="card-body">
             <h3>Agent Commerce</h3>
             <p>A multi-agent AI pipeline that researches, writes, designs, and reviews digital products end to end, from trend research to a finished, sellable listing.</p>
             <div class="tag-row">
@@ -208,6 +321,8 @@
                 <span class="tag tag-muted">Claude API</span>
             </div>
             <span class="card-link">View details &rarr;</span>
+        
+            </div>
         </a>
 
     </div>
@@ -223,6 +338,6 @@
     <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft · CyberZombi3</span>
 </footer>
 
-<script src="assets/js/main.js?v=3"></script>
+<script src="assets/js/main.js?v=4"></script>
 </body>
 </html>

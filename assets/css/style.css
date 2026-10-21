@@ -499,6 +499,8 @@ body::after {
 
 .page-header .tag-row { margin-top: 24px; }
 
+.page-header.wide { max-width: var(--wide); }
+
 /* ---------------------------------------------------------------- */
 /* Buttons                                                            */
 /* ---------------------------------------------------------------- */
@@ -898,6 +900,26 @@ body::after {
     50% { transform: scale(1.04, 1.07); opacity: 0.88; }
 }
 
+/* Projects page: every card leads with a screenshot or drawn graphic */
+.media-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.media-grid .project-card { padding: 0; }
+.media-grid .card-media { height: 190px; }
+
+.card-media.art::after { display: none; }
+
+.card-art {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.card-art .sweep { transform-origin: 0 0; animation: spin 4s linear infinite; }
+.card-art .blip { animation: blip 2s ease-in-out infinite; }
+.card-art .blip.b2 { animation-delay: 1s; }
+
+@keyframes blip { 50% { opacity: 0.25; } }
+
 /* ---------------------------------------------------------------- */
 /* Focus tiles (home)                                                 */
 /* ---------------------------------------------------------------- */
@@ -1199,6 +1221,7 @@ body::after {
     .term { transform: none; }
     .stats { grid-template-columns: repeat(2, 1fr); }
     .focus-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .media-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .bento {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         grid-template-areas:
@@ -1228,6 +1251,7 @@ body::after {
     .content-panel { padding: 0 16px 56px; }
     .stats { padding: 0 16px 16px; }
     .project-grid,
+    .media-grid,
     .focus-grid { grid-template-columns: 1fr; }
     .bento {
         grid-template-columns: 1fr;
