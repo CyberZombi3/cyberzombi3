@@ -6,7 +6,7 @@
     <meta name="description" content="Aaron Moorcroft (CyberZombi3), security researcher and penetration tester, building offensive security tooling, AI agents, and systems from scratch.">
     <title>CyberZombi3 · Aaron Moorcroft</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=3">
 </head>
 
 <body>
@@ -28,71 +28,164 @@
 </header>
 
 <main class="hero">
-    <p class="eyebrow">Hi, I'm</p>
-    <h1>Aaron Moorcroft</h1>
-    <p class="role"><span class="handle-inline">CyberZombi3</span> · Security Researcher &amp; Penetration Tester</p>
-    <p class="intro">
-        I break into systems for a living, and build my own tools when the off-the-shelf ones
-        aren't enough: recon automation, AI agents that plan and run their own enumeration, a
-        home SOC lab to see attacks from the other side, a free
-        <a href="spoofcheck.html">email spoofing check</a> anyone can run against their own
-        domain, and (because old habits die hard) an operating system written entirely from
-        scratch.
-    </p>
+    <div class="hero-copy">
+        <p class="eyebrow"><span class="dot"></span>Security researcher &amp; builder</p>
+        <h1>Aaron<br><span class="gradient-text">Moorcroft</span></h1>
+        <p class="role"><span class="handle-inline">CyberZombi3</span> · Penetration Tester</p>
+        <p class="intro">
+            I break into systems for a living, and build my own tools when the off-the-shelf ones
+            aren't enough: a command-and-control framework, AI agents that plan and run their own
+            enumeration, a home SOC lab to see attacks from the other side, a free
+            <a href="spoofcheck.html">email spoofing check</a> anyone can run against their own
+            domain, and (because old habits die hard) an operating system written entirely from
+            scratch.
+        </p>
 
-    <div class="hero-actions">
-        <a href="projects.html" class="btn btn-primary">View Projects</a>
-        <a href="about.html" class="btn btn-secondary">About Me</a>
-        <a href="blog/index.html" class="btn btn-secondary">Read the Blog</a>
+        <div class="hero-actions">
+            <a href="projects.html" class="btn btn-primary">View projects &rarr;</a>
+            <a href="about.html" class="btn btn-secondary">About me</a>
+            <a href="blog/index.html" class="btn btn-secondary">Read the blog</a>
+        </div>
     </div>
 
-    <div class="tag-row">
-        <span class="tag">Offensive Security</span>
-        <span class="tag">Systems Programming</span>
-        <span class="tag">Local AI Agents</span>
-        <span class="tag">iOS Development</span>
-        <span class="tag">Blue Team / SOC</span>
+    <div class="hero-visual" aria-hidden="true">
+        <div class="term">
+            <div class="term-bar"><i></i><i></i><i></i><span>zsh · zombi3@lab</span></div>
+            <pre class="term-body" id="term-body"></pre>
+        </div>
     </div>
 </main>
 
-<section class="content-panel">
-    <h2 class="section-header">&gt; Featured Work</h2>
+<section class="stats">
+    <div class="stat"><b class="gradient-text">16</b><span>projects and counting</span></div>
+    <div class="stat"><b class="gradient-text">17k</b><span>lines of hand-written assembly in CyberOS</span></div>
+    <div class="stat"><b class="gradient-text">129</b><span>local tools driven by ReconPro's agent</span></div>
+    <div class="stat"><b class="gradient-text">3</b><span>games, two of them for iPhone</span></div>
+</section>
 
-    <div class="project-grid">
-        <a href="cyberos.html" class="project-card">
-            <h3>CyberOS</h3>
-            <p>A custom 32-bit x86 operating system built from scratch, with bootloader, VBE graphics and networking all hand-written.</p>
-            <div class="tag-row">
-                <span class="tag tag-muted">x86 Assembly</span>
-                <span class="tag tag-muted">C</span>
+<section class="content-panel wide">
+    <h2 class="section-header">Featured work</h2>
+    <div class="section-top">
+        <div>
+            <h3 class="section-title">Things I'm proudest of</h3>
+            <p class="section-lede">Offensive tooling, systems written from nothing, and a couple of things built purely for fun.</p>
+        </div>
+        <a href="projects.html" class="btn btn-secondary">All projects &rarr;</a>
+    </div>
+
+    <div class="bento">
+        <a href="nightjarc2.html" class="project-card c2">
+            <div class="card-media"><img src="assets/images/nightjarc2.jpg" alt="NightJARC2 operator console with a live beacon session" loading="lazy"></div>
+            <div class="card-body">
+                <span class="card-kicker">Command &amp; control</span>
+                <h3>NightJARC2</h3>
+                <p>A C2 framework written from scratch for lab work: beacons, listeners, SOCKS5 pivoting and payload staging. Every operator action attributed and logged, evasion opt-in and always recorded.</p>
+                <div class="tag-row">
+                    <span class="tag tag-muted">Python</span>
+                    <span class="tag tag-muted">C2</span>
+                    <span class="tag tag-muted">Lab use only</span>
+                </div>
+                <span class="card-link">View details &rarr;</span>
             </div>
-            <span class="card-link">View details &rarr;</span>
         </a>
 
-        <a href="agent.html" class="project-card">
-            <h3>AI Pentest Agent</h3>
-            <p>An autonomous recon engine that plans and executes enumeration tools against a target using an LLM-driven loop.</p>
-            <div class="tag-row">
-                <span class="tag tag-muted">Python</span>
-                <span class="tag tag-muted">FastAPI</span>
+        <a href="thebounty.html" class="project-card bounty">
+            <div class="card-media"><img src="assets/images/the-bounty-map.jpg" alt="The Bounty map screen with a route through hijacked devices" loading="lazy"></div>
+            <div class="card-body">
+                <span class="card-kicker">iOS game</span>
+                <h3>The Bounty: Contract Hacker</h3>
+                <p>A freelance hacking sim for iPhone. Take bounties from rival factions, route through hijacked devices and wipe your tracks before the threat hunt finds you.</p>
+                <div class="tag-row">
+                    <span class="tag tag-muted">JavaScript</span>
+                    <span class="tag tag-muted">Capacitor</span>
+                    <span class="tag tag-muted">iOS</span>
+                </div>
+                <span class="card-link">View details &rarr;</span>
             </div>
-            <span class="card-link">View details &rarr;</span>
         </a>
 
-        <a href="jarvis.html" class="project-card">
-            <h3>JARVIS</h3>
-            <p>A fully local, voice-driven AI assistant for macOS. No cloud dependency, with a plugin system for controlling the Mac.</p>
-            <div class="tag-row">
-                <span class="tag tag-muted">Ollama</span>
-                <span class="tag tag-muted">Whisper</span>
+        <a href="cyberos.html" class="project-card os">
+            <div class="card-media"><img src="assets/images/cyberos-windows.png" alt="CyberOS desktop with Files and Settings windows open" loading="lazy"></div>
+            <div class="card-body">
+                <span class="card-kicker">Operating system</span>
+                <h3>CyberOS</h3>
+                <p>A 32-bit OS from scratch in NASM: bootloader, windowed desktop, FAT32 and a TCP/IP stack.</p>
+                <div class="tag-row">
+                    <span class="tag tag-muted">NASM</span>
+                    <span class="tag tag-muted">x86</span>
+                </div>
+                <span class="card-link">View details &rarr;</span>
             </div>
-            <span class="card-link">View details &rarr;</span>
+        </a>
+
+        <a href="agent.html" class="project-card agent">
+            <div class="card-media"><img src="assets/images/agent-ui.png" alt="AI pentest agent dashboard showing its planning loop" loading="lazy" style="object-position: 30% 35%;"></div>
+            <div class="card-body">
+                <span class="card-kicker">AI agent</span>
+                <h3>AI Pentest Agent</h3>
+                <p>An autonomous recon engine that plans, runs and iterates on enumeration with an LLM-driven loop.</p>
+                <div class="tag-row">
+                    <span class="tag tag-muted">Python</span>
+                    <span class="tag tag-muted">FastAPI</span>
+                </div>
+                <span class="card-link">View details &rarr;</span>
+            </div>
+        </a>
+
+        <a href="ember.html" class="project-card ember">
+            <div class="card-inner">
+                <div class="card-media">
+                    <svg class="ember-art" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                        <defs>
+                            <radialGradient id="eg" cx="50%" cy="55%" r="60%">
+                                <stop offset="0" stop-color="#ff8a3d" stop-opacity=".35"/>
+                                <stop offset=".5" stop-color="#8b7bff" stop-opacity=".12"/>
+                                <stop offset="1" stop-color="#05070b" stop-opacity="0"/>
+                            </radialGradient>
+                            <linearGradient id="ef" x1="0" y1="1" x2="0" y2="0">
+                                <stop offset="0" stop-color="#ff5f57"/>
+                                <stop offset=".55" stop-color="#ff9f43"/>
+                                <stop offset="1" stop-color="#ffd166"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="400" height="260" fill="url(#eg)"/>
+                        <g fill="none" stroke-width="1">
+                            <circle class="ring" cx="200" cy="135" r="92" stroke="rgba(139,123,255,.35)" stroke-dasharray="4 10"/>
+                            <circle class="ring r2" cx="200" cy="135" r="66" stroke="rgba(62,207,178,.4)" stroke-dasharray="40 14 4 14"/>
+                            <circle cx="200" cy="135" r="118" stroke="rgba(255,255,255,.06)"/>
+                        </g>
+                        <path class="flame" d="M200 70c18 26 36 40 36 68a36 36 0 0 1-72 0c0-14 6-24 14-32 0 12 6 20 13 22-4-20 1-38 9-58z" fill="url(#ef)"/>
+                        <path class="flame" d="M201 118c8 11 14 18 14 29a14 14 0 0 1-28 0c0-9 7-15 14-29z" fill="#fff3c4" opacity=".85"/>
+                        <text x="200" y="232" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="rgba(238,242,247,.55)">ember@workstation:~$ sudo ./build.sh</text>
+                    </svg>
+                </div>
+                <div class="card-body">
+                    <span class="card-kicker">Linux distribution · in progress</span>
+                    <h3>Ember</h3>
+                    <p>My own Debian-based Linux: one machine instead of three. A Windows-feeling KDE desktop, iCloud mail and calendars, a real security toolset, and a snapshot around every package change.</p>
+                    <div class="tag-row">
+                        <span class="tag tag-muted">Debian</span>
+                        <span class="tag tag-muted">live-build</span>
+                        <span class="tag tag-muted">KDE Plasma</span>
+                    </div>
+                    <span class="card-link">View details &rarr;</span>
+                </div>
+            </div>
         </a>
     </div>
 
-    <p style="margin-top: 24px;">
-        <a href="projects.html" class="card-link" style="text-decoration:none; font-weight:600;">See all projects &rarr;</a>
-    </p>
+    <h2 class="section-header">What I work on</h2>
+    <div class="focus-grid">
+        <div class="focus"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Offensive security</h3><p>Pentesting by day, and the C2, recon and harness tooling to back it up.</p></div>
+        <div class="focus"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg></div><h3>Systems from scratch</h3><p>An OS in assembly and a Linux build of my own, to understand the layers underneath.</p></div>
+        <div class="focus"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M18 6l-2.5 2.5M8.5 15.5L6 18"/><circle cx="12" cy="12" r="2.5"/></svg></div><h3>AI agents</h3><p>Agents that plan and run their own work, with scope and a human kept in charge.</p></div>
+        <div class="focus"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="11" rx="5"/><path d="M7 11v3M5.5 12.5h3"/><circle cx="16" cy="11.5" r=".8" fill="currentColor"/><circle cx="18" cy="13.5" r=".8" fill="currentColor"/></svg></div><h3>Games &amp; apps</h3><p>Phone and browser games, with the toughest testers in the house aged three and six.</p></div>
+    </div>
+
+    <h2 class="section-header">Latest from the blog</h2>
+    <a href="blog/same-game-new-decade.html" class="post-link"><span class="when">2026-10-21</span><span class="title">Same game, new decade</span></a>
+    <a href="blog/email-spoof-check.html" class="post-link"><span class="when">2026-08-18</span><span class="title">Anyone can send email as your business</span></a>
+    <a href="blog/frontier-models-on-a-laptop.html" class="post-link"><span class="when">2026-08-14</span><span class="title">What actually fits on a laptop</span></a>
 </section>
 
 <footer class="site-footer">
@@ -104,6 +197,6 @@
     <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft · CyberZombi3</span>
 </footer>
 
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js?v=3"></script>
 </body>
 </html>
