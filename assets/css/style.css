@@ -569,3 +569,13 @@ img { max-width: 100%; display: block; }
     .project-grid { grid-template-columns: 1fr; }
     .site-footer { flex-direction: column; align-items: flex-start; }
 }
+
+/* Portrait phone screenshots: keep them phone-sized and side by side */
+.image-row.phone {
+    justify-content: center;
+}
+
+.image-row.phone .project-image {
+    flex: 0 1 280px;
+    margin: 8px 0 20px;
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Same game, new decade · CyberZombi3 | Aaron Moorcroft</title>
+    <meta name="description" content="Building The Bounty: Contract Hacker, a phone-first freelance hacking sim, and then modernising it without changing a single rule.">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+
+<div class="grid-bg"></div>
+
+<header class="navbar">
+    <a href="../index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../spoofcheck.html">Email Check</a>
+        <a href="index.html">Blog</a>
+    </nav>
+</header>
+
+<header class="page-header">
+    <a href="index.html" class="eyebrow-link">&larr; Blog</a>
+    <h1 class="page-title">Same game, new decade</h1>
+    <p class="page-subtitle">Building a contract hacker sim for my phone, then dragging it out of the early 2000s without touching the rules.</p>
+</header>
+
+<section class="content-panel">
+
+    <p class="post-date">2026-10-21</p>
+
+    <p class="text-block">
+        It has been a while since I posted, mostly because the evenings have gone on building things rather than writing about them. The one I have spent the most time with is a game: <a href="../thebounty.html">The Bounty: Contract Hacker</a>. You are a freelancer taking bounties from factions and companies, routing through hijacked devices to reach a target, doing the job and getting out before security works out where you came from.
+    </p>
+
+    <p class="text-block">
+        It started as a straight homage to the hacker sims from around the turn of the century: grey windows, a world map of phone lines, email from an anonymous agency. It played well. It also looked exactly like the year it was paying tribute to, and when I sat down with it on the phone the question was obvious: how do you keep the game and lose the decade?
+    </p>
+
+    <h2 class="section-header">&gt; Rename, do not redesign</h2>
+    <p class="text-block">
+        The answer that worked was to treat it as a translation job. Every mechanic survived, it just needed a word from this decade. Bouncing through relay computers became hopping through hijacked smart cameras, home routers and cloud VMs. The trace became a detection meter that moves through Anomaly, Alert and Incident, which is how a real security team would talk about you. The investigation that follows you home became a threat hunt, working back along your route one hop at a time. Firewalls and proxies became auth gates and sentinels. Bank accounts became wallets.
+    </p>
+
+    <p class="text-block">
+        None of the numbers changed. The same route still buys the same number of seconds. But the fiction now matches the job I actually do, and that makes the decisions in the game feel more real than the old phone-line map ever did.
+    </p>
+
+    <h2 class="section-header">&gt; Email is not how anyone talks</h2>
+    <p class="text-block">
+        The old version delivered everything by email, which is not how anyone receives a job from a criminal any more. So the inbox became a chat app with named contacts, typing indicators and threads grouped by sender, and the news page became a social feed with handles and share counts. It is a cosmetic change on paper, but it changes how the story reads. A handler who sends you three short messages feels like a person. A handler who sends you a memo feels like a template.
+    </p>
+
+    <h2 class="section-header">&gt; More reasons to come back</h2>
+    <p class="text-block">
+        The original had one story arc and then an endless board of procedural jobs, which is fine until it is not. I added three factions who post the bounties, each with a rival who notices when you work for the other side, and perks that change the maths of a job rather than just adding a bonus. There is a Daily Bounty at double pay with a streak, and two more story arcs, each ending in a choice that changes the world afterwards. The last one has a real ending.
+    </p>
+
+    <h2 class="section-header">&gt; The rules have no idea there is a screen</h2>
+    <p class="text-block">
+        The decision that made all of this cheap was made on day one: the game rules live in one module with no DOM in it. That meant I could rewrite the entire interface, every screen and every bit of copy, and then prove nothing had broken by playing the game headlessly in Node. The test runs the tutorial, builds faction standing until the perks unlock, plays all three story arcs and gets itself burned, checking the state after every step.
+    </p>
+
+    <p class="text-block">
+        It is plain JavaScript, no framework and no build step, wrapped as an iOS app with Capacitor so it gets haptics and a proper home screen icon. It is running on my phone now, and the plan is TestFlight next, then the App Store.
+    </p>
+
+    <p class="text-block">
+        I have also added <a href="../dinodash.html">Dino Dash</a>, a dinosaur stunt racer whose most important testers are three and six, and <a href="../ember.html">Ember</a>, my own Debian build, to the projects page.
+    </p>
+
+</section>
+
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="index.html">Blog</a>
+        <a href="../projects.html">Projects</a>
+        <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
+    </div>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft · CyberZombi3</span>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

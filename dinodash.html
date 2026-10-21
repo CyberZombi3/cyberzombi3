@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dino Dash · CyberZombi3 | Aaron Moorcroft</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+<div class="grid-bg"></div>
+
+<header class="navbar">
+    <a href="index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="spoofcheck.html">Email Check</a>
+        <a href="blog/index.html">Blog</a>
+    </nav>
+</header>
+
+<header class="page-header">
+    <a href="projects.html" class="eyebrow-link">&larr; Projects</a>
+    <h1 class="page-title">Dino Dash</h1>
+    <p class="page-subtitle">A jungle stunt-racing browser game: dinosaur cars, loops, lava, waterfalls and erupting volcanoes.</p>
+    <div class="tag-row">
+        <span class="tag">JavaScript</span>
+        <span class="tag">Canvas</span>
+        <span class="tag">planck.js</span>
+    </div>
+</header>
+
+<section class="content-panel">
+
+    <h2 class="section-header">&gt; Screens</h2>
+    <div class="image-row">
+        <img src="assets/images/dino-dash-title.jpg" class="project-image" alt="Dino Dash title screen in a jungle">
+        <img src="assets/images/dino-dash-level.jpg" class="project-image" alt="A T-rex car driving through the first jungle level">
+    </div>
+
+    <h2 class="section-header">&gt; Overview</h2>
+    <p class="text-block">
+        Dino Dash is a side-on physics racer for kids, and a test of how far a small web game can go on
+        the browser game portals. You drive a dinosaur-shaped car over hills, through
+        loops and across lava, collecting eggs and coins and trying to beat the clock for three stars.
+        Nobody dies: flip over and you are straight back on your wheels, fall in lava and you go back to a
+        checkpoint.
+    </p>
+
+    <h2 class="section-header">&gt; What is in it</h2>
+    <p class="text-block">
+        - <strong>20 levels</strong> built from thirteen kinds of section: loops, ponds, waterfalls, geysers, rope bridges, rock walls and more<br>
+        - <strong>Hazards</strong> that arrive as you progress: lava bombs from erupting volcanoes, stampedes that chase you down the track<br>
+        - <strong>9 dinos</strong> unlocked by eggs found, each with its own trick. Ankylo smashes rock walls, Ptero glides, Spino is fast in water<br>
+        - <strong>A garage</strong> with engine, tyre, suspension and nitro upgrades, paint jobs and wheel styles<br>
+        - <strong>Ghost runs</strong> of your best time, slow motion over the finish line, big air call-outs
+    </p>
+
+    <h2 class="section-header">&gt; How it is built</h2>
+    <p class="text-block">
+        Around 3,700 lines of plain JavaScript drawing to a canvas, with planck.js for the physics and
+        nothing else from outside. Every graphic, texture, sound effect and piece of music is made in code at
+        start-up, so the whole game is about half a megabyte and runs straight from the file.
+    </p>
+    <p class="text-block">
+        The part I like most is the testing. A robot driver plays every level with every dino at full gas
+        and reports where it got stuck, which loops it skipped and which eggs are off the racing line. Its
+        times set the star targets, so when I change a level the difficulty updates itself.
+    </p>
+
+    <h2 class="section-header">&gt; Status</h2>
+    <p class="text-block">
+        Feature complete. Next is play-testing with the real target audience, aged three and six, before
+        submitting it to a games portal.
+    </p>
+
+</section>
+
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
+        <a href="https://github.com/CyberZombi3" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/%F0%9F%90%91-aaron-moorcroft-88064921/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft · CyberZombi3</span>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

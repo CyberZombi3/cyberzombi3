@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ember · CyberZombi3 | Aaron Moorcroft</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+<div class="grid-bg"></div>
+
+<header class="navbar">
+    <a href="index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="spoofcheck.html">Email Check</a>
+        <a href="blog/index.html">Blog</a>
+    </nav>
+</header>
+
+<header class="page-header">
+    <a href="projects.html" class="eyebrow-link">&larr; Projects</a>
+    <h1 class="page-title">Ember</h1>
+    <p class="page-subtitle">A personal Debian-based Linux: one machine for daily use, Apple mail and calendars, and a real pentest toolset.</p>
+    <div class="tag-row">
+        <span class="tag">Debian</span>
+        <span class="tag">live-build</span>
+        <span class="tag">KDE Plasma</span>
+        <span class="tag">Bash</span>
+    </div>
+</header>
+
+<section class="content-panel">
+
+    <h2 class="section-header">&gt; Overview</h2>
+    <p class="text-block">
+        Ember is my attempt at one machine instead of three: a daily driver that feels like Windows, pulls in
+        iCloud mail, calendars and contacts, carries a proper security toolset, and looks like a workstation
+        someone designed rather than skinned. It is a complete live-build configuration designed to produce a
+        bootable, installable ISO.
+    </p>
+
+    <h2 class="section-header">&gt; Decisions</h2>
+    <p class="text-block">
+        - <strong>Debian, not Kali.</strong> Kali is a poor daily driver. The cost is a toolset gap, which I have documented piece by piece along with how to fill each one<br>
+        - <strong>KDE Plasma, not GNOME.</strong> The most customisable desktop, set up with Windows habits: a taskbar, a start menu on the Super key<br>
+        - <strong>Evolution for iCloud.</strong> IMAP, CalDAV and CardDAV are more reliable there than the alternatives<br>
+        - <strong>btrfs and snapper.</strong> A snapshot around every package transaction, so a broken hook of my own is one rollback away<br>
+        - <strong>Calamares as the installer.</strong> The stock Debian installer would quietly install plain Debian from the ISO pool, without any of Ember's packages
+    </p>
+
+    <h2 class="section-header">&gt; VM now, hardware later</h2>
+    <p class="text-block">
+        Phase one runs as an arm64 virtual machine on my Mac. Phase two moves to x86 hardware, where Windows
+        compatibility through Wine and GPU tools like hashcat make sense. The architecture is built around
+        that move, and a preflight script checks every package name for the target architecture before a
+        forty-minute build rather than failing at the end of one.
+    </p>
+
+    <h2 class="section-header">&gt; Status</h2>
+    <p class="text-block">
+        Version 0.2. The configuration is complete and the first ISO build is the next real test. The name
+        is a placeholder.
+    </p>
+
+</section>
+
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
+        <a href="https://github.com/CyberZombi3" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/%F0%9F%90%91-aaron-moorcroft-88064921/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft · CyberZombi3</span>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

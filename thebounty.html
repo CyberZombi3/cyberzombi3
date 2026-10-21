@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Bounty: Contract Hacker · CyberZombi3 | Aaron Moorcroft</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+<div class="grid-bg"></div>
+
+<header class="navbar">
+    <a href="index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="spoofcheck.html">Email Check</a>
+        <a href="blog/index.html">Blog</a>
+    </nav>
+</header>
+
+<header class="page-header">
+    <a href="projects.html" class="eyebrow-link">&larr; Projects</a>
+    <h1 class="page-title">The Bounty: Contract Hacker</h1>
+    <p class="page-subtitle">A freelance hacking sim for iPhone. Take bounties, hop through hijacked devices, and get out before the threat hunt finds you.</p>
+    <div class="tag-row">
+        <span class="tag">JavaScript</span>
+        <span class="tag">Capacitor</span>
+        <span class="tag">iOS</span>
+        <span class="tag">Web Audio</span>
+    </div>
+</header>
+
+<section class="content-panel">
+
+    <h2 class="section-header">&gt; Screens</h2>
+    <div class="image-row phone">
+        <img src="assets/images/the-bounty-map.jpg" class="project-image" alt="The Bounty map screen with a route through three hijacked devices to a target">
+        <img src="assets/images/the-bounty-board.jpg" class="project-image" alt="The Bounty board showing active bounties and the Daily Bounty">
+    </div>
+
+    <h2 class="section-header">&gt; Overview</h2>
+    <p class="text-block">
+        You are a contract hacker. Factions, companies and people with secrets post bounties: steal a
+        file, wipe a record, upgrade someone's credentials, clean a background check, move money between
+        wallets. You pick the job, plan a route through hijacked smart cameras, home routers and cloud VMs,
+        get in, do the work, wipe your telemetry and get out. Every hop you add buys time before security
+        notices you.
+    </p>
+    <p class="text-block">
+        It is my take on the classic freelance hacker sim, rebuilt for a phone and set in the present day. Every name, line of text, sound and visual in it is original.
+    </p>
+
+    <h2 class="section-header">&gt; How a bounty plays</h2>
+    <p class="text-block">
+        - <strong>Route.</strong> Chain hops on the map. Hops get hot with use and cool down over time, and private proxies charge a fee<br>
+        - <strong>Detection.</strong> A meter runs Anomaly, Alert, Incident. Hit 100% and you are disconnected<br>
+        - <strong>Defences.</strong> Auth gates block an admin session until you open them, and sentinels speed detection up until you mute them<br>
+        - <strong>Threat hunts.</strong> Leave telemetry behind and a security team works back along your route, one hop at a time. Three strikes and you are burned<br>
+        - <strong>Kit.</strong> Five tools and three hardware upgrades, each changing the maths of a job rather than just a number on a screen
+    </p>
+
+    <h2 class="section-header">&gt; Factions and story</h2>
+    <p class="text-block">
+        Every bounty is really posted by one of three factions: hacktivists, a syndicate and a corporate
+        intelligence firm. Working for one annoys its rival, and standing unlocks perks or closes doors. On
+        top of the endless procedural board there is a Daily Bounty at double pay with a streak bonus, and
+        three story arcs that each end in a choice. The choices change the world afterwards, and the last
+        arc has a proper ending.
+    </p>
+
+    <h2 class="section-header">&gt; How it is built</h2>
+    <p class="text-block">
+        Plain ES modules, no framework and no build step, around 3,300 lines. The rules live in one module
+        with no DOM in it, so the whole game can be played headlessly in Node: the test drives the tutorial,
+        the factions, all three story arcs and getting burned, and checks the state after each step. The UI
+        re-renders from state and patches only the fast-moving parts like the detection meter. Sound is
+        generated with Web Audio rather than shipped as files. Capacitor wraps it as a native iOS app with
+        haptics, and it is running on my phone now.
+    </p>
+
+    <h2 class="section-header">&gt; Status</h2>
+    <p class="text-block">
+        Playable start to finish. Next is TestFlight, then the App Store.
+    </p>
+
+</section>
+
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
+        <a href="https://github.com/CyberZombi3" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/%F0%9F%90%91-aaron-moorcroft-88064921/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft · CyberZombi3</span>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
