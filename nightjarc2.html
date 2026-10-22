@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CreativeWork", "name": "NightJARC2", "description": "A command-and-control framework built from scratch for lab use, with multi-operator per-action attribution, SOCKS5 pivoting through beacons, and every action…", "url": "https://cyberzombi3.co.uk/nightjarc2.html", "image": "https://cyberzombi3.co.uk/assets/images/nightjarc2.jpg", "author": {"@type": "Person", "name": "Aaron Moorcroft", "url": "https://cyberzombi3.co.uk/"}}</script>
     <!-- /seo -->
-    <link rel="stylesheet" href="assets/css/style.css?v=6">
+    <link rel="stylesheet" href="assets/css/style.css?v=8">
 </head>
 
 <body>
@@ -65,18 +65,32 @@
     <div class="callout">
         <strong>Authorised use only.</strong> NightJARC2 runs against my own QEMU lab VMs. It is
         published here as an engineering write-up, not as a tool release. There is no download,
-        and the implant source stays off this site. The screenshot below is a simulated beacon
-        (<code>test_beacon.py</code>) checking in to a loopback listener.
+        and the implant source stays off this site. The screenshots below show lab and demo
+        beacons, with live check-ins coming from a simulated beacon
+        (<code>test_beacon.py</code>) on a loopback listener.
     </div>
 
     <h2 class="section-header">&gt; The console</h2>
     <img src="assets/images/nightjarc2.jpg" class="project-image"
-         alt="The NightJARC2 web interface: a session table listing one simulated beacon on host KALI-SIM with integrity, PID and sleep columns, and an interactive beacon console below showing the full command list">
+         alt="The NightJARC2 web interface: a session table listing lab beacons across several hosts with integrity, PID and sleep columns, and an interactive beacon console below showing the full command list">
 
     <p class="text-block">
         The interface is a single page: a session table at the top, a tabbed console below it.
         Each beacon gets its own tab, the event log gets one, and the two stay side by side, so
         you can never run a command without the log of it being one click away.
+    </p>
+
+    <h2 class="section-header">&gt; Host view and listeners</h2>
+    <img src="assets/images/nightjarc2-hosts.jpg" class="project-image"
+         alt="The NightJARC2 host view: cards per host summarising beacons, naming context, Kerberoastable accounts, domain policy weaknesses and Linux privilege-escalation findings">
+    <img src="assets/images/nightjarc2-listeners.jpg" class="project-image"
+         alt="The NightJARC2 listeners panel: HTTPS, mail and DNS listeners with their bind address, beacon URI and server banner, plus a form to add a new listener">
+
+    <p class="text-block">
+        The host view rolls every beacon up by machine and surfaces what matters for the next
+        move: the domain naming context, Kerberoastable accounts, missing lockout thresholds and
+        local privilege-escalation leads. The server starts cold, so nothing listens until a
+        listener is started by hand.
     </p>
 
     <h2 class="section-header">&gt; Transparent by default</h2>
@@ -145,6 +159,6 @@
     <p class="footer-note">Lab use only. No tooling or implant source is distributed from this site.</p>
 </footer>
 
-<script src="assets/js/main.js?v=6"></script>
+<script src="assets/js/main.js?v=8"></script>
 </body>
 </html>

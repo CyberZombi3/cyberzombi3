@@ -151,6 +151,26 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // ---- Click a screenshot to see it full size ----
+    document.querySelectorAll(".project-image").forEach((img) => {
+        img.addEventListener("click", () => {
+            const box = document.createElement("div");
+            box.className = "lightbox";
+            box.innerHTML = `<img src="${img.currentSrc || img.src}" alt="">`;
+            box.querySelector("img").alt = img.alt;
+            const close = () => {
+                box.classList.remove("open");
+                document.removeEventListener("keydown", onKey);
+                setTimeout(() => box.remove(), 200);
+            };
+            const onKey = (e) => { if (e.key === "Escape") close(); };
+            box.addEventListener("click", close);
+            document.addEventListener("keydown", onKey);
+            document.body.appendChild(box);
+            requestAnimationFrame(() => box.classList.add("open"));
+        });
+    });
+
     // ---- Card spotlight follows the pointer ----
     document.querySelectorAll(".project-card").forEach((card) => {
         card.addEventListener("pointermove", (e) => {
