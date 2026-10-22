@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CyberOS · CyberZombi3 | Aaron Moorcroft</title>
-    <meta name="description" content="A 32-bit x86 operating system written from scratch in NASM, with a three-stage bootloader, windowed desktop, FAT12/FAT32, a TCP/IP stack and a packet…">
+    <meta name="description" content="A 32-bit x86 operating system built from scratch in NASM, with a three-stage bootloader, windowed desktop, FAT12/FAT32, a TCP/IP stack and a packet…">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <!-- seo -->
     <link rel="canonical" href="https://cyberzombi3.co.uk/cyberos.html">
@@ -13,18 +13,18 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="CyberZombi3 · Aaron Moorcroft">
     <meta property="og:title" content="CyberOS · CyberZombi3 | Aaron Moorcroft">
-    <meta property="og:description" content="A 32-bit x86 operating system written from scratch in NASM, with a three-stage bootloader, windowed desktop, FAT12/FAT32, a TCP/IP stack and a packet…">
+    <meta property="og:description" content="A 32-bit x86 operating system built from scratch in NASM, with a three-stage bootloader, windowed desktop, FAT12/FAT32, a TCP/IP stack and a packet…">
     <meta property="og:url" content="https://cyberzombi3.co.uk/cyberos.html">
     <meta property="og:image" content="https://cyberzombi3.co.uk/assets/images/cyberos-desktop-5911.png">
     <meta property="og:locale" content="en_GB">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="CyberOS · CyberZombi3 | Aaron Moorcroft">
-    <meta name="twitter:description" content="A 32-bit x86 operating system written from scratch in NASM, with a three-stage bootloader, windowed desktop, FAT12/FAT32, a TCP/IP stack and a packet…">
+    <meta name="twitter:description" content="A 32-bit x86 operating system built from scratch in NASM, with a three-stage bootloader, windowed desktop, FAT12/FAT32, a TCP/IP stack and a packet…">
     <meta name="twitter:image" content="https://cyberzombi3.co.uk/assets/images/cyberos-desktop-5911.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CreativeWork", "name": "CyberOS", "description": "A 32-bit x86 operating system written from scratch in NASM, with a three-stage bootloader, windowed desktop, FAT12/FAT32, a TCP/IP stack and a packet…", "url": "https://cyberzombi3.co.uk/cyberos.html", "image": "https://cyberzombi3.co.uk/assets/images/cyberos-desktop-5911.png", "author": {"@type": "Person", "name": "Aaron Moorcroft", "url": "https://cyberzombi3.co.uk/"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CreativeWork", "name": "CyberOS", "description": "A 32-bit x86 operating system built from scratch in NASM, with a three-stage bootloader, windowed desktop, FAT12/FAT32, a TCP/IP stack and a packet…", "url": "https://cyberzombi3.co.uk/cyberos.html", "image": "https://cyberzombi3.co.uk/assets/images/cyberos-desktop-5911.png", "author": {"@type": "Person", "name": "Aaron Moorcroft", "url": "https://cyberzombi3.co.uk/"}}</script>
     <!-- /seo -->
     <link rel="stylesheet" href="assets/css/style.css?v=6">
 </head>
@@ -50,7 +50,7 @@
 <header class="page-header">
     <a href="projects.html" class="eyebrow-link">&larr; Projects</a>
     <h1 class="page-title">CyberOS</h1>
-    <p class="page-subtitle">A 32-bit operating system written from scratch in assembly: bootloader, kernel, windowing system, filesystems and a network stack. No libraries, no toolchain beyond NASM.</p>
+    <p class="page-subtitle">A 32-bit operating system built from scratch in assembly: bootloader, kernel, windowing system, filesystems and a network stack. No libraries, no toolchain beyond NASM.</p>
     <div class="tag-row">
         <span class="tag">NASM</span>
         <span class="tag">x86</span>
@@ -70,8 +70,14 @@
     <p class="text-block">
         CyberOS boots from a 1.44 MB floppy image into a 1024×768 32-bit graphical desktop.
         Everything on screen, from the window manager and the icons to the font rendering and
-        the mouse cursor, is drawn by hand-written assembly into a linear framebuffer. There is no
+        the mouse cursor, is drawn by assembly code into a linear framebuffer. There is no
         libc, no compiler, and nothing borrowed from an existing kernel.
+    </p>
+    <p class="text-block">
+        To be clear, I didn't write the assembly by hand. CyberOS was vibe coded with AI from
+        start to finish, with me steering, testing and deciding what it should do next. It
+        started as an experiment to see how far that approach could go on something as
+        unforgiving as an operating system.
     </p>
 
     <h2 class="section-header">&gt; By the numbers</h2>
@@ -137,7 +143,7 @@
     <p class="text-block">
         In July 2026 I ran a full security audit against the CyberOS source, the same way I
         would approach any other codebase, except that this one had no libraries to hide behind
-        and I had written every line of it. It found <strong>3 critical, 6 high, 8 medium and
+        and every line of it had been written by AI. It found <strong>3 critical, 6 high, 8 medium and
         9 low</strong> findings. All are fixed.
     </p>
     <p class="text-block">
