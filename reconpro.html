@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ReconPro · AI Penetration Testing Platform | Aaron Moorcroft</title>
+    <title>APT Pro · AI Penetration Testing Platform | Aaron Moorcroft</title>
     <meta name="description" content="An AI-driven penetration testing platform: a frontier agent drives nmap, nuclei, sqlmap, metasploit and the rest of the local toolset against authorised…">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <!-- seo -->
@@ -12,19 +12,19 @@
     <meta name="theme-color" content="#05070b">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="CyberZombi3 · Aaron Moorcroft">
-    <meta property="og:title" content="ReconPro · AI Penetration Testing Platform | Aaron Moorcroft">
+    <meta property="og:title" content="APT Pro · AI Penetration Testing Platform | Aaron Moorcroft">
     <meta property="og:description" content="An AI-driven penetration testing platform: a frontier agent drives nmap, nuclei, sqlmap, metasploit and the rest of the local toolset against authorised…">
     <meta property="og:url" content="https://cyberzombi3.co.uk/reconpro.html">
     <meta property="og:image" content="https://cyberzombi3.co.uk/assets/images/reconpro.jpg">
     <meta property="og:locale" content="en_GB">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="ReconPro · AI Penetration Testing Platform | Aaron Moorcroft">
+    <meta name="twitter:title" content="APT Pro · AI Penetration Testing Platform | Aaron Moorcroft">
     <meta name="twitter:description" content="An AI-driven penetration testing platform: a frontier agent drives nmap, nuclei, sqlmap, metasploit and the rest of the local toolset against authorised…">
     <meta name="twitter:image" content="https://cyberzombi3.co.uk/assets/images/reconpro.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CreativeWork", "name": "ReconPro", "description": "An AI-driven penetration testing platform: a frontier agent drives nmap, nuclei, sqlmap, metasploit and the rest of the local toolset against authorised…", "url": "https://cyberzombi3.co.uk/reconpro.html", "image": "https://cyberzombi3.co.uk/assets/images/reconpro.jpg", "author": {"@type": "Person", "name": "Aaron Moorcroft", "url": "https://cyberzombi3.co.uk/"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CreativeWork", "name": "APT Pro", "description": "An AI-driven penetration testing platform: a frontier agent drives nmap, nuclei, sqlmap, metasploit and the rest of the local toolset against authorised…", "url": "https://cyberzombi3.co.uk/reconpro.html", "image": "https://cyberzombi3.co.uk/assets/images/reconpro.jpg", "author": {"@type": "Person", "name": "Aaron Moorcroft", "url": "https://cyberzombi3.co.uk/"}}</script>
     <!-- /seo -->
     <link rel="stylesheet" href="assets/css/style.css?v=8">
 </head>
@@ -49,13 +49,13 @@
 
 <header class="page-header">
     <a href="projects.html" class="eyebrow-link">&larr; Projects</a>
-    <h1 class="page-title">ReconPro</h1>
+    <h1 class="page-title">APT Pro</h1>
     <p class="page-subtitle">An AI penetration testing platform. The agent plans and executes the test itself, from recon through to exploitation and reporting, driving the real local toolset, and every finding it records is verified with command output rather than inferred from a banner.</p>
     <div class="tag-row">
         <span class="tag">Python</span>
         <span class="tag">FastAPI</span>
         <span class="tag">Claude Agent SDK</span>
-        <span class="tag tag-muted">129 tools</span>
+        <span class="tag tag-muted">124 tools</span>
         <span class="tag tag-muted">Authorised targets only</span>
     </div>
 </header>
@@ -70,7 +70,7 @@
 
     <h2 class="section-header">&gt; Scan history and diffing</h2>
     <img src="assets/images/reconpro.jpg" class="project-image"
-         alt="The ReconPro interface showing the scan history tab: six runs against a lab host, each row tagged agent or fixed with its critical, high and medium counts, above tabs for findings, services, config review, reasoning, terminal and the credential vault">
+         alt="The APT Pro interface showing the scan history tab: six runs against a lab host, each row tagged agent or fixed with its critical, high and medium counts, above tabs for findings, services, config review, reasoning, terminal and the credential vault">
 
     <p class="text-block">
         Every run against a host is kept, so a re-scan is a comparison rather than a fresh
@@ -85,7 +85,7 @@
         why scanner output needs a human to triage it before anyone will act on it.
     </p>
     <p class="text-block">
-        ReconPro's agent has to <em>demonstrate</em> the finding. It runs the check, reads the
+        APT Pro's agent has to <em>demonstrate</em> the finding. It runs the check, reads the
         output, and only records a finding when it has evidence. The command and its output are
         attached to the finding itself. Where it can go further it does: it exploits, captures
         credentials, and stores them for reuse against the rest of the estate on later scans.
@@ -95,7 +95,7 @@
     <p class="text-block">
         A FastAPI server on loopback serves a single-page operator UI. The agent drives whatever
         is on <code>PATH</code>: nmap, nuclei, sqlmap, metasploit, enum4linux, hydra,
-        bloodhound-python and around 129 tools in total. The whole run streams live into
+        bloodhound-python and around 124 tools in total. The whole run streams live into
         the browser so you can watch it think and intervene.
     </p>
     <p class="text-block">
@@ -127,7 +127,7 @@
 
     <h2 class="section-header">&gt; What a report looks like</h2>
     <img src="assets/images/reconpro-report.jpg" class="project-image"
-         alt="A generated ReconPro scan report in Markdown: open ports, then eighteen new verified findings including EternalBlue and several DVWA injection issues, then a separate section listing twenty-nine findings not re-observed this scan and flagged for verification before being treated as fixed">
+         alt="A generated APT Pro scan report in Markdown for a lab host: open ports, a changes-since-previous-scan diff, and twenty-nine findings with CVEs, CVSS scores and config issues, each written up with evidence">
 
     <p class="text-block">
         This is a real report against a deliberately vulnerable lab VM, and the structure is the
