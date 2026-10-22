@@ -25,7 +25,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <!-- /seo -->
-    <link rel="stylesheet" href="assets/css/style.css?v=5">
+    <link rel="stylesheet" href="assets/css/style.css?v=6">
 </head>
 
 <body>
@@ -53,10 +53,18 @@
 
 <section class="content-panel wide">
 
+    <div class="filter-bar" role="group" aria-label="Filter projects">
+        <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" class="filter-btn" data-filter="security" aria-pressed="false">Security</button>
+        <button type="button" class="filter-btn" data-filter="ai" aria-pressed="false">AI</button>
+        <button type="button" class="filter-btn" data-filter="systems" aria-pressed="false">Systems</button>
+        <button type="button" class="filter-btn" data-filter="games" aria-pressed="false">Games</button>
+    </div>
+
     <h2 class="section-header">Featured</h2>
     <div class="project-grid media-grid">
 
-        <a href="nightjarc2.html" class="project-card">
+        <a href="nightjarc2.html" class="project-card" data-cat="security">
             <div class="card-media"><img src="assets/images/nightjarc2.jpg" alt="NightJARC2" loading="lazy"></div>
             <div class="card-body">
             <h3>NightJARC2</h3>
@@ -71,7 +79,7 @@
             </div>
         </a>
 
-        <a href="thebounty.html" class="project-card">
+        <a href="thebounty.html" class="project-card" data-cat="games">
             <div class="card-media"><img src="assets/images/the-bounty-map.jpg" alt="The Bounty: Contract Hacker" loading="lazy" style="object-position: center 18%;"></div>
             <div class="card-body">
             <h3>The Bounty: Contract Hacker</h3>
@@ -86,7 +94,7 @@
             </div>
         </a>
 
-        <a href="cyberos.html" class="project-card">
+        <a href="cyberos.html" class="project-card" data-cat="systems">
             <div class="card-media"><img src="assets/images/cyberos-windows.png" alt="CyberOS" loading="lazy" style="object-position: center 30%;"></div>
             <div class="card-body">
             <h3>CyberOS</h3>
@@ -101,7 +109,7 @@
             </div>
         </a>
 
-        <a href="agent.html" class="project-card">
+        <a href="agent.html" class="project-card" data-cat="security ai">
             <div class="card-media"><img src="assets/images/agent-ui.png" alt="AI Pentest Agent" loading="lazy" style="object-position: 30% 35%;"></div>
             <div class="card-body">
             <h3>AI Pentest Agent</h3>
@@ -116,7 +124,7 @@
             </div>
         </a>
 
-        <a href="ember.html" class="project-card">
+        <a href="ember.html" class="project-card" data-cat="systems">
             <div class="card-media">
             <img src="assets/images/ember-desktop.jpg" alt="Ember Linux desktop with KDE Plasma" loading="lazy" style="object-position: center 40%;">
             </div>
@@ -138,7 +146,7 @@
     <h2 class="section-header">More projects</h2>
     <div class="project-grid media-grid">
 
-        <a href="dinodash.html" class="project-card">
+        <a href="dinodash.html" class="project-card" data-cat="games">
             <div class="card-media"><img src="assets/images/dino-dash-level.jpg" alt="Dino Dash" loading="lazy" style="object-position: center 60%;"></div>
             <div class="card-body">
             <h3>Dino Dash</h3>
@@ -153,7 +161,7 @@
             </div>
         </a>
 
-        <a href="iosgame.html" class="project-card">
+        <a href="iosgame.html" class="project-card" data-cat="games">
             <div class="card-media"><img src="assets/images/CyberLink-Gameplay.png" alt="CyberLink" loading="lazy" style="object-position: center 30%;"></div>
             <div class="card-body">
             <h3>CyberLink</h3>
@@ -167,7 +175,7 @@
             </div>
         </a>
 
-        <a href="nmapwrapper.html" class="project-card">
+        <a href="nmapwrapper.html" class="project-card" data-cat="security">
             <div class="card-media"><img src="assets/images/nmapwrapper.png" alt="NmapEnhanced" loading="lazy"></div>
             <div class="card-body">
             <h3>NmapEnhanced</h3>
@@ -182,7 +190,7 @@
             </div>
         </a>
 
-        <a href="spoofcheck.html" class="project-card">
+        <a href="spoofcheck.html" class="project-card" data-cat="security">
             <div class="card-media"><img src="assets/images/spoofcheck-result.jpg" alt="Email Spoof Check" loading="lazy"></div>
             <div class="card-body">
             <h3>Email Spoof Check</h3>
@@ -197,7 +205,7 @@
             </div>
         </a>
 
-        <a href="dashboard.html" class="project-card">
+        <a href="dashboard.html" class="project-card" data-cat="systems">
             <div class="card-media"><img src="assets/images/dashboard-radar.jpg" alt="Side Dashboard" loading="lazy" style="object-position: center;"></div>
             <div class="card-body">
             <h3>Side Dashboard</h3>
@@ -212,7 +220,7 @@
             </div>
         </a>
 
-        <a href="jarvis.html" class="project-card">
+        <a href="jarvis.html" class="project-card" data-cat="ai">
             <div class="card-media"><img src="assets/images/jarvis-hud.jpg" alt="JARVIS" loading="lazy" style="object-position: center;"></div>
             <div class="card-body">
             <h3>JARVIS</h3>
@@ -227,7 +235,7 @@
             </div>
         </a>
 
-        <a href="soclab.html" class="project-card">
+        <a href="soclab.html" class="project-card" data-cat="security">
             <div class="card-media art">
             <svg class="card-art" viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
                 <defs>
@@ -269,7 +277,7 @@
             </div>
         </a>
 
-        <a href="reconpro.html" class="project-card">
+        <a href="reconpro.html" class="project-card" data-cat="security ai">
             <div class="card-media"><img src="assets/images/reconpro.jpg" alt="ReconPro" loading="lazy"></div>
             <div class="card-body">
             <h3>ReconPro</h3>
@@ -284,7 +292,7 @@
             </div>
         </a>
 
-        <a href="cdmf.html" class="project-card">
+        <a href="cdmf.html" class="project-card" data-cat="security ai">
             <div class="card-media"><img src="assets/images/cdmf.jpg" alt="CDMF" loading="lazy"></div>
             <div class="card-body">
             <h3>CDMF</h3>
@@ -299,7 +307,7 @@
             </div>
         </a>
 
-        <a href="pentest-harness.html" class="project-card">
+        <a href="pentest-harness.html" class="project-card" data-cat="security ai">
             <div class="card-media"><img src="assets/images/pentest-harness.jpg" alt="Pentest Harnesses" loading="lazy"></div>
             <div class="card-body">
             <h3>Pentest Harnesses</h3>
@@ -314,7 +322,7 @@
             </div>
         </a>
 
-        <a href="agentcommerce.html" class="project-card">
+        <a href="agentcommerce.html" class="project-card" data-cat="ai">
             <div class="card-media"><img src="assets/images/agent-commerce.jpg" alt="Agent Commerce" loading="lazy"></div>
             <div class="card-body">
             <h3>Agent Commerce</h3>
@@ -342,6 +350,6 @@
     <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft · CyberZombi3</span>
 </footer>
 
-<script src="assets/js/main.js?v=5"></script>
+<script src="assets/js/main.js?v=6"></script>
 </body>
 </html>

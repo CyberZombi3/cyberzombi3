@@ -1318,3 +1318,35 @@ body::after {
     }
     .reveal { opacity: 1; transform: none; }
 }
+
+/* ---------------------------------------------------------------- */
+/* Projects filter                                                    */
+/* ---------------------------------------------------------------- */
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 36px;
+}
+
+.filter-btn {
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.filter-btn:hover { color: var(--text); border-color: rgba(62, 207, 178, 0.4); }
+
+.filter-btn.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-color: rgba(62, 207, 178, 0.4);
+}
+
+.filter-hidden { display: none !important; }

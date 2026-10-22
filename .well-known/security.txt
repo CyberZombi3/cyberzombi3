@@ -1,0 +1,6 @@
+# Found a security issue on cyberzombi3.co.uk or in one of my projects?
+# Please let me know privately first. Thank you.
+Contact: mailto:aaronjmoorcroft@gmail.com
+Expires: 2027-10-21T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://cyberzombi3.co.uk/.well-known/security.txt

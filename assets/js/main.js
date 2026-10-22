@@ -127,6 +127,30 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // ---- Projects page: filter by category ----
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    filterBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const want = btn.dataset.filter;
+            filterBtns.forEach((b) => {
+                b.classList.toggle("active", b === btn);
+                b.setAttribute("aria-pressed", String(b === btn));
+            });
+            document.querySelectorAll(".project-card[data-cat]").forEach((card) => {
+                const show = want === "all" || card.dataset.cat.split(" ").includes(want);
+                card.classList.toggle("filter-hidden", !show);
+                if (show) card.classList.add("in");
+            });
+            // Hide a group's heading when none of its cards match
+            document.querySelectorAll(".media-grid").forEach((grid) => {
+                const empty = !grid.querySelector(".project-card:not(.filter-hidden)");
+                grid.classList.toggle("filter-hidden", empty);
+                const heading = grid.previousElementSibling;
+                if (heading && heading.classList.contains("section-header")) heading.classList.toggle("filter-hidden", empty);
+            });
+        });
+    });
+
     // ---- Card spotlight follows the pointer ----
     document.querySelectorAll(".project-card").forEach((card) => {
         card.addEventListener("pointermove", (e) => {
