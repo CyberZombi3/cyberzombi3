@@ -50,23 +50,26 @@
 <header class="page-header">
     <a href="projects.html" class="eyebrow-link">&larr; Projects</a>
     <h1 class="page-title">Side Dashboard</h1>
-    <p class="page-subtitle">A vertical, always-on dashboard for a rotated side monitor. Seventeen cards, one dependency.</p>
+    <p class="page-subtitle">A vertical, always-on dashboard for a rotated side monitor. Glass widgets, a live flight radar and a Facebook feed with only my friends in it.</p>
     <div class="tag-row">
         <span class="tag">Node</span>
         <span class="tag">ADS-B</span>
         <span class="tag">SVG</span>
         <span class="tag tag-muted">GridStack</span>
         <span class="tag tag-muted">AppleScript</span>
+        <span class="tag tag-muted">Electron</span>
     </div>
 </header>
 
 <section class="content-panel">
 
     <h2 class="section-header">&gt; Preview</h2>
+    <div class="image-row phone">
+    <img src="assets/images/dashboard-glass.jpg" class="project-image" style="flex-basis: 460px; border-radius: 18px;"
+         alt="The glass version of the dashboard: translucent cards over a blue, green and purple background, with clock, air quality, weather, Derby fixtures and news, and the flight radar. Private cards are blurred">
+    </div>
     <img src="assets/images/dashboard-radar.jpg" class="project-image"
          alt="The flight radar card: a green radar scope over a dark map of Shropshire and Staffordshire, with aircraft drawn as plane and helicopter silhouettes, beside a list of nearby traffic with callsigns, types and altitudes">
-    <img src="assets/images/dashboard-overview.jpg" class="project-image"
-         alt="The top of the dashboard in dark mode: clock, air quality, a seven-day weather forecast and a week-view calendar">
 
     <h2 class="section-header">&gt; Overview</h2>
     <p class="text-block">
@@ -75,6 +78,28 @@
         drag-and-drop cards whose layout persists in the browser. The server is a zero-framework
         Node HTTP server; the entire project has one runtime dependency, and that is the grid
         library doing the drag and resize.
+    </p>
+
+    <h2 class="section-header">&gt; Version two: glass and widgets</h2>
+    <p class="text-block">
+        <strong>The glass look.</strong> Every card is frosted glass over a slow, blurred colour
+        field, in the style of the latest macOS widgets, with a soft light that follows the pointer and
+        a staggered fade as the cards arrive. The night theme dims everything with an overlay rather
+        than a filter, because a filter on a parent element quietly breaks the blur on every card
+        inside it.<br><br>
+        <strong>Editable widgets.</strong> An edit mode where the cards wobble like icons on an
+        iPhone: drag, resize, remove, and add them back from a tray. A removed card remembers where it
+        was and goes back to the same spot.<br><br>
+        <strong>A Facebook feed with only my friends in it.</strong> Facebook refuses to be shown
+        inside another page, and sending a fake header to get around that does not work either, so
+        the dashboard became a small desktop app. Facebook runs in its own sandboxed view, laid
+        exactly over its card, with the sidebars and menus hidden. It then compares the author of
+        every post with my friends list and hides anything that is not from one of them. That
+        removes the adverts, the suggested pages and the viral videos in one rule, instead of
+        chasing each one. The friends list stays on my Mac and the view gets no permissions.<br><br>
+        <strong>A proper app.</strong> It has its own icon, with a dark version that matches the rest of
+        the Dock, and opens from Spotlight. Everything else is still the same web page underneath, so it
+        is just as easy to change.
     </p>
 
     <h2 class="section-header">&gt; What's on it</h2>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pentesting a chemical plant on my laptop · CyberZombi3 | Aaron Moorcroft</title>
+    <meta name="description" content="How I built an OT security lab on GRFICSv3, wrapped it in a Command Centre with eight missions, took over a PLC from Kali, and open-sourced it.">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <!-- seo -->
+    <link rel="canonical" href="https://cyberzombi3.co.uk/blog/ot-lab-command-centre.html">
+    <meta name="author" content="Aaron Moorcroft">
+    <meta name="theme-color" content="#05070b">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="CyberZombi3 · Aaron Moorcroft">
+    <meta property="og:title" content="Pentesting a chemical plant on my laptop · CyberZombi3 | Aaron Moorcroft">
+    <meta property="og:description" content="How I built an OT security lab on GRFICSv3, wrapped it in a Command Centre with eight missions, took over a PLC from Kali, and open-sourced it.">
+    <meta property="og:url" content="https://cyberzombi3.co.uk/blog/ot-lab-command-centre.html">
+    <meta property="og:image" content="https://cyberzombi3.co.uk/assets/images/ot-lab-attack.jpg">
+    <meta property="og:locale" content="en_GB">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pentesting a chemical plant on my laptop · CyberZombi3 | Aaron Moorcroft">
+    <meta name="twitter:description" content="How I built an OT security lab on GRFICSv3, wrapped it in a Command Centre with eight missions, took over a PLC from Kali, and open-sourced it.">
+    <meta name="twitter:image" content="https://cyberzombi3.co.uk/assets/images/ot-lab-attack.jpg">
+    <meta property="article:published_time" content="2026-11-06">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Pentesting a chemical plant on my laptop", "description": "How I built an OT security lab on GRFICSv3, wrapped it in a Command Centre with eight missions, took over a PLC from Kali, and open-sourced it.", "url": "https://cyberzombi3.co.uk/blog/ot-lab-command-centre.html", "mainEntityOfPage": "https://cyberzombi3.co.uk/blog/ot-lab-command-centre.html", "image": "https://cyberzombi3.co.uk/assets/images/ot-lab-attack.jpg", "author": {"@type": "Person", "name": "Aaron Moorcroft", "url": "https://cyberzombi3.co.uk/"}, "datePublished": "2026-11-06"}</script>
+    <!-- /seo -->
+    <link rel="stylesheet" href="../assets/css/style.css?v=8">
+</head>
+
+<body>
+
+<div class="grid-bg"></div>
+
+<header class="navbar">
+    <a href="../index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../spoofcheck.html">Email Check</a>
+        <a href="index.html">Blog</a>
+    </nav>
+</header>
+
+<header class="page-header">
+    <a href="index.html" class="eyebrow-link">&larr; Blog</a>
+    <h1 class="page-title">Pentesting a chemical plant on my laptop</h1>
+    <p class="page-subtitle">Building an OT security lab, wrapping it in a Command Centre, and why the operator's screen never noticed.</p>
+</header>
+
+<section class="content-panel">
+
+    <p class="post-date">2026-11-06</p>
+
+    <p class="text-block">
+        Most of my testing has been IT: web apps, networks, Active Directory. OT, the systems that
+        run factories, water works and power stations, has been on my list for a while, and you
+        cannot exactly ask a customer if you can practise on their reactor. So I built a plant I am
+        allowed to break, and then a control panel to run it from.
+    </p>
+
+    <h2 class="section-header">&gt; The plant</h2>
+    <p class="text-block">
+        The heavy lifting is <a href="https://github.com/Fortiphyd/GRFICSv3" target="_blank" rel="noopener">GRFICSv3</a>
+        from Fortiphyd Logic, an open-source training range. It simulates a chemical reactor with
+        two feeds, a purge and a product outlet, controlled by a real OpenPLC runtime over Modbus,
+        with a Scada-LTS operator screen, a firewall between the operations and control zones, a Kali
+        box in the DMZ, and Wazuh and Zeek watching the network. Nine containers in all.
+    </p>
+    <p class="text-block">
+        It runs on my Mac under Colima with the native arm64 images. The one fiddly part is Zeek:
+        it gets its traffic from a mirror set up on the Docker host with <code>tc</code>, which
+        disappears every time the container restarts. My wrapper script rebuilds it on every start
+        so I never have to remember.
+    </p>
+
+    <h2 class="section-header">&gt; The Command Centre</h2>
+    <img src="../assets/images/ot-lab-command-centre.jpg" class="project-image"
+         alt="The Command Centre with reactor pressure in red, the eight missions complete, and the course guide open beside them">
+    <p class="text-block">
+        Nine systems on their own ports, each with its own login, gets old quickly. So I built one
+        page that shows the state of the plant (emergency stop, PLC, pressure, valves, the gas
+        analyser), a light and restart button for every system, and a workspace where any two of them
+        sit side by side. On top of that sit eight missions with objectives, flag questions, XP and
+        medals, and a written guide that says exactly where to type each command and what you should
+        see. It is a small Python server with no dependencies, bound to localhost.
+    </p>
+    <p class="text-block">
+        One design choice I am pleased with: the dashboard reads plant values from the simulator,
+        not from the PLC. If it polled the PLC over Modbus, my own dashboard would show up in the Zeek
+        logs I was supposed to be analysing.
+    </p>
+
+    <h2 class="section-header">&gt; Taking over the PLC</h2>
+    <img src="../assets/images/ot-lab-attack.jpg" class="project-image"
+         alt="The HMI showing manual mode on beside a Kali terminal running manual_takeover.py, with pressure climbing from 2698 to 2994 kPa">
+    <p class="text-block">
+        This is the bit that changed how I think about it. Modbus has no authentication. If you can
+        reach port 502 you can read and write the PLC, and nothing asks who you are. From the Kali box
+        it took a few lines of Python: flip one coil to put the controller into manual mode, then write
+        four holding registers to open both feeds fully and close both outlets. Gas goes in, nothing
+        comes out, and the pressure climbs about four kPa a second.
+    </p>
+    <p class="text-block">
+        The operator's screen shows it all happening: manual mode on, the setpoints, the pressure
+        rising. What it does not do is raise an alarm. Every write was a legitimate Modbus function
+        doing exactly what it was designed to do. No exploit, no malware, no CVE. That is the core of
+        OT security for me now: the question is not "is it patched" but "who can reach it, and would
+        anyone notice".
+    </p>
+    <p class="text-block">
+        The lab also taught me how fragile this kit is. Restarting the router once dropped the HMI's
+        connection and the PLC runtime crashed outright. That is why you scan an OT network carefully,
+        or not at all, and why the best time to test a control panel is in the factory before it ships.
+    </p>
+
+    <h2 class="section-header">&gt; Then catching it</h2>
+    <p class="text-block">
+        The later missions swap sides. Zeek logs every Modbus request, so a new IP writing to the PLC
+        stands out immediately when you list who talks to whom. Wazuh turns that into an alert. Then
+        firewall rules between the zones stop the Kali box reaching port 502 at all, and you rerun the
+        attack to prove it fails. The last mission is writing it up as a one-page factory acceptance
+        test report, with each finding mapped to an IEC 62443-3-3 requirement and a fix for each.
+    </p>
+
+    <h2 class="section-header">&gt; Sharing it</h2>
+    <p class="text-block">
+        I posted a screenshot on LinkedIn expecting a few likes. Tens of thousands of people saw it and
+        a lot of them asked if they could have the Command Centre, so it is now on GitHub, free and MIT
+        licensed: <a href="https://github.com/CyberZombi3/ot-lab-command-centre" target="_blank" rel="noopener">CyberZombi3/ot-lab-command-centre</a>.
+        It does not bundle GRFICSv3; a setup command fetches it from Fortiphyd, so the credit for the
+        plant stays with them.
+    </p>
+    <p class="text-block">
+        If you know IT security and want to see what is different about OT, it runs on a laptop with
+        Docker and about 16GB of RAM. Keep it on your own machine, and never point the scripts at real
+        equipment. There is more detail on the <a href="../ot-lab.html">project page</a>.
+    </p>
+
+</section>
+
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="index.html">Blog</a>
+        <a href="../projects.html">Projects</a>
+        <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
+    </div>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft · CyberZombi3</span>
+</footer>
+
+<script src="../assets/js/main.js?v=8"></script>
+</body>
+</html>

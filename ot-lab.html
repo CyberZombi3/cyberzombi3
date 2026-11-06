@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A guided OT security course and control panel built on GRFICSv3: a simulated chemical plant, a real PLC, a Kali attacker and eight missions. Free and open source.">
+    <title>OT Lab Command Centre · CyberZombi3 | Aaron Moorcroft</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <!-- seo -->
+    <link rel="canonical" href="https://cyberzombi3.co.uk/ot-lab.html">
+    <meta name="author" content="Aaron Moorcroft">
+    <meta name="theme-color" content="#05070b">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="CyberZombi3 · Aaron Moorcroft">
+    <meta property="og:title" content="OT Lab Command Centre · CyberZombi3 | Aaron Moorcroft">
+    <meta property="og:description" content="A guided OT security course and control panel built on GRFICSv3: a simulated chemical plant, a real PLC, a Kali attacker and eight missions. Free and open source.">
+    <meta property="og:url" content="https://cyberzombi3.co.uk/ot-lab.html">
+    <meta property="og:image" content="https://cyberzombi3.co.uk/assets/images/ot-lab-command-centre.jpg">
+    <meta property="og:locale" content="en_GB">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="OT Lab Command Centre · CyberZombi3 | Aaron Moorcroft">
+    <meta name="twitter:description" content="A guided OT security course and control panel built on GRFICSv3: a simulated chemical plant, a real PLC, a Kali attacker and eight missions. Free and open source.">
+    <meta name="twitter:image" content="https://cyberzombi3.co.uk/assets/images/ot-lab-command-centre.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CreativeWork", "name": "OT Lab Command Centre", "description": "A guided OT security course and control panel built on GRFICSv3: a simulated chemical plant, a real PLC, a Kali attacker and eight missions. Free and open source.", "url": "https://cyberzombi3.co.uk/ot-lab.html", "image": "https://cyberzombi3.co.uk/assets/images/ot-lab-command-centre.jpg", "author": {"@type": "Person", "name": "Aaron Moorcroft", "url": "https://cyberzombi3.co.uk/"}}</script>
+    <!-- /seo -->
+    <link rel="stylesheet" href="assets/css/style.css?v=8">
+</head>
+
+<body>
+
+<div class="grid-bg"></div>
+
+<header class="navbar">
+    <a href="index.html" class="nav-brand">
+        <span class="handle">CyberZombi3</span>
+        <span class="real-name">Aaron Moorcroft</span>
+    </a>
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="spoofcheck.html">Email Check</a>
+        <a href="blog/index.html">Blog</a>
+    </nav>
+</header>
+
+<header class="page-header">
+    <a href="projects.html" class="eyebrow-link">&larr; Projects</a>
+    <h1 class="page-title">OT Lab Command Centre</h1>
+    <p class="page-subtitle">A simulated chemical plant, a real PLC, a Kali attacker and eight missions to learn OT security on a laptop.</p>
+    <div class="tag-row">
+        <span class="tag">ICS / OT</span>
+        <span class="tag">Modbus</span>
+        <span class="tag">IEC 62443</span>
+        <span class="tag tag-muted">Python</span>
+        <span class="tag tag-muted">Docker</span>
+        <span class="tag tag-muted">Open source</span>
+    </div>
+</header>
+
+<section class="content-panel">
+
+    <h2 class="section-header">&gt; Preview</h2>
+    <img src="assets/images/ot-lab-command-centre.jpg" class="project-image"
+         alt="The Command Centre: plant status tiles across the top with reactor pressure in red at 3056 kPa, a row of system tiles, and the missions list beside the course guide">
+    <img src="assets/images/ot-lab-attack.jpg" class="project-image"
+         alt="The Command Centre workspace split in two: the operator's HMI on the left showing manual mode on and pressure at 2986 kPa, and a Kali terminal on the right running manual_takeover.py with pressure climbing every five seconds">
+
+    <h2 class="section-header">&gt; Overview</h2>
+    <p class="text-block">
+        I wanted to understand what is actually different about testing industrial systems, without
+        a real plant to break. <a href="https://github.com/Fortiphyd/GRFICSv3" target="_blank" rel="noopener">GRFICSv3</a>
+        by Fortiphyd Logic gives you the plant: a simulated chemical reactor, an OpenPLC controller,
+        a Scada-LTS operator screen, a firewall between zones, a Kali attacker, and Wazuh and Zeek
+        watching it all. I built a layer on top that turns it into a guided course, with a single
+        control panel to run it from.
+    </p>
+
+    <h2 class="section-header">&gt; The Command Centre</h2>
+    <p class="text-block">
+        <strong>Plant status.</strong> Emergency stop, PLC state, reactor pressure against its
+        setpoint, every valve position and the analyser reading, live. When something is wrong the
+        tile goes red and has a button to fix it.<br><br>
+        <strong>Workspace.</strong> Every system in the lab runs inside the page. Pick any two and
+        they sit side by side, so you can watch the operator's screen while you attack from Kali,
+        or follow the guide while you type.<br><br>
+        <strong>Systems.</strong> A light, login and restart button for each of the nine
+        containers, and a one-click reset back to factory defaults.<br><br>
+        <strong>Missions.</strong> Objectives to tick, flag questions to answer, XP, ranks and
+        medals.
+    </p>
+
+    <h2 class="section-header">&gt; The eight missions</h2>
+    <p class="text-block">
+        <strong>1. Walk the plant.</strong> The physical process, the HMI and the PLC, before touching anything.<br>
+        <strong>2. Passive discovery.</strong> Read Zeek's Modbus logs and build an asset inventory without sending a packet.<br>
+        <strong>3. Careful active scanning.</strong> Why scans crash PLCs, and how to scan one without doing it.<br>
+        <strong>4. Read the analyser.</strong> Pull live process data over Modbus with no login at all.<br>
+        <strong>5. Change the process.</strong> Switch the PLC to manual and drive the reactor pressure up while the operator's screen says everything is fine.<br>
+        <strong>6. Detect it.</strong> Find the attack in Zeek and Wazuh.<br>
+        <strong>7. Defend it.</strong> Firewall rules between the zones, then prove the attack no longer works.<br>
+        <strong>8. Write it up.</strong> A one-page factory acceptance test (FAT) security report in IEC 62443-3-3 terms.
+    </p>
+    <p class="text-block">
+        Every step says which machine to type on, what to type, what is happening behind the scenes
+        and what you should see. The first version I wrote was too vague to follow, which is the
+        most useful lesson I took from building it.
+    </p>
+    <img src="assets/images/ot-lab-hmi.jpg" class="project-image"
+         alt="The Scada-LTS HMI during the attack: MANUAL MODE ON, both feed valves at 100 percent, purge and product at 0 percent, and reactor pressure at 2816 kPa">
+
+    <h2 class="section-header">&gt; How it works</h2>
+    <p class="text-block">
+        A shell script wraps Docker Compose, rebuilds Zeek's traffic mirror after every restart and
+        copies the attack scripts into Kali. The Command Centre is a small Python server using only the
+        standard library. It reads plant values from the simulator's own web endpoint rather than
+        polling the PLC, so the dashboard never adds Modbus traffic to the logs you are analysing.
+    </p>
+    <pre class="code-block">git clone https://github.com/CyberZombi3/ot-lab-command-centre.git ot-lab
+cd ot-lab
+./lab.sh setup     # downloads GRFICSv3 and its images
+./lab.sh start     # opens the Command Centre at localhost:4900</pre>
+
+    <h2 class="section-header">&gt; Security</h2>
+    <p class="text-block">
+        The lab is deliberately vulnerable, so the panel that drives it must not be. Everything binds to
+        localhost. The HMI and Wazuh refuse to be framed, so two local relays strip that one header and
+        nothing else, and they reject any Host that is not localhost. Buttons can only run a fixed list
+        of actions, and every action needs a custom header that forces a CORS preflight the server never
+        approves, so no other website can drive the lab from your browser.
+    </p>
+
+    <h2 class="section-header">&gt; Get it</h2>
+    <p class="text-block">
+        Free and MIT licensed on
+        <a href="https://github.com/CyberZombi3/ot-lab-command-centre" target="_blank" rel="noopener">GitHub</a>.
+        GRFICSv3 is downloaded separately from Fortiphyd and keeps its own licence; all credit for
+        the plant goes to them. There is a write-up of building it on the
+        <a href="blog/ot-lab-command-centre.html">blog</a>.
+    </p>
+    <div class="callout">
+        Keep it on your own machine and never point the scripts at real equipment. Writing to a
+        real PLC can hurt people.
+    </div>
+
+</section>
+
+<footer class="site-footer">
+    <div class="footer-links">
+        <a href="mailto:aaronjmoorcroft@gmail.com">Email</a>
+        <a href="https://github.com/CyberZombi3" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/%F0%9F%90%91-aaron-moorcroft-88064921/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <span class="footer-note">&copy; <span data-year></span> Aaron Moorcroft · CyberZombi3</span>
+</footer>
+
+<script src="assets/js/main.js?v=8"></script>
+</body>
+</html>
